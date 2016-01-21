@@ -72,7 +72,7 @@ getRawX()、getRawY() 与getX()、getY()的区别是前者相对手机屏幕，�
     <link href="http://www.turegeek.com/2016/01/06/open-source-02/"/>
     <id>http://www.turegeek.com/2016/01/06/open-source-02/</id>
     <published>2016-01-05T16:00:00.000Z</published>
-    <updated>2016-01-21T16:21:56.000Z</updated>
+    <updated>2016-01-21T16:21:57.000Z</updated>
     <content type="html"><![CDATA[<p>可以滑动的recyclerview CardItem、高效的Gif播放器、视觉差viewpager、自定义仪表盘、开源视频项目、GestureViews、图片选择库、Custome CoordinatorLayout、个性动态展示文字、基于materialDesign的开源项目</p>
 <a id="more"></a>
 <h3 id="SwipeableCard"><a href="#SwipeableCard" class="headerlink" title="SwipeableCard"></a><a href="https://github.com/michelelacorte/SwipeableCard" target="_blank" rel="external">SwipeableCard</a></h3><p>swipe card +recyclerView </p>
@@ -109,7 +109,7 @@ getRawX()、getRawY() 与getX()、getY()的区别是前者相对手机屏幕，�
     <link href="http://www.turegeek.com/2015/12/30/open-source-01/"/>
     <id>http://www.turegeek.com/2015/12/30/open-source-01/</id>
     <published>2015-12-29T16:00:00.000Z</published>
-    <updated>2016-01-21T16:28:24.000Z</updated>
+    <updated>2016-01-21T16:28:25.000Z</updated>
     <content type="html"><![CDATA[<p>仿twitter like动画、android 动态加载技术系列、支持手势缩放的TextView、倾斜45°显示文字的lableView、<br>类似于flowlayout的扩展、微博话题功能、富文本编辑器、为listView、gridView…添加阻尼效果、仿Tinder的卡片效果</p>
 <a id="more"></a>
 <ol>
@@ -203,7 +203,7 @@ getRawX()、getRawY() 与getX()、getY()的区别是前者相对手机屏幕，�
     <link href="http://www.turegeek.com/2015/11/13/dpi-tips/"/>
     <id>http://www.turegeek.com/2015/11/13/dpi-tips/</id>
     <published>2015-11-12T16:00:00.000Z</published>
-    <updated>2016-01-21T16:54:07.000Z</updated>
+    <updated>2016-01-21T16:54:11.000Z</updated>
     <content type="html"><![CDATA[<p>做android开发还有面试的时候经验会遇到屏幕适配问题,Android由于机型太多,所以导致屏幕尺寸还有分辨率多样化.接下来讲解下DP、DPI、SP的概念,有些不对的地方欢迎指正</p>
 <p>引用Andorid官方文档的说明</p>
 <blockquote>
