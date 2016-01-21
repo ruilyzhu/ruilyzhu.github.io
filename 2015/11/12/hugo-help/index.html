@@ -1,0 +1,736 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Ruily blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.5.0" />
+
+
+
+
+
+
+<meta name="description" content="参考了Hugo中文文档、CoderZH Blog
+
+前言Hugo是一个静态网站生成器,使用起来非常方便简单.个人认为程序员必须要有一个自己的博客,不只是以后找工作有加分,最重要的是对自己的知识点、经验、爬坑的总结,理解是一回事,能写出来让大家理解又是另外一回事.
+安装Hugo本文章是针对mac系统的配置,其他系统仅供参考
+
+Hugo Releases下载对应系统的二进制文件:hugo_0.14_d">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Hugo搭建个人博客">
+<meta property="og:url" content="http://www.turegeek.com/2015/11/12/hugo-help/index.html">
+<meta property="og:site_name" content="Ruily blog">
+<meta property="og:description" content="参考了Hugo中文文档、CoderZH Blog
+
+前言Hugo是一个静态网站生成器,使用起来非常方便简单.个人认为程序员必须要有一个自己的博客,不只是以后找工作有加分,最重要的是对自己的知识点、经验、爬坑的总结,理解是一回事,能写出来让大家理解又是另外一回事.
+安装Hugo本文章是针对mac系统的配置,其他系统仅供参考
+
+Hugo Releases下载对应系统的二进制文件:hugo_0.14_d">
+<meta property="og:updated_time" content="2016-01-19T14:27:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Hugo搭建个人博客">
+<meta name="twitter:description" content="参考了Hugo中文文档、CoderZH Blog
+
+前言Hugo是一个静态网站生成器,使用起来非常方便简单.个人认为程序员必须要有一个自己的博客,不只是以后找工作有加分,最重要的是对自己的知识点、经验、爬坑的总结,理解是一回事,能写出来让大家理解又是另外一回事.
+安装Hugo本文章是针对mac系统的配置,其他系统仅供参考
+
+Hugo Releases下载对应系统的二进制文件:hugo_0.14_d">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 使用Hugo搭建个人博客 | Ruily blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ruily blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">reading and Writing</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            列表
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-githubs">
+          <a href="http://www.github.com" rel="section">
+            
+              <i class="menu-item-icon fa fa-question-circle fa-fw"></i> <br />
+            
+            github
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-emails">
+          <a href="mailto:ruilyforcn@gmail.com" rel="section">
+            
+              <i class="menu-item-icon fa fa-question-circle fa-fw"></i> <br />
+            
+            Email
+          </a>
+        </li>
+      
+
+      
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                使用Hugo搭建个人博客
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-11-12T00:00:00+08:00" content="2015-11-12">
+              2015-11-12
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p><a href="/www.gohugo.org">参考了Hugo中文文档</a>、<a href="http://blog.coderzh.com/2015/08/29/hugo/" target="_blank" rel="external">CoderZH Blog</a></p>
+</blockquote>
+<h3 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h3><p>Hugo是一个静态网站生成器,使用起来非常方便简单.个人认为程序员必须要有一个自己的博客,不只是以后找工作有加分,最重要的是对自己的知识点、经验、爬坑的总结,理解是一回事,能写出来让大家理解又是另外一回事.</p>
+<h3 id="u5B89_u88C5Hugo"><a href="#u5B89_u88C5Hugo" class="headerlink" title="安装Hugo"></a>安装Hugo</h3><p>本文章是针对mac系统的配置,其他系统仅供参考</p>
+<ol>
+<li><a href="https://github.com/spf13/hugo/releases" target="_blank" rel="external">Hugo Releases</a>下载对应系统的二进制文件:<a href="https://github.com/spf13/hugo/releases/download/v0.14/hugo_0.14_darwin_amd64.zip" target="_blank" rel="external">hugo_0.14_darwin_amd64.zip</a><br></li>
+<li>下载完解压将文件重命名为hugo<br></li>
+<li>然后放入/usr/local/bin目录下</li>
+</ol>
+<h3 id="u4F7F_u7528Hugo_u751F_u6210_u81EA_u5DF1_u7684_u7AD9_u70B9"><a href="#u4F7F_u7528Hugo_u751F_u6210_u81EA_u5DF1_u7684_u7AD9_u70B9" class="headerlink" title="使用Hugo生成自己的站点"></a>使用Hugo生成自己的站点</h3><h4 id="u521B_u5EFA_u4E00_u4E2A_u7AD9_u70B9_u76EE_u5F55_u5982/_u2026/_u2026/Documents/blog"><a href="#u521B_u5EFA_u4E00_u4E2A_u7AD9_u70B9_u76EE_u5F55_u5982/_u2026/_u2026/Documents/blog" class="headerlink" title="创建一个站点目录如/…/…/Documents/blog"></a>创建一个站点目录如/…/…/Documents/blog</h4><p> <code>$ hugo new site.../Documents/blog</code></p>
+<h4 id="u7136_u540EHugo_u4F1A_u5728blog_u76EE_u5F55_u4E0B_u521B_u5EFA_u4E00_u4E2A_u7AD9_u70B9_u76EE_u5F55_u7ED3_u6784_3A"><a href="#u7136_u540EHugo_u4F1A_u5728blog_u76EE_u5F55_u4E0B_u521B_u5EFA_u4E00_u4E2A_u7AD9_u70B9_u76EE_u5F55_u7ED3_u6784_3A" class="headerlink" title="然后Hugo会在blog目录下创建一个站点目录结构:"></a>然后Hugo会在blog目录下创建一个站点目录结构:</h4><pre><code>▸ archetypes/
+▸ content/   //存放markdown文章
+▸ layouts/   //存放网站模板文件
+▸ static/    //存放静态图片
+config.toml   //网站配置文件(可以配置baseurl、title、theme等)
+</code></pre><h4 id="cd_u5230blog_u76EE_u5F55_3A"><a href="#cd_u5230blog_u76EE_u5F55_3A" class="headerlink" title="cd到blog目录:"></a>cd到blog目录:</h4><p><code>$ cd ../../Documents/blog</code></p>
+<h4 id="u521B_u5EFA_u4E00_u4E2A_u535A_u6587_28_u6700_u597D_u653E_u5728content/post/_u76EE_u5F55_u4E0B_29_3A"><a href="#u521B_u5EFA_u4E00_u4E2A_u535A_u6587_28_u6700_u597D_u653E_u5728content/post/_u76EE_u5F55_u4E0B_29_3A" class="headerlink" title="创建一个博文(最好放在content/post/目录下):"></a>创建一个博文(最好放在content/post/目录下):</h4><p><code>$ hugo new post/hello_Hugo.md</code></p>
+<p>Hugo默认的是TOML格式的,至于其他格式,请自行了解</p>
+<pre><code>+++
+date = &quot;2015-10-25T08:36:54-07:00&quot;
+draft = true
+title = &quot;hello,Hugo&quot;
+
++++
+
+正文内容
+</code></pre><p>date格式自行设置,title为文章标题</p>
+<h3 id="u535A_u5BA2_u6A21_u677F"><a href="#u535A_u5BA2_u6A21_u677F" class="headerlink" title="博客模板"></a>博客模板</h3><p>点击<a href="http://www.gohugo.org/theme/" target="_blank" rel="external">模板列表</a>自行挑选喜欢的模板,并复制对应git地址,如AIR主题<br>在上面创建的blog目录下创建themes目录</p>
+<pre><code>cd themes
+git clone https://github.com/syui/hugo-theme-air.git
+</code></pre><p>你可以在themes目录下针对模板的布局还有CSS样式进行自定义</p>
+<h3 id="u5F00_u59CB_u4F60_u7684_u535A_u5BA2_u4E4B_u65C5"><a href="#u5F00_u59CB_u4F60_u7684_u535A_u5BA2_u4E4B_u65C5" class="headerlink" title="开始你的博客之旅"></a>开始你的博客之旅</h3><p>在站点根目录执行命令:</p>
+<pre><code>$ hugo server --theme=hugo-theme-air --buildDrafts --watch
+</code></pre><p>watch参数可以在你修改博客的时候保持实时刷新,执行命令后会有以下提醒:</p>
+<pre><code>Web Server is available at http://127.0.0.1:1313/
+Press Ctrl+C to stop
+</code></pre><p>打开对应的网址,就可以看到对应模板效果的博客</p>
+<h3 id="Github_pages_u90E8_u7F72"><a href="#Github_pages_u90E8_u7F72" class="headerlink" title="Github pages部署"></a>Github pages部署</h3><p>在自己的github里创建个Repository,命名xxxx.github.io(xxxx为你的github用户名)</p>
+<p>在站点根目录执行以下命令,会自动生成关于github路径的静态页面:</p>
+<pre><code>$ hugo --theme=hugo-theme-air --baseUrl=&quot;http://xxxx.github.io/&quot;
+</code></pre><p>Ok,这个时候你打开站点目录的public目录下,可以看到生成的所有静态页面</p>
+<p>最后一步,把生成的静态页面push到github的master分支就可以了,推荐个mac git工具SourceTree,配置好路径,这样以后每次你写完文章直接push就可以了,以下为使用命令初始化、push</p>
+<pre><code>$ cd public
+$ git init
+$ git remote add origin https://github.com/xxxx/xxxx.github.io.git
+$ git add -A
+$ git commit -m &quot;first commit for blog&quot;
+$ git push -u origin master
+</code></pre><h3 id="Mac_Markdown_u5DE5_u5177_u63A8_u8350Mou"><a href="#Mac_Markdown_u5DE5_u5177_u63A8_u8350Mou" class="headerlink" title="Mac Markdown工具推荐Mou"></a>Mac Markdown工具推荐<a href="http://25.io/mou/" target="_blank" rel="external">Mou</a></h3>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/11/13/dpi-tips/" rel="prev" title="关于dpi、dp与sp的解释与适配">
+                关于dpi、dp与sp的解释与适配 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/boy_03.png"
+               alt="Ruily Zhu" />
+          <p class="site-author-name" itemprop="name">Ruily Zhu</p>
+          <p class="site-description motion-element" itemprop="description">Ruily's blog | Android | JAVA</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">1</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#u524D_u8A00"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5B89_u88C5Hugo"><span class="nav-number">2.</span> <span class="nav-text">安装Hugo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u4F7F_u7528Hugo_u751F_u6210_u81EA_u5DF1_u7684_u7AD9_u70B9"><span class="nav-number">3.</span> <span class="nav-text">使用Hugo生成自己的站点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#u521B_u5EFA_u4E00_u4E2A_u7AD9_u70B9_u76EE_u5F55_u5982/_u2026/_u2026/Documents/blog"><span class="nav-number">3.1.</span> <span class="nav-text">创建一个站点目录如/…/…/Documents/blog</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u7136_u540EHugo_u4F1A_u5728blog_u76EE_u5F55_u4E0B_u521B_u5EFA_u4E00_u4E2A_u7AD9_u70B9_u76EE_u5F55_u7ED3_u6784_3A"><span class="nav-number">3.2.</span> <span class="nav-text">然后Hugo会在blog目录下创建一个站点目录结构:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cd_u5230blog_u76EE_u5F55_3A"><span class="nav-number">3.3.</span> <span class="nav-text">cd到blog目录:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u521B_u5EFA_u4E00_u4E2A_u535A_u6587_28_u6700_u597D_u653E_u5728content/post/_u76EE_u5F55_u4E0B_29_3A"><span class="nav-number">3.4.</span> <span class="nav-text">创建一个博文(最好放在content/post/目录下):</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u535A_u5BA2_u6A21_u677F"><span class="nav-number">4.</span> <span class="nav-text">博客模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5F00_u59CB_u4F60_u7684_u535A_u5BA2_u4E4B_u65C5"><span class="nav-number">5.</span> <span class="nav-text">开始你的博客之旅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Github_pages_u90E8_u7F72"><span class="nav-number">6.</span> <span class="nav-text">Github pages部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mac_Markdown_u5DE5_u5177_u63A8_u8350Mou"><span class="nav-number">7.</span> <span class="nav-text">Mac Markdown工具推荐Mou</span></a></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ruily Zhu</span>
+</div>
+
+
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  
+
+
+  
+
+
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.5.0"></script>
+
+
+
+  
+  
+
+  
+  
+<script type="text/javascript" src="/js/src/scrollspy.js?v=0.5.0"></script>
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = NexT.utils.escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    NexT.motion.middleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          NexT.utils.displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+
+  
+  
+
+
+</body>
+</html>
