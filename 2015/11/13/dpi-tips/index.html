@@ -72,7 +72,7 @@ When adding support for multiple screens, applications do not work directly with
 
 When adding support for multiple screens, applications do not work directly with resolution">
 <meta property="og:image" content="http://img1.tbcdn.cn/L1/461/1/7d691bde9a6f414a5f93082b0312c1589289494d">
-<meta property="og:updated_time" content="2016-01-19T14:27:03.000Z">
+<meta property="og:updated_time" content="2016-01-21T16:54:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于dpi、dp与sp的解释与适配">
 <meta name="twitter:description" content="做android开发还有面试的时候经验会遇到屏幕适配问题,Android由于机型太多,所以导致屏幕尺寸还有分辨率多样化.接下来讲解下DP、DPI、SP的概念,有些不对的地方欢迎指正
@@ -264,8 +264,34 @@ When adding support for multiple screens, applications do not work directly with
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/App规范/" itemprop="url" rel="index">
+                    <span itemprop="name">App规范</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/13/dpi-tips/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/13/dpi-tips/" itemprop="commentsCount"></span>
+                </a>
+              </span>
             
           
 
@@ -290,6 +316,7 @@ When adding support for multiple screens, applications do not work directly with
 <p>When adding support for multiple screens, applications do not work directly with resolution; applications should be concerned only with screen size and density, as specified by the generalized size and density groups.</p>
 </blockquote>
 <p>所以关于适配主要根据手机屏幕大小和屏幕密度</p>
+<a id="more"></a>
 <h3 id="u4EC0_u4E48_u662FDPI"><a href="#u4EC0_u4E48_u662FDPI" class="headerlink" title="什么是DPI"></a>什么是DPI</h3><p>DPI(Dots Per Inch)表示屏幕密度,按字面意思理解就是每一英寸有多少个像素点,例如320DPI就表示一个Inch包含320个像素点.Android DPI也可以理解为PPI</p>
 <p>一般我们说手机多少寸,是指手机屏幕对角线的长度,因此可以根据手机屏幕尺寸还有分辨率计算手机的DPI,比如MOTO X(1920*1080)、5.2英寸</p>
 <pre><code>DPI = Math.sqrt(1920*1920+1080*1080)/5.2
@@ -330,8 +357,8 @@ MOTO X = 0.062...
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2015/12/29/name-rule/" rel="prev" title="Android命名规范的参考笔记">
-                Android命名规范的参考笔记 <i class="fa fa-chevron-right"></i>
+              <a href="/2015/12/29/version-tips/" rel="prev" title="App版本号定义与说明基础知识">
+                App版本号定义与说明基础知识 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -357,6 +384,10 @@ MOTO X = 0.062...
 
           
   <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/11/13/dpi-tips/"
+           data-title="关于dpi、dp与sp的解释与适配" data-url="http://www.turegeek.com/2015/11/13/dpi-tips/">
+      </div>
     
   </div>
 
@@ -400,14 +431,14 @@ MOTO X = 0.062...
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
@@ -696,9 +727,28 @@ MOTO X = 0.062...
 
   
 
+  
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"turegeek"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
 
   
+    
+  
+
+
 
 
 

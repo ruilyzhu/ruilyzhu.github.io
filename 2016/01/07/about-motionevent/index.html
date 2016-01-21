@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="MothonEvent," />
 
 
 
@@ -59,24 +59,33 @@
 
 
 
-<meta name="description" content="我们经常在dispatchTouchEvent、onInterceptTouchEvent、onTouchEvent中看到MotionEvent对象，通过这个对象我可以可以获取触摸事件然后进行相应的操作，触摸事件类型比较常用的就是ACTION_UP、ACTION_DOWN、ACTION_MOVE等。获取触摸点坐标有以下方法  getX() 获取触摸点X轴坐标
+<meta name="description" content="我们经常在dispatchTouchEvent、onInterceptTouchEvent、onTouchEvent中看到MotionEvent对象，通过这个对象我可以可以获取触摸事件然后进行相应的操作，触摸事件类型比较常用的就是ACTION_UP、ACTION_DOWN、ACTION_MOVE等。获取触摸点坐标有以下方法
+getX() 获取触摸点X轴坐标
 
-getY() 获取触摸点Y轴坐标">
+getY() 获取触摸点Y轴坐标
+
+g">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于MothonEvent的一些了解以及getAction()与getActionMasked()的区别">
+<meta property="og:title" content="关于MothonEvent里getAction与getActionMasked的区别">
 <meta property="og:url" content="http://www.turegeek.com/2016/01/07/about-motionevent/index.html">
 <meta property="og:site_name" content="Ruily blog">
-<meta property="og:description" content="我们经常在dispatchTouchEvent、onInterceptTouchEvent、onTouchEvent中看到MotionEvent对象，通过这个对象我可以可以获取触摸事件然后进行相应的操作，触摸事件类型比较常用的就是ACTION_UP、ACTION_DOWN、ACTION_MOVE等。获取触摸点坐标有以下方法  getX() 获取触摸点X轴坐标
+<meta property="og:description" content="我们经常在dispatchTouchEvent、onInterceptTouchEvent、onTouchEvent中看到MotionEvent对象，通过这个对象我可以可以获取触摸事件然后进行相应的操作，触摸事件类型比较常用的就是ACTION_UP、ACTION_DOWN、ACTION_MOVE等。获取触摸点坐标有以下方法
+getX() 获取触摸点X轴坐标
 
-getY() 获取触摸点Y轴坐标">
+getY() 获取触摸点Y轴坐标
+
+g">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/005KJayxjw1ezq82y8dcej30zk07ktaf.jpg">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/005KJayxjw1ezq8541g8ej3104060myn.jpg">
-<meta property="og:updated_time" content="2016-01-19T15:32:04.000Z">
+<meta property="og:updated_time" content="2016-01-21T15:58:55.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于MothonEvent的一些了解以及getAction()与getActionMasked()的区别">
-<meta name="twitter:description" content="我们经常在dispatchTouchEvent、onInterceptTouchEvent、onTouchEvent中看到MotionEvent对象，通过这个对象我可以可以获取触摸事件然后进行相应的操作，触摸事件类型比较常用的就是ACTION_UP、ACTION_DOWN、ACTION_MOVE等。获取触摸点坐标有以下方法  getX() 获取触摸点X轴坐标
+<meta name="twitter:title" content="关于MothonEvent里getAction与getActionMasked的区别">
+<meta name="twitter:description" content="我们经常在dispatchTouchEvent、onInterceptTouchEvent、onTouchEvent中看到MotionEvent对象，通过这个对象我可以可以获取触摸事件然后进行相应的操作，触摸事件类型比较常用的就是ACTION_UP、ACTION_DOWN、ACTION_MOVE等。获取触摸点坐标有以下方法
+getX() 获取触摸点X轴坐标
 
-getY() 获取触摸点Y轴坐标">
+getY() 获取触摸点Y轴坐标
+
+g">
 
 
 
@@ -94,7 +103,7 @@ getY() 获取触摸点Y轴坐标">
   };
 </script>
 
-  <title> 关于MothonEvent的一些了解以及getAction()与getActionMasked()的区别 | Ruily blog </title>
+  <title> 关于MothonEvent里getAction与getActionMasked的区别 | Ruily blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -244,7 +253,7 @@ getY() 获取触摸点Y轴坐标">
             
             
               
-                关于MothonEvent的一些了解以及getAction()与getActionMasked()的区别
+                关于MothonEvent里getAction与getActionMasked的区别
               
             
           </h1>
@@ -284,6 +293,13 @@ getY() 获取触摸点Y轴坐标">
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/07/about-motionevent/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/07/about-motionevent/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -301,17 +317,22 @@ getY() 获取触摸点Y轴坐标">
       
 
       
-        <h5 id="u6211_u4EEC_u7ECF_u5E38_u5728dispatchTouchEvent_u3001onInterceptTouchEvent_u3001onTouchEvent_u4E2D_u770B_u5230MotionEvent_u5BF9_u8C61_uFF0C_u901A_u8FC7_u8FD9_u4E2A_u5BF9_u8C61_u6211_u53EF_u4EE5_u53EF_u4EE5_u83B7_u53D6_u89E6_u6478_u4E8B_u4EF6_u7136_u540E_u8FDB_u884C_u76F8_u5E94_u7684_u64CD_u4F5C_uFF0C_u89E6_u6478_u4E8B_u4EF6_u7C7B_u578B_u6BD4_u8F83_u5E38_u7528_u7684_u5C31_u662FACTION_UP_u3001ACTION_DOWN_u3001ACTION_MOVE_u7B49_u3002_u83B7_u53D6_u89E6_u6478_u70B9_u5750_u6807_u6709_u4EE5_u4E0B_u65B9_u6CD5"><a href="#u6211_u4EEC_u7ECF_u5E38_u5728dispatchTouchEvent_u3001onInterceptTouchEvent_u3001onTouchEvent_u4E2D_u770B_u5230MotionEvent_u5BF9_u8C61_uFF0C_u901A_u8FC7_u8FD9_u4E2A_u5BF9_u8C61_u6211_u53EF_u4EE5_u53EF_u4EE5_u83B7_u53D6_u89E6_u6478_u4E8B_u4EF6_u7136_u540E_u8FDB_u884C_u76F8_u5E94_u7684_u64CD_u4F5C_uFF0C_u89E6_u6478_u4E8B_u4EF6_u7C7B_u578B_u6BD4_u8F83_u5E38_u7528_u7684_u5C31_u662FACTION_UP_u3001ACTION_DOWN_u3001ACTION_MOVE_u7B49_u3002_u83B7_u53D6_u89E6_u6478_u70B9_u5750_u6807_u6709_u4EE5_u4E0B_u65B9_u6CD5" class="headerlink" title="我们经常在dispatchTouchEvent、onInterceptTouchEvent、onTouchEvent中看到MotionEvent对象，通过这个对象我可以可以获取触摸事件然后进行相应的操作，触摸事件类型比较常用的就是ACTION_UP、ACTION_DOWN、ACTION_MOVE等。获取触摸点坐标有以下方法"></a>我们经常在dispatchTouchEvent、onInterceptTouchEvent、onTouchEvent中看到MotionEvent对象，通过这个对象我可以可以获取触摸事件然后进行相应的操作，触摸事件类型比较常用的就是ACTION_UP、ACTION_DOWN、ACTION_MOVE等。获取触摸点坐标有以下方法</h5><pre><code>  getX() 获取触摸点X轴坐标
+        <p>我们经常在dispatchTouchEvent、onInterceptTouchEvent、onTouchEvent中看到MotionEvent对象，通过这个对象我可以可以获取触摸事件然后进行相应的操作，触摸事件类型比较常用的就是ACTION_UP、ACTION_DOWN、ACTION_MOVE等。获取触摸点坐标有以下方法</p>
+<pre><code>getX() 获取触摸点X轴坐标
 
 getY() 获取触摸点Y轴坐标
 
 getX(int pointerIndex)、getY(int pointerIndex) 在多点触控时获取对应手指的坐标
 
 getRawX()、getRawY() 与getX()、getY()的区别是前者相对手机屏幕，后者相对当前控件
-</code></pre><h5 id="u5728_u83B7_u53D6MotionEvent_u7684Action_u4E8B_u4EF6_u7684_u65F6_u5019_uFF0C_u6211_u4EEC_u770B_u5230_u4EE5_u4E0B_u4E24_u4E2A_u65B9_u6CD5_u53EF_u4EE5_u83B7_u53D6_u5F53_u524D_u7684_u4E8B_u4EF6_3A"><a href="#u5728_u83B7_u53D6MotionEvent_u7684Action_u4E8B_u4EF6_u7684_u65F6_u5019_uFF0C_u6211_u4EEC_u770B_u5230_u4EE5_u4E0B_u4E24_u4E2A_u65B9_u6CD5_u53EF_u4EE5_u83B7_u53D6_u5F53_u524D_u7684_u4E8B_u4EF6_3A" class="headerlink" title="在获取MotionEvent的Action事件的时候，我们看到以下两个方法可以获取当前的事件:"></a>在获取MotionEvent的Action事件的时候，我们看到以下两个方法可以获取当前的事件:</h5><h5 id="getAction_28_29_3A"><a href="#getAction_28_29_3A" class="headerlink" title="getAction():"></a>getAction():</h5><p><img src="http://ww4.sinaimg.cn/large/005KJayxjw1ezq82y8dcej30zk07ktaf.jpg" alt=""></p>
-<h5 id="getActionMasked_28_29_3A"><a href="#getActionMasked_28_29_3A" class="headerlink" title="getActionMasked():"></a>getActionMasked():</h5><p><img src="http://ww3.sinaimg.cn/large/005KJayxjw1ezq8541g8ej3104060myn.jpg" alt="">         </p>
-<h5 id="u4E24_u4E2A_u65B9_u6CD5_u7684_u533A_u522B_u5728_u4E8E_uFF0CgetActionMasked_u65B9_u6CD5_u4E2D_u591A_u4E86_u4E00_u4E2A_26amp_3BACTION_MASK_uFF1A"><a href="#u4E24_u4E2A_u65B9_u6CD5_u7684_u533A_u522B_u5728_u4E8E_uFF0CgetActionMasked_u65B9_u6CD5_u4E2D_u591A_u4E86_u4E00_u4E2A_26amp_3BACTION_MASK_uFF1A" class="headerlink" title="两个方法的区别在于，getActionMasked方法中多了一个&amp;ACTION_MASK："></a>两个方法的区别在于，getActionMasked方法中多了一个&amp;ACTION_MASK：</h5><pre><code>public static final int ACTION_MASK = 0xff;
-</code></pre><h5 id="u6211_u4EEC_u628AnativeGetAction_28mNativePtr_29_u6BD4_u4F5CmActionValue_u4E5F_u5C31_u662F_u8BF4mActionValue__26amp_3B_0xff_u8868_u793A_u53EA_u8981mActionValue_u7684_u503C_u57280x00-0xff_u4E4B_u95F4_u7684_u8BDD_uFF0CgetAction_u4E0EgetActionMasked_u8FD4_u56DE_u503C_u662F_u4E00_u6837_u7684_uFF0C_u56E0_u4E3Aff_u662F_u5341_u516D_u8FDB_u5236_u8F6C_u6362_u62102_u8FDB_u5236_u5C31_u662F11111111__u4E0E_u5B83_u76F8_u4E0E_u7684_u6570_u53EA_u8981_u5C0F_u4E8E_u7B49_u4E8E_u5B83_u90FD_u662F_u539F_u503C_uFF0C_26amp_3B_28_u4E0E_29_u53EF_u4EE5_u7528_u4F5C_u4F4D_u8FD0_u7B97_u7B26_uFF0C_u4F8B_u59821101__26amp_3B_1011__3D_1001_uFF0C_u6309_u4F4D_u8FDB_u884C_u6BD4_u8F83_u4E24_u4E2A_u90FD_u4E3A1_u5219_u4E3A1_uFF0C_u5426_u5219_u4E3A0_u3002"><a href="#u6211_u4EEC_u628AnativeGetAction_28mNativePtr_29_u6BD4_u4F5CmActionValue_u4E5F_u5C31_u662F_u8BF4mActionValue__26amp_3B_0xff_u8868_u793A_u53EA_u8981mActionValue_u7684_u503C_u57280x00-0xff_u4E4B_u95F4_u7684_u8BDD_uFF0CgetAction_u4E0EgetActionMasked_u8FD4_u56DE_u503C_u662F_u4E00_u6837_u7684_uFF0C_u56E0_u4E3Aff_u662F_u5341_u516D_u8FDB_u5236_u8F6C_u6362_u62102_u8FDB_u5236_u5C31_u662F11111111__u4E0E_u5B83_u76F8_u4E0E_u7684_u6570_u53EA_u8981_u5C0F_u4E8E_u7B49_u4E8E_u5B83_u90FD_u662F_u539F_u503C_uFF0C_26amp_3B_28_u4E0E_29_u53EF_u4EE5_u7528_u4F5C_u4F4D_u8FD0_u7B97_u7B26_uFF0C_u4F8B_u59821101__26amp_3B_1011__3D_1001_uFF0C_u6309_u4F4D_u8FDB_u884C_u6BD4_u8F83_u4E24_u4E2A_u90FD_u4E3A1_u5219_u4E3A1_uFF0C_u5426_u5219_u4E3A0_u3002" class="headerlink" title="我们把nativeGetAction(mNativePtr)比作mActionValue也就是说mActionValue &amp; 0xff表示只要mActionValue的值在0x00-0xff之间的话，getAction与getActionMasked返回值是一样的，因为ff是十六进制转换成2进制就是11111111 与它相与的数只要小于等于它都是原值，&amp;(与)可以用作位运算符，例如1101 &amp; 1011 = 1001，按位进行比较两个都为1则为1，否则为0。"></a>我们把nativeGetAction(mNativePtr)比作mActionValue也就是说mActionValue &amp; 0xff表示只要mActionValue的值在0x00-0xff之间的话，getAction与getActionMasked返回值是一样的，因为ff是十六进制转换成2进制就是11111111 与它相与的数只要小于等于它都是原值，&amp;(与)可以用作位运算符，例如1101 &amp; 1011 = 1001，按位进行比较两个都为1则为1，否则为0。</h5><h4 id="u90A3_u4EC0_u4E48_u65F6_u5019_u4E24_u4E2A_u65B9_u6CD5_u8FD4_u56DE_u7684_u4E0D_u4E00_u6837_u5462_uFF1F"><a href="#u90A3_u4EC0_u4E48_u65F6_u5019_u4E24_u4E2A_u65B9_u6CD5_u8FD4_u56DE_u7684_u4E0D_u4E00_u6837_u5462_uFF1F" class="headerlink" title="那什么时候两个方法返回的不一样呢？"></a>那什么时候两个方法返回的不一样呢？<br></h4><h5 id="u80AF_u5B9A_u662F_u8FD4_u56DE_u7684_u503C_u5927_u4E8E0xff_u7684_u65F6_u5019_u3002"><a href="#u80AF_u5B9A_u662F_u8FD4_u56DE_u7684_u503C_u5927_u4E8E0xff_u7684_u65F6_u5019_u3002" class="headerlink" title="肯定是返回的值大于0xff的时候。"></a>肯定是返回的值大于0xff的时候。<br></h5><h4 id="u90A3_u53C8_u662F_u4EC0_u4E48_u65F6_u5019_u8FD4_u56DE_u7684_u503C_u5927_u4E8E0xff_u5462_uFF1F"><a href="#u90A3_u53C8_u662F_u4EC0_u4E48_u65F6_u5019_u8FD4_u56DE_u7684_u503C_u5927_u4E8E0xff_u5462_uFF1F" class="headerlink" title="那又是什么时候返回的值大于0xff呢？"></a>那又是什么时候返回的值大于0xff呢？<br></h4><h5 id="u7B54_u6848_u5C31_u662F_u591A_u70B9_u89E6_u63A7_u7684_u65F6_u5019_u3002"><a href="#u7B54_u6848_u5C31_u662F_u591A_u70B9_u89E6_u63A7_u7684_u65F6_u5019_u3002" class="headerlink" title="答案就是多点触控的时候。"></a>答案就是多点触控的时候。<br></h5><h5 id="u56E0_u4E3A_u65E2_u7136_u662F_u591A_u70B9_u89E6_u63A7_uFF0C_u5982_u679C_u6211_u4EEC_u8981_u83B7_u53D6_u67D0_u4E00_u70B9_u7684_u89E6_u63A7_u4FE1_u606F_u600E_u4E48_u83B7_u53D6_uFF0C_u80AF_u5B9A_u9700_u8981_u6709_u4E00_u4E2A_u7D22_u5F15_uFF0Candroid_u5C31_u628A_u7D22_u5F15_u7684_u4FE1_u606F_u653E_u5728action_u9AD8_u516B_u4F4D_u4E2D_u5B58_u50A8_uFF0C_u4E5F_u5C31_u662F_u8BF40x00-0xff_u4EE3_u8868_u7684_u662F_u5F53_u524D_u89E6_u6478_u65F6_u95F4_u7684_u7C7B_u578B_uFF0C_u5B58_u653E_u5728action_u4F4E_u516B_u4F4D_u4E2D-_u4E00_u4E2A_u5B57_u6BB5_u5B58_u653E_u4E24_u79CD_u4FE1_u606F-_u6240_u4EE50xff_3D0x00ff_uFF0C00_u4EE3_u8868_u9AD8_u516B_u4F4D_u5B58_u50A8_u7D22_u5F15_u4FE1_u606F_uFF0Cff_u4EE3_u8868_u4E8B_u4EF6_u7C7B_u578B_uFF0C_u7531_u6B64_u63A8_u8BBAgetAction_28_29_u8FD4_u56DE_u89E6_u6478_u4E8B_u4EF6_u7C7B_u578B_uFF0C_u5982_u679C_u662F_u591A_u70B9_u89E6_u63A7_u5219_u8FD4_u56DEACTION_POINTER_DOWN_u4E0E_u7D22_u5F15_u4FE1_u606F_u7684_u6DF7_u5408_u503C_uFF0C_u800CgetActionMasked_28_29_u7531_u4E8E__26amp_3B_0xff_280x00ff_29_u7684_u64CD_u4F5C_uFF0C_u6E05_u7A7A_u4E86_u7D22_u5F15_u4FE1_u606F_uFF0C_u53EA_u8FD4_u56DEACTION_POINTER_DOWN_u7684_u503C_uFF0C_u5982_u679C_u60F3_u5355_u72EC_u83B7_u53D6_u7D22_u5F15_u4FE1_u606F_u7684_u8BDD_u53EF_u901A_u8FC7getActionIndex_28_29_u65B9_u6CD5_u3002"><a href="#u56E0_u4E3A_u65E2_u7136_u662F_u591A_u70B9_u89E6_u63A7_uFF0C_u5982_u679C_u6211_u4EEC_u8981_u83B7_u53D6_u67D0_u4E00_u70B9_u7684_u89E6_u63A7_u4FE1_u606F_u600E_u4E48_u83B7_u53D6_uFF0C_u80AF_u5B9A_u9700_u8981_u6709_u4E00_u4E2A_u7D22_u5F15_uFF0Candroid_u5C31_u628A_u7D22_u5F15_u7684_u4FE1_u606F_u653E_u5728action_u9AD8_u516B_u4F4D_u4E2D_u5B58_u50A8_uFF0C_u4E5F_u5C31_u662F_u8BF40x00-0xff_u4EE3_u8868_u7684_u662F_u5F53_u524D_u89E6_u6478_u65F6_u95F4_u7684_u7C7B_u578B_uFF0C_u5B58_u653E_u5728action_u4F4E_u516B_u4F4D_u4E2D-_u4E00_u4E2A_u5B57_u6BB5_u5B58_u653E_u4E24_u79CD_u4FE1_u606F-_u6240_u4EE50xff_3D0x00ff_uFF0C00_u4EE3_u8868_u9AD8_u516B_u4F4D_u5B58_u50A8_u7D22_u5F15_u4FE1_u606F_uFF0Cff_u4EE3_u8868_u4E8B_u4EF6_u7C7B_u578B_uFF0C_u7531_u6B64_u63A8_u8BBAgetAction_28_29_u8FD4_u56DE_u89E6_u6478_u4E8B_u4EF6_u7C7B_u578B_uFF0C_u5982_u679C_u662F_u591A_u70B9_u89E6_u63A7_u5219_u8FD4_u56DEACTION_POINTER_DOWN_u4E0E_u7D22_u5F15_u4FE1_u606F_u7684_u6DF7_u5408_u503C_uFF0C_u800CgetActionMasked_28_29_u7531_u4E8E__26amp_3B_0xff_280x00ff_29_u7684_u64CD_u4F5C_uFF0C_u6E05_u7A7A_u4E86_u7D22_u5F15_u4FE1_u606F_uFF0C_u53EA_u8FD4_u56DEACTION_POINTER_DOWN_u7684_u503C_uFF0C_u5982_u679C_u60F3_u5355_u72EC_u83B7_u53D6_u7D22_u5F15_u4FE1_u606F_u7684_u8BDD_u53EF_u901A_u8FC7getActionIndex_28_29_u65B9_u6CD5_u3002" class="headerlink" title="因为既然是多点触控，如果我们要获取某一点的触控信息怎么获取，肯定需要有一个索引，android就把索引的信息放在action高八位中存储，也就是说0x00-0xff代表的是当前触摸时间的类型，存放在action低八位中.一个字段存放两种信息.所以0xff=0x00ff，00代表高八位存储索引信息，ff代表事件类型，由此推论getAction()返回触摸事件类型，如果是多点触控则返回ACTION_POINTER_DOWN与索引信息的混合值，而getActionMasked()由于 &amp; 0xff(0x00ff)的操作，清空了索引信息，只返回ACTION_POINTER_DOWN的值，如果想单独获取索引信息的话可通过getActionIndex()方法。"></a>因为既然是多点触控，如果我们要获取某一点的触控信息怎么获取，肯定需要有一个索引，android就把索引的信息放在action高八位中存储，也就是说0x00-0xff代表的是当前触摸时间的类型，存放在action低八位中.一个字段存放两种信息.所以0xff=0x00ff，00代表高八位存储索引信息，ff代表事件类型，由此推论getAction()返回触摸事件类型，如果是多点触控则返回ACTION_POINTER_DOWN与索引信息的混合值，而getActionMasked()由于 &amp; 0xff(0x00ff)的操作，清空了索引信息，只返回ACTION_POINTER_DOWN的值，如果想单独获取索引信息的话可通过getActionIndex()方法。</h5><pre><code> public static final int ACTION_POINTER_INDEX_MASK  = 0xff00;
+</code></pre><a id="more"></a>
+<p>在获取MotionEvent的Action事件的时候，我们看到以下两个方法可以获取当前的事件:<br>getAction():<br><img src="http://ww4.sinaimg.cn/large/005KJayxjw1ezq82y8dcej30zk07ktaf.jpg" alt=""></p>
+<p>getActionMasked():<br><img src="http://ww3.sinaimg.cn/large/005KJayxjw1ezq8541g8ej3104060myn.jpg" alt=""><br>两个方法的区别在于，getActionMasked方法中多了一个&amp;ACTION_MASK：</p>
+<pre><code>public static final int ACTION_MASK = 0xff;
+</code></pre><p>我们把nativeGetAction(mNativePtr)比作mActionValue也就是说mActionValue &amp; 0xff表示只要mActionValue的值在0x00-0xff之间的话，getAction与getActionMasked返回值是一样的，因为ff是十六进制转换成2进制就是11111111 与它相与的数只要小于等于它都是原值，&amp;(与)可以用作位运算符，例如1101 &amp; 1011 = 1001，按位进行比较两个都为1则为1，否则为0。</p>
+<p>那什么时候两个方法返回的不一样呢？<br><br>肯定是返回的值大于0xff的时候。<br><br>那又是什么时候返回的值大于0xff呢？<br><br>答案就是多点触控的时候。<br></p>
+<p>因为既然是多点触控，如果我们要获取某一点的触控信息怎么获取，肯定需要有一个索引，android就把索引的信息放在action高八位中存储，也就是说0x00-0xff代表的是当前触摸时间的类型，存放在action低八位中.一个字段存放两种信息.所以0xff=0x00ff，00代表高八位存储索引信息，ff代表事件类型，由此推论getAction()返回触摸事件类型，如果是多点触控则返回ACTION_POINTER_DOWN与索引信息的混合值，而getActionMasked()由于 &amp; 0xff(0x00ff)的操作，清空了索引信息，只返回ACTION_POINTER_DOWN的值，如果想单独获取索引信息的话可通过getActionIndex()方法。</p>
+<pre><code> public static final int ACTION_POINTER_INDEX_MASK  = 0xff00;
 
  public static final int ACTION_POINTER_INDEX_SHIFT = 8;
 
@@ -319,7 +340,8 @@ getRawX()、getRawY() 与getX()、getY()的区别是前者相对手机屏幕，�
     return (nativeGetAction(mNativePtr) &amp; ACTION_POINTER_INDEX_MASK)
             &gt;&gt; ACTION_POINTER_INDEX_SHIFT;
 }
-</code></pre><h5 id="u901A_u8FC7_u4E0A_u8FF0_u4EE3_u7801_u53EF_u5F97_u77E5mActionValue__26amp_3B_ACTION_POINTER_INDEX_MASK_280xff00_29_u4F1A_u6E05_u7A7A_u4F4E_u516B_u4F4D_u7684_u503C_u4E5F_u5C31_u662F_u4E8B_u4EF6_u7C7B_u578B_u7684_u503C_uFF0C_u53EA_u7559_u4E0B_u7D22_u5F15_u4FE1_u606F_u7684_u503C_uFF0C_u518D_u901A_u8FC7_26gt_3B_26gt_3B_ACTION_POINTER_INDEX_SHIFT_288_29__u5C06_u503C_u53F3_u79FB_u516B_u4F4D_u8FD4_u56DE_u3002"><a href="#u901A_u8FC7_u4E0A_u8FF0_u4EE3_u7801_u53EF_u5F97_u77E5mActionValue__26amp_3B_ACTION_POINTER_INDEX_MASK_280xff00_29_u4F1A_u6E05_u7A7A_u4F4E_u516B_u4F4D_u7684_u503C_u4E5F_u5C31_u662F_u4E8B_u4EF6_u7C7B_u578B_u7684_u503C_uFF0C_u53EA_u7559_u4E0B_u7D22_u5F15_u4FE1_u606F_u7684_u503C_uFF0C_u518D_u901A_u8FC7_26gt_3B_26gt_3B_ACTION_POINTER_INDEX_SHIFT_288_29__u5C06_u503C_u53F3_u79FB_u516B_u4F4D_u8FD4_u56DE_u3002" class="headerlink" title="通过上述代码可得知mActionValue &amp; ACTION_POINTER_INDEX_MASK(0xff00)会清空低八位的值也就是事件类型的值，只留下索引信息的值，再通过&gt;&gt; ACTION_POINTER_INDEX_SHIFT(8) 将值右移八位返回。"></a>通过上述代码可得知mActionValue &amp; ACTION_POINTER_INDEX_MASK(0xff00)会清空低八位的值也就是事件类型的值，只留下索引信息的值，再通过&gt;&gt; ACTION_POINTER_INDEX_SHIFT(8) 将值右移八位返回。</h5><blockquote>
+</code></pre><p>通过上述代码可得知mActionValue &amp; ACTION_POINTER_INDEX_MASK(0xff00)会清空低八位的值也就是事件类型的值，只留下索引信息的值，再通过&gt;&gt; ACTION_POINTER_INDEX_SHIFT(8) 将值右移八位返回。</p>
+<blockquote>
 <h5 id="u5173_u4E8E_u9AD8_u516B_u4F4D_u4E0E_u4F4E_u516B_u4F4D_u7684_u4E00_u4E9B_u89E3_u91CA_3A"><a href="#u5173_u4E8E_u9AD8_u516B_u4F4D_u4E0E_u4F4E_u516B_u4F4D_u7684_u4E00_u4E9B_u89E3_u91CA_3A" class="headerlink" title="关于高八位与低八位的一些解释:"></a>关于高八位与低八位的一些解释:</h5><h5 id="u4E00_u822C_u6765_u8BF4_u5185_u5B58_u64CD_u4F5C_u90FD_u662F_u9488_u5BF9_u5185_u5B58_uFF0C_u4E5F_u5C31_u662F_u4E00_u4E2A_u5B57_u8282_uFF0C8_u4F4D_u3002_u5982_u679C_u662F16_u4F4D_u7684_u6307_u4EE4_uFF0C_u5C31_u662F_u540C_u65F6_u64CD_u4F5C_u8FDE_u7EED_u76842_u4E2A_u5185_u5B58_u5730_u5740_uFF0C_u5C06_u8FD9_u8FDE_u7EED_u76842_u4E2A_u5185_u5B58_u5730_u5740_u5F53_u6210_u4E00_u4E2A_u5355_u4F4D_uFF0C_u6240_u6709_u5C31_u6709_u9AD88_u4F4D_u548C_u4F4E8_u4F4D_u4E4B_u5206_u3002_u7531_u4E8E_u8BA1_u7B97_u673A_u4EC5_u8BC6_u522B_u4E8C_u8FDB_u5236_uFF0C_u6240_u4EE5_u5BF9_u4E00_u4E2A_u5185_u5B58_u5730_u5740_uFF0C_u4E5F_u5C31_u662F8_u4F4D_u4E8C_u8FDB_u5236_uFF0C_u5982_3A0000_0001_0000_u5C31_u662F_u9AD8_u56DB_u4F4D_uFF0C0001_u5C31_u662F_u4F4E_u56DB_u4F4D_uFF0C_u5F53_u71362_u4E2A_u5185_u5B58_u5730_u5740_uFF0C_u5C31_u662F16_u4F4D_u4E8C_u8FDB_u5236_uFF0C_u4E5F_u5C31_u662F_uFF1A0000_0001_0000_0002_uFF0C0000_0001__u5C31_u662F_u9AD8_u516B_u4F4D_uFF0C0000_0002_u5C31_u662F_u4F4E_u516B_u4F4D"><a href="#u4E00_u822C_u6765_u8BF4_u5185_u5B58_u64CD_u4F5C_u90FD_u662F_u9488_u5BF9_u5185_u5B58_uFF0C_u4E5F_u5C31_u662F_u4E00_u4E2A_u5B57_u8282_uFF0C8_u4F4D_u3002_u5982_u679C_u662F16_u4F4D_u7684_u6307_u4EE4_uFF0C_u5C31_u662F_u540C_u65F6_u64CD_u4F5C_u8FDE_u7EED_u76842_u4E2A_u5185_u5B58_u5730_u5740_uFF0C_u5C06_u8FD9_u8FDE_u7EED_u76842_u4E2A_u5185_u5B58_u5730_u5740_u5F53_u6210_u4E00_u4E2A_u5355_u4F4D_uFF0C_u6240_u6709_u5C31_u6709_u9AD88_u4F4D_u548C_u4F4E8_u4F4D_u4E4B_u5206_u3002_u7531_u4E8E_u8BA1_u7B97_u673A_u4EC5_u8BC6_u522B_u4E8C_u8FDB_u5236_uFF0C_u6240_u4EE5_u5BF9_u4E00_u4E2A_u5185_u5B58_u5730_u5740_uFF0C_u4E5F_u5C31_u662F8_u4F4D_u4E8C_u8FDB_u5236_uFF0C_u5982_3A0000_0001_0000_u5C31_u662F_u9AD8_u56DB_u4F4D_uFF0C0001_u5C31_u662F_u4F4E_u56DB_u4F4D_uFF0C_u5F53_u71362_u4E2A_u5185_u5B58_u5730_u5740_uFF0C_u5C31_u662F16_u4F4D_u4E8C_u8FDB_u5236_uFF0C_u4E5F_u5C31_u662F_uFF1A0000_0001_0000_0002_uFF0C0000_0001__u5C31_u662F_u9AD8_u516B_u4F4D_uFF0C0000_0002_u5C31_u662F_u4F4E_u516B_u4F4D" class="headerlink" title="一般来说内存操作都是针对内存，也就是一个字节，8位。如果是16位的指令，就是同时操作连续的2个内存地址，将这连续的2个内存地址当成一个单位，所有就有高8位和低8位之分。由于计算机仅识别二进制，所以对一个内存地址，也就是8位二进制，如:0000 0001 0000就是高四位，0001就是低四位，当然2个内存地址，就是16位二进制，也就是：0000 0001 0000 0002，0000 0001 就是高八位，0000 0002就是低八位"></a>一般来说内存操作都是针对内存，也就是一个字节，8位。如果是16位的指令，就是同时操作连续的2个内存地址，将这连续的2个内存地址当成一个单位，所有就有高8位和低8位之分。由于计算机仅识别二进制，所以对一个内存地址，也就是8位二进制，如:0000 0001 0000就是高四位，0001就是低四位，当然2个内存地址，就是16位二进制，也就是：0000 0001 0000 0002，0000 0001 就是高八位，0000 0002就是低八位</h5></blockquote>
 
       
@@ -327,22 +349,24 @@ getRawX()、getRawY() 与getX()、getY()的区别是前者相对手机屏幕，�
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/MothonEvent/" rel="tag">#MothonEvent</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/01/06/open-source-02/" rel="next" title="每周十个开源库(二)">
-                <i class="fa fa-chevron-left"></i> 每周十个开源库(二)
+              <a href="/2016/01/06/open-source-02/" rel="next" title="十个开源库分享(二)">
+                <i class="fa fa-chevron-left"></i> 十个开源库分享(二)
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/01/21/demo/" rel="prev" title="辨析 Sass 中的 Map 和 List">
-                辨析 Sass 中的 Map 和 List <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -367,6 +391,10 @@ getRawX()、getRawY() 与getX()、getY()的区别是前者相对手机屏幕，�
 
           
   <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/01/07/about-motionevent/"
+           data-title="关于MothonEvent里getAction与getActionMasked的区别" data-url="http://www.turegeek.com/2016/01/07/about-motionevent/">
+      </div>
     
   </div>
 
@@ -410,14 +438,14 @@ getRawX()、getRawY() 与getX()、getY()的区别是前者相对手机屏幕，�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           <div class="site-state-item site-state-categories">
             <a href="/categories">
-              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-count">3</span>
               <span class="site-state-item-name">分类</span>
               </a>
           </div>
@@ -463,7 +491,7 @@ getRawX()、getRawY() 与getX()、getY()的区别是前者相对手机屏幕，�
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#u6211_u4EEC_u7ECF_u5E38_u5728dispatchTouchEvent_u3001onInterceptTouchEvent_u3001onTouchEvent_u4E2D_u770B_u5230MotionEvent_u5BF9_u8C61_uFF0C_u901A_u8FC7_u8FD9_u4E2A_u5BF9_u8C61_u6211_u53EF_u4EE5_u53EF_u4EE5_u83B7_u53D6_u89E6_u6478_u4E8B_u4EF6_u7136_u540E_u8FDB_u884C_u76F8_u5E94_u7684_u64CD_u4F5C_uFF0C_u89E6_u6478_u4E8B_u4EF6_u7C7B_u578B_u6BD4_u8F83_u5E38_u7528_u7684_u5C31_u662FACTION_UP_u3001ACTION_DOWN_u3001ACTION_MOVE_u7B49_u3002_u83B7_u53D6_u89E6_u6478_u70B9_u5750_u6807_u6709_u4EE5_u4E0B_u65B9_u6CD5"><span class="nav-number">1.</span> <span class="nav-text">我们经常在dispatchTouchEvent、onInterceptTouchEvent、onTouchEvent中看到MotionEvent对象，通过这个对象我可以可以获取触摸事件然后进行相应的操作，触摸事件类型比较常用的就是ACTION_UP、ACTION_DOWN、ACTION_MOVE等。获取触摸点坐标有以下方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u5728_u83B7_u53D6MotionEvent_u7684Action_u4E8B_u4EF6_u7684_u65F6_u5019_uFF0C_u6211_u4EEC_u770B_u5230_u4EE5_u4E0B_u4E24_u4E2A_u65B9_u6CD5_u53EF_u4EE5_u83B7_u53D6_u5F53_u524D_u7684_u4E8B_u4EF6_3A"><span class="nav-number">2.</span> <span class="nav-text">在获取MotionEvent的Action事件的时候，我们看到以下两个方法可以获取当前的事件:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#getAction_28_29_3A"><span class="nav-number">3.</span> <span class="nav-text">getAction():</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#getActionMasked_28_29_3A"><span class="nav-number">4.</span> <span class="nav-text">getActionMasked():</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u4E24_u4E2A_u65B9_u6CD5_u7684_u533A_u522B_u5728_u4E8E_uFF0CgetActionMasked_u65B9_u6CD5_u4E2D_u591A_u4E86_u4E00_u4E2A_26amp_3BACTION_MASK_uFF1A"><span class="nav-number">5.</span> <span class="nav-text">两个方法的区别在于，getActionMasked方法中多了一个&ACTION_MASK：</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u6211_u4EEC_u628AnativeGetAction_28mNativePtr_29_u6BD4_u4F5CmActionValue_u4E5F_u5C31_u662F_u8BF4mActionValue__26amp_3B_0xff_u8868_u793A_u53EA_u8981mActionValue_u7684_u503C_u57280x00-0xff_u4E4B_u95F4_u7684_u8BDD_uFF0CgetAction_u4E0EgetActionMasked_u8FD4_u56DE_u503C_u662F_u4E00_u6837_u7684_uFF0C_u56E0_u4E3Aff_u662F_u5341_u516D_u8FDB_u5236_u8F6C_u6362_u62102_u8FDB_u5236_u5C31_u662F11111111__u4E0E_u5B83_u76F8_u4E0E_u7684_u6570_u53EA_u8981_u5C0F_u4E8E_u7B49_u4E8E_u5B83_u90FD_u662F_u539F_u503C_uFF0C_26amp_3B_28_u4E0E_29_u53EF_u4EE5_u7528_u4F5C_u4F4D_u8FD0_u7B97_u7B26_uFF0C_u4F8B_u59821101__26amp_3B_1011__3D_1001_uFF0C_u6309_u4F4D_u8FDB_u884C_u6BD4_u8F83_u4E24_u4E2A_u90FD_u4E3A1_u5219_u4E3A1_uFF0C_u5426_u5219_u4E3A0_u3002"><span class="nav-number">6.</span> <span class="nav-text">我们把nativeGetAction(mNativePtr)比作mActionValue也就是说mActionValue & 0xff表示只要mActionValue的值在0x00-0xff之间的话，getAction与getActionMasked返回值是一样的，因为ff是十六进制转换成2进制就是11111111 与它相与的数只要小于等于它都是原值，&(与)可以用作位运算符，例如1101 & 1011 = 1001，按位进行比较两个都为1则为1，否则为0。</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u90A3_u4EC0_u4E48_u65F6_u5019_u4E24_u4E2A_u65B9_u6CD5_u8FD4_u56DE_u7684_u4E0D_u4E00_u6837_u5462_uFF1F"><span class="nav-number"></span> <span class="nav-text">那什么时候两个方法返回的不一样呢？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#u80AF_u5B9A_u662F_u8FD4_u56DE_u7684_u503C_u5927_u4E8E0xff_u7684_u65F6_u5019_u3002"><span class="nav-number">1.</span> <span class="nav-text">肯定是返回的值大于0xff的时候。</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u90A3_u53C8_u662F_u4EC0_u4E48_u65F6_u5019_u8FD4_u56DE_u7684_u503C_u5927_u4E8E0xff_u5462_uFF1F"><span class="nav-number"></span> <span class="nav-text">那又是什么时候返回的值大于0xff呢？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#u7B54_u6848_u5C31_u662F_u591A_u70B9_u89E6_u63A7_u7684_u65F6_u5019_u3002"><span class="nav-number">1.</span> <span class="nav-text">答案就是多点触控的时候。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u56E0_u4E3A_u65E2_u7136_u662F_u591A_u70B9_u89E6_u63A7_uFF0C_u5982_u679C_u6211_u4EEC_u8981_u83B7_u53D6_u67D0_u4E00_u70B9_u7684_u89E6_u63A7_u4FE1_u606F_u600E_u4E48_u83B7_u53D6_uFF0C_u80AF_u5B9A_u9700_u8981_u6709_u4E00_u4E2A_u7D22_u5F15_uFF0Candroid_u5C31_u628A_u7D22_u5F15_u7684_u4FE1_u606F_u653E_u5728action_u9AD8_u516B_u4F4D_u4E2D_u5B58_u50A8_uFF0C_u4E5F_u5C31_u662F_u8BF40x00-0xff_u4EE3_u8868_u7684_u662F_u5F53_u524D_u89E6_u6478_u65F6_u95F4_u7684_u7C7B_u578B_uFF0C_u5B58_u653E_u5728action_u4F4E_u516B_u4F4D_u4E2D-_u4E00_u4E2A_u5B57_u6BB5_u5B58_u653E_u4E24_u79CD_u4FE1_u606F-_u6240_u4EE50xff_3D0x00ff_uFF0C00_u4EE3_u8868_u9AD8_u516B_u4F4D_u5B58_u50A8_u7D22_u5F15_u4FE1_u606F_uFF0Cff_u4EE3_u8868_u4E8B_u4EF6_u7C7B_u578B_uFF0C_u7531_u6B64_u63A8_u8BBAgetAction_28_29_u8FD4_u56DE_u89E6_u6478_u4E8B_u4EF6_u7C7B_u578B_uFF0C_u5982_u679C_u662F_u591A_u70B9_u89E6_u63A7_u5219_u8FD4_u56DEACTION_POINTER_DOWN_u4E0E_u7D22_u5F15_u4FE1_u606F_u7684_u6DF7_u5408_u503C_uFF0C_u800CgetActionMasked_28_29_u7531_u4E8E__26amp_3B_0xff_280x00ff_29_u7684_u64CD_u4F5C_uFF0C_u6E05_u7A7A_u4E86_u7D22_u5F15_u4FE1_u606F_uFF0C_u53EA_u8FD4_u56DEACTION_POINTER_DOWN_u7684_u503C_uFF0C_u5982_u679C_u60F3_u5355_u72EC_u83B7_u53D6_u7D22_u5F15_u4FE1_u606F_u7684_u8BDD_u53EF_u901A_u8FC7getActionIndex_28_29_u65B9_u6CD5_u3002"><span class="nav-number">2.</span> <span class="nav-text">因为既然是多点触控，如果我们要获取某一点的触控信息怎么获取，肯定需要有一个索引，android就把索引的信息放在action高八位中存储，也就是说0x00-0xff代表的是当前触摸时间的类型，存放在action低八位中.一个字段存放两种信息.所以0xff=0x00ff，00代表高八位存储索引信息，ff代表事件类型，由此推论getAction()返回触摸事件类型，如果是多点触控则返回ACTION_POINTER_DOWN与索引信息的混合值，而getActionMasked()由于 & 0xff(0x00ff)的操作，清空了索引信息，只返回ACTION_POINTER_DOWN的值，如果想单独获取索引信息的话可通过getActionIndex()方法。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u901A_u8FC7_u4E0A_u8FF0_u4EE3_u7801_u53EF_u5F97_u77E5mActionValue__26amp_3B_ACTION_POINTER_INDEX_MASK_280xff00_29_u4F1A_u6E05_u7A7A_u4F4E_u516B_u4F4D_u7684_u503C_u4E5F_u5C31_u662F_u4E8B_u4EF6_u7C7B_u578B_u7684_u503C_uFF0C_u53EA_u7559_u4E0B_u7D22_u5F15_u4FE1_u606F_u7684_u503C_uFF0C_u518D_u901A_u8FC7_26gt_3B_26gt_3B_ACTION_POINTER_INDEX_SHIFT_288_29__u5C06_u503C_u53F3_u79FB_u516B_u4F4D_u8FD4_u56DE_u3002"><span class="nav-number">3.</span> <span class="nav-text">通过上述代码可得知mActionValue & ACTION_POINTER_INDEX_MASK(0xff00)会清空低八位的值也就是事件类型的值，只留下索引信息的值，再通过>> ACTION_POINTER_INDEX_SHIFT(8) 将值右移八位返回。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u5173_u4E8E_u9AD8_u516B_u4F4D_u4E0E_u4F4E_u516B_u4F4D_u7684_u4E00_u4E9B_u89E3_u91CA_3A"><span class="nav-number">4.</span> <span class="nav-text">关于高八位与低八位的一些解释:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u4E00_u822C_u6765_u8BF4_u5185_u5B58_u64CD_u4F5C_u90FD_u662F_u9488_u5BF9_u5185_u5B58_uFF0C_u4E5F_u5C31_u662F_u4E00_u4E2A_u5B57_u8282_uFF0C8_u4F4D_u3002_u5982_u679C_u662F16_u4F4D_u7684_u6307_u4EE4_uFF0C_u5C31_u662F_u540C_u65F6_u64CD_u4F5C_u8FDE_u7EED_u76842_u4E2A_u5185_u5B58_u5730_u5740_uFF0C_u5C06_u8FD9_u8FDE_u7EED_u76842_u4E2A_u5185_u5B58_u5730_u5740_u5F53_u6210_u4E00_u4E2A_u5355_u4F4D_uFF0C_u6240_u6709_u5C31_u6709_u9AD88_u4F4D_u548C_u4F4E8_u4F4D_u4E4B_u5206_u3002_u7531_u4E8E_u8BA1_u7B97_u673A_u4EC5_u8BC6_u522B_u4E8C_u8FDB_u5236_uFF0C_u6240_u4EE5_u5BF9_u4E00_u4E2A_u5185_u5B58_u5730_u5740_uFF0C_u4E5F_u5C31_u662F8_u4F4D_u4E8C_u8FDB_u5236_uFF0C_u5982_3A0000_0001_0000_u5C31_u662F_u9AD8_u56DB_u4F4D_uFF0C0001_u5C31_u662F_u4F4E_u56DB_u4F4D_uFF0C_u5F53_u71362_u4E2A_u5185_u5B58_u5730_u5740_uFF0C_u5C31_u662F16_u4F4D_u4E8C_u8FDB_u5236_uFF0C_u4E5F_u5C31_u662F_uFF1A0000_0001_0000_0002_uFF0C0000_0001__u5C31_u662F_u9AD8_u516B_u4F4D_uFF0C0000_0002_u5C31_u662F_u4F4E_u516B_u4F4D"><span class="nav-number">5.</span> <span class="nav-text">一般来说内存操作都是针对内存，也就是一个字节，8位。如果是16位的指令，就是同时操作连续的2个内存地址，将这连续的2个内存地址当成一个单位，所有就有高8位和低8位之分。由于计算机仅识别二进制，所以对一个内存地址，也就是8位二进制，如:0000 0001 0000就是高四位，0001就是低四位，当然2个内存地址，就是16位二进制，也就是：0000 0001 0000 0002，0000 0001 就是高八位，0000 0002就是低八位</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#u5173_u4E8E_u9AD8_u516B_u4F4D_u4E0E_u4F4E_u516B_u4F4D_u7684_u4E00_u4E9B_u89E3_u91CA_3A"><span class="nav-number">1.</span> <span class="nav-text">关于高八位与低八位的一些解释:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u4E00_u822C_u6765_u8BF4_u5185_u5B58_u64CD_u4F5C_u90FD_u662F_u9488_u5BF9_u5185_u5B58_uFF0C_u4E5F_u5C31_u662F_u4E00_u4E2A_u5B57_u8282_uFF0C8_u4F4D_u3002_u5982_u679C_u662F16_u4F4D_u7684_u6307_u4EE4_uFF0C_u5C31_u662F_u540C_u65F6_u64CD_u4F5C_u8FDE_u7EED_u76842_u4E2A_u5185_u5B58_u5730_u5740_uFF0C_u5C06_u8FD9_u8FDE_u7EED_u76842_u4E2A_u5185_u5B58_u5730_u5740_u5F53_u6210_u4E00_u4E2A_u5355_u4F4D_uFF0C_u6240_u6709_u5C31_u6709_u9AD88_u4F4D_u548C_u4F4E8_u4F4D_u4E4B_u5206_u3002_u7531_u4E8E_u8BA1_u7B97_u673A_u4EC5_u8BC6_u522B_u4E8C_u8FDB_u5236_uFF0C_u6240_u4EE5_u5BF9_u4E00_u4E2A_u5185_u5B58_u5730_u5740_uFF0C_u4E5F_u5C31_u662F8_u4F4D_u4E8C_u8FDB_u5236_uFF0C_u5982_3A0000_0001_0000_u5C31_u662F_u9AD8_u56DB_u4F4D_uFF0C0001_u5C31_u662F_u4F4E_u56DB_u4F4D_uFF0C_u5F53_u71362_u4E2A_u5185_u5B58_u5730_u5740_uFF0C_u5C31_u662F16_u4F4D_u4E8C_u8FDB_u5236_uFF0C_u4E5F_u5C31_u662F_uFF1A0000_0001_0000_0002_uFF0C0000_0001__u5C31_u662F_u9AD8_u516B_u4F4D_uFF0C0000_0002_u5C31_u662F_u4F4E_u516B_u4F4D"><span class="nav-number">2.</span> <span class="nav-text">一般来说内存操作都是针对内存，也就是一个字节，8位。如果是16位的指令，就是同时操作连续的2个内存地址，将这连续的2个内存地址当成一个单位，所有就有高8位和低8位之分。由于计算机仅识别二进制，所以对一个内存地址，也就是8位二进制，如:0000 0001 0000就是高四位，0001就是低四位，当然2个内存地址，就是16位二进制，也就是：0000 0001 0000 0002，0000 0001 就是高八位，0000 0002就是低八位</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
@@ -706,9 +734,28 @@ getRawX()、getRawY() 与getX()、getY()的区别是前者相对手机屏幕，�
 
   
 
+  
+    
+  
 
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"turegeek"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
 
   
+    
+  
+
+
 
 
 

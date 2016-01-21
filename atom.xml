@@ -5,7 +5,7 @@
   <subtitle><![CDATA[reading and Writing]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.turegeek.com//"/>
-  <updated>2016-01-19T17:32:26.000Z</updated>
+  <updated>2016-01-21T15:58:55.000Z</updated>
   <id>http://www.turegeek.com//</id>
   
   <author>
@@ -16,121 +16,27 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title><![CDATA[辨析 Sass 中的 Map 和 List]]></title>
-    <link href="http://www.turegeek.com/2016/01/21/demo/"/>
-    <id>http://www.turegeek.com/2016/01/21/demo/</id>
-    <published>2016-01-21T02:34:12.000Z</published>
-    <updated>2016-01-19T17:32:26.000Z</updated>
-    <content type="html"><![CDATA[<p>如果你使用过 Sass 3.3 之前的版本，那么你一定对那段时光颇有感触，那时候没有现如今这么好的条件，那时候的 Map 还只能用多重列表（lists of list）来模拟。多重列表可以实现复杂数据的嵌套定义，但却不是以键值对的形式实现的，所有当我们需要获取其中特定的某一项时就会比较麻烦。Map 这种数据类型天生就是基于键值对的形式，非常便于组织数据。</p>
-<p>自从可以使用 Map 之后，开发者们开始毫无顾忌地定义 Map 存储数据，比如断点宽度、颜色值、栅格布局等等响应式排版的细节，都被一股脑的塞进了 Map 中。</p>
-<p>那么，有了 Map 之后，我们还有必要使用 List 吗？可能某些人会觉得为了保持向后兼容应该继续使用多重列表模拟 Map，因为可能有些开发者仍然在使用老版本的 Sass 编译器，但实际上，这是多此一举了，Sass 的版本通常由 <code>package.json</code> 或者其他同类型的项目配置文件所控制，往往只需一条命令（<code>gem update sass</code>）即可更新 Sass 的版本，因此基本上无需考虑对老版本的兼容问题。</p>
-<a id="more"></a>
-<p>使用多重列表替代 Map 的优势之一就是减少代码量。下面让我们来比较一下多种列表和 Map 的语法结构以及遍历方式。</p>
-<h2 id="u6D4B_u8BD5_u8868_u683C"><a href="#u6D4B_u8BD5_u8868_u683C" class="headerlink" title="测试表格"></a>测试表格</h2><table>
-<thead>
-<tr>
-<th>Variable</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>site</code></td>
-<td>Sitewide information.</td>
-</tr>
-<tr>
-<td><code>page</code></td>
-<td>Page specific information and custom variables set in front-matter.</td>
-</tr>
-<tr>
-<td><code>config</code></td>
-<td>Site configuration</td>
-</tr>
-<tr>
-<td><code>theme</code></td>
-<td>Theme configuration. Inherits from site configuration.</td>
-</tr>
-<tr>
-<td><code>_</code> (single underscore)</td>
-<td><a href="http://lodash.com/" target="_blank" rel="external">Lodash</a> library</td>
-</tr>
-<tr>
-<td><code>path</code></td>
-<td>Path of current page</td>
-</tr>
-<tr>
-<td><code>url</code></td>
-<td>Full URL of current page</td>
-</tr>
-<tr>
-<td><code>env</code></td>
-<td>Environment variables</td>
-</tr>
-</tbody>
-</table>
-<h2 id="u8BED_u6CD5_u6BD4_u8F83"><a href="#u8BED_u6CD5_u6BD4_u8F83" class="headerlink" title="语法比较"></a>语法比较</h2><div class="note"><br>    <h5>测试标题</h5><br>    <p>在下面的示例中，我创建了一个用于控制响应式布局的数据，该数据一共有四个断点，每一个断点都包含了 <code>min-width</code>、<code>max-width</code>、<code>font-size</code> 和 <code>line-height</code> 四个样式。</p><br></div>
-
-<h4 id="Map__u8BED_u6CD5"><a href="#Map__u8BED_u6CD5" class="headerlink" title="Map 语法"></a>Map 语法</h4><p>下面就是使用 Map 存储的数据，具体来说，该 Map 中首先存储了四个用于标识断点的 Key，相对应的是保存具体属性值得 Value。虽然这种形式可读性更高，但是总体代码量却高达 26 行 450 个字符。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$breakpoint-map: (&#10;&#160; &#160; small: (&#10;&#160; &#160; &#160; &#160; min-width: null,&#10;&#160; &#160; &#160; &#160; max-width: 479px,&#10;&#160; &#160; &#160; &#160; base-font: 16px,&#10;&#160; &#160; &#160; &#160; vertical-rhythm: 1.3&#10;&#160; &#160; ),&#10;&#160; &#160; medium: (&#10;&#160; &#160; &#160; &#160; min-width: 480px,&#10;&#160; &#160; &#160; &#160; max-width: 959px,&#10;&#160; &#160; &#160; &#160; base-font: 18px,&#10;&#160; &#160; &#160; &#160; vertical-rhythm: 1.414&#10;&#160; &#160; ),&#10;&#160; &#160; large: (&#10;&#160; &#160; &#160; &#160; min-width: 960px,&#10;&#160; &#160; &#160; &#160; max-width: 1099px,&#10;&#160; &#160; &#160; &#160; base-font: 18px,&#10;&#160; &#160; &#160; &#160; vertical-rhythm: 1.5&#10;&#160; &#160; ),&#10;&#160; &#160; xlarge: (&#10;&#160; &#160; &#160; &#160; min-width: 1100px,&#10;&#160; &#160; &#160; &#160; max-width: null,&#10;&#160; &#160; &#160; &#160; base-font: 21px,&#10;&#160; &#160; &#160; &#160; vertical-rhythm: 1.618&#10;&#160; &#160; )&#10;);</span><br></pre></td></tr></table></figure>
-<h4 id="u591A_u91CD_u5217_u8868_u8BED_u6CD5"><a href="#u591A_u91CD_u5217_u8868_u8BED_u6CD5" class="headerlink" title="多重列表语法"></a>多重列表语法</h4><p>下面的多重列表存储了和上面 Map 同样的数据，在多重列表中没有 Key-Value 的对应关系，这意味着要想找到特定的值，必须使用遍历或 <code>nth()</code> 的方式来实现了。从另一个角度来看，多种列表又比 Map 的代码量小得多，总共只有六行 180 个字符。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$breakpoint-list: (&#10;&#160; &#160; (small, null, 479px, 16px, 1.3),&#10;&#160; &#160; (medium, 480px, 959px, 18px, 1.414),&#10;&#160; &#160; (large, 960px, 1099px, 18px, 1.5),&#10;&#160; &#160; (xlarge, 1100px, null, 21px, 1.618)&#10;);</span><br></pre></td></tr></table></figure>
-<h2 id="u904D_u5386_u6BD4_u8F83"><a href="#u904D_u5386_u6BD4_u8F83" class="headerlink" title="遍历比较"></a>遍历比较</h2><div class="note info"><br>    <h5>测试标题</h5><br>    <p>从上面简单地比较中可以粗略的看出，多种列表的代码量明显少于 Map。但是，如果我们需要遍历这些值得话，复杂度又是怎样的呢？</p><br></div>
-
-<h4 id="u904D_u5386_Map"><a href="#u904D_u5386_Map" class="headerlink" title="遍历 Map"></a>遍历 Map</h4><p>我们可以使用如下的代码遍历 Map：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@each $label, $map in $breakpoint-map &#123;&#125;</span><br></pre></td></tr></table></figure>
-<p>这里的变量 <code>$label</code> 和 <code>$map</code> 会随着对 <code>$breakpoint-map</code> 的遍历被动态地赋值，<code>$label</code> 将会被赋值为 <code>$breakpoint-map</code> 的 Key，而 <code>$map</code> 会被赋值为 <code>$breakpoint-map</code> 的 Value。为了在遍历过程中获取特定值，我们就需要使用 Sass 原生的 <code>map-get()</code> 函数，使用该函数需要传入两个参数：Map 的名字和求取的 Key，最后返回该 Map 中匹配该 Key 的 Value。</p>
-<p>具体的做法就是使用 <code>@each</code> 遍历 Map，然后使用 <code>map-get()</code> 获取特定值，最终只需要六行代码 220 个字符即可完成整个遍历：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@each $label, $map in $breakpoint-map &#123;&#10;&#160; &#160; $min-width: map-get($map, min-width);&#10;&#160; &#160; $max-width: map-get($map, max-width);&#10;&#160; &#160; $base-font: map-get($map, base-font);&#10;&#160; &#160; $vertical-rhythm: map-get($map, vertical-rhythm);&#10;&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="u904D_u5386_u591A_u91CD_u5217_u8868"><a href="#u904D_u5386_u591A_u91CD_u5217_u8868" class="headerlink" title="遍历多重列表"></a>遍历多重列表</h4><p>遍历多重列表不必像遍历 Map 一样动态获取到 Map 后再使用 <code>map-get()</code> 函数取特定值，直接遍历一遍即可获得特定值。</p>
-<p>因为多种列表内层的每一个列表结构相同，都有按照相同顺序排列的五个值，所以我们可以持续遍历每个值并赋值给特定的变量。无需调用 <code>map-get()</code>，直接引用这些变量即可进行赋值等裸机操作。最终遍历多重列表只使用了两行代码 100 个字符：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@each $label, $min-width, $max-width, $base-font, $vertical-rhythm in $breakpoint-list &#123;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="u614E_u7528_u591A_u91CD_u5217_u8868"><a href="#u614E_u7528_u591A_u91CD_u5217_u8868" class="headerlink" title="慎用多重列表"></a>慎用多重列表</h2><div class="note warning"><br>    <h5>测试标题</h5><br>    <p>经过上述的比对，看起来多重列表各方面都在碾压 Map，实则不然，Sass 中添加 Map 有一条非常重要的原因就是：Key-Value 的映射关系。</p><br></div>
-
-<h4 id="u9057_u6F0F_u952E_u503C"><a href="#u9057_u6F0F_u952E_u503C" class="headerlink" title="遗漏键值"></a>遗漏键值</h4><p>如果要使用多重列表，那么就必须保证自己非常熟悉多重列表内部的每一项所代表的意义。下面我们举个例子，来看看遗漏了某些值的情况：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$breakpoint-list: (&#10;&#160; &#160; (small, null, 479px, 16px, 1.3),&#10;&#160; &#160; (medium, 480px, 959px, 18px, 1.414),&#10;&#160; &#160; (large, 960px, 1099px, 18px, 1.5),&#10;&#160; &#160; (xlarge, 1100px, 21px, 1.618)&#10;);&#10;&#10;p &#123;&#10;&#160; &#160; @each $label, $min-width, $max-width, $base-font, $vertical-rhythm in $breakpoint-list &#123;&#10;&#160; &#160; &#160; &#160; @if $min-width &#123;&#10;&#160; &#160; &#160; &#160; &#160; &#160; @include breakpoint( $min-width ) &#123;&#10;&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; font-size: $base-font;&#10;&#160; &#160; &#160; &#160; &#160; &#160; &#160; &#160; line-height: $vertical-rhythm;&#10;&#160; &#160; &#160; &#160; &#160; &#160; &#125;&#10;&#160; &#160; &#160; &#160; &#125; @else &#123;&#10;&#160; &#160; &#160; &#160; &#160; &#160; font-size: $base-font;&#10;&#160; &#160; &#160; &#160; &#160; &#160; line-height: $vertical-rhythm;&#10;&#160; &#160; &#160; &#160; &#125;&#10;&#160; &#160; &#125;&#10;&#125;</span><br></pre></td></tr></table></figure>
-<p>当我们尝试运行这段代码时，结果肯定是错误地，因为在 <code>$breakpoint-list</code> 的最后一行，<code>xlarge</code> 被赋值给了 <code>$label</code>，<code>1100px</code> 被赋值给了 <code>$min-width</code>，<code>21px</code> 被赋值给了 <code>$max-width</code>, <code>1.618</code> 被赋值给了 <code>$base-font</code>，最终导致 <code>$vertical-rhythm</code> 没有被赋值，结果就是 <code>font-size</code> 的属性值是错的，<code>line-height</code> 的属性值是空的。此外，Sass 还不会对此抛出错误，导致我们无从知晓错误所在。</p>
-<p>如果我们使用 Map 来代替这里的多重列表，那么使用 <code>map-get()</code> 函数即使遇见空值也能正确获得想要的结果。这就是值得我们慎重思考的地方：多种列表虽然简单快速，但是丧失了 Map 中的容错能力和快速取值能力。</p>
-<h4 id="u67E5_u627E_u7279_u5B9A_u5217_u8868"><a href="#u67E5_u627E_u7279_u5B9A_u5217_u8868" class="headerlink" title="查找特定列表"></a>查找特定列表</h4><p>在多重列表中查找特定列表简直就是一种折磨。如果使用 Map，那么配合 <code>map-get()</code> 函数可以快速定位到特定子 Map：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$medium-map: map-get($maps, medium);</span><br></pre></td></tr></table></figure>
-<p>但如果要获取多种列表 <code>medium</code> 列表，麻烦可就大了：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@function get-list($label) &#123;&#10;&#160; &#160; @each $list in $breakpoint-list &#123;&#10;&#160; &#160; &#160; &#160; @if nth($list, 1) == $label &#123;&#10;&#160; &#160; &#160; &#160; &#160; &#160; @return $list;&#10;&#160; &#160; &#160; &#160; &#125;&#10;&#160; &#160; &#125;&#10;&#160; &#160; @return null;&#10;&#125;&#10;$medium-list: get-list(medium);</span><br></pre></td></tr></table></figure>
-<p>这段代码的逻辑就是遍历整个多重列表，知道找到第一个匹配项，然后返回，如果一直没有找到匹配项，就一直遍历到末尾，然后返回 <code>null</code>。这实际上就是手工实现了 <code>map-get()</code> 的逻辑。</p>
-<h4 id="u7F3A_u5C11_u539F_u751F_u7684_Map__u51FD_u6570"><a href="#u7F3A_u5C11_u539F_u751F_u7684_Map__u51FD_u6570" class="headerlink" title="缺少原生的 Map 函数"></a>缺少原生的 Map 函数</h4><p>Sass 提供了诸多的原生函数用于处理 Map 数据类型，但是多重列表是没法调用这些函数的，比如，使用 <code>map-merge()</code> 可以合并两个 Map，如果两个 Map 有相同的值，则取第二个 Map 的值为最终值。当然你也可以在多重列表中使用 <code>join()</code> 或 <code>append()</code> 来增加新列表，从而模拟出 <code>map-merge()</code> 的效果。</p>
-<p>另一个实用的 Map 函数就是 <code>map-has-key()</code>，对于依赖 <code>map-get()</code> 的自定义函数来说，<code>map-has-key()</code> 可以用来验证特定的 Key 是否存在。但在列表中是完全没有相似的方法。</p>
-<h2 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h2><div class="note unreleased"><br>    <h5>Test Title</h5><br>    <p>相比起列表来说，Key-Value 模型的 Map 显然更有力量，原生的 Sass Map 函数更是提供了强力的数据查找和验证工具。</p><br></div>
-
-<p>虽然多重列表代码量少，但并不能像 Map 一样进行错误检查或验证参数。在大多数时候，相比较多重列表而言，我相信 Map 是更好的选择。如果是为了更少的代码量和其他简单地调用，那么我偶尔会用用多重列表，但是从项目的宏观控制和数据存储方面显然更优秀。</p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p>如果你使用过 Sass 3.3 之前的版本，那么你一定对那段时光颇有感触，那时候没有现如今这么好的条件，那时候的 Map 还只能用多重列表（lists of list）来模拟。多重列表可以实现复杂数据的嵌套定义，但却不是以键值对的形式实现的，所有当我们需要获取其中特定的某一项时就会比较麻烦。Map 这种数据类型天生就是基于键值对的形式，非常便于组织数据。</p>
-<p>自从可以使用 Map 之后，开发者们开始毫无顾忌地定义 Map 存储数据，比如断点宽度、颜色值、栅格布局等等响应式排版的细节，都被一股脑的塞进了 Map 中。</p>
-<p>那么，有了 Map 之后，我们还有必要使用 List 吗？可能某些人会觉得为了保持向后兼容应该继续使用多重列表模拟 Map，因为可能有些开发者仍然在使用老版本的 Sass 编译器，但实际上，这是多此一举了，Sass 的版本通常由 <code>package.json</code> 或者其他同类型的项目配置文件所控制，往往只需一条命令（<code>gem update sass</code>）即可更新 Sass 的版本，因此基本上无需考虑对老版本的兼容问题。</p>]]>
-    
-    </summary>
-    
-      <category term="css" scheme="http://www.turegeek.com/tags/css/"/>
-    
-      <category term="java" scheme="http://www.turegeek.com/categories/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title><![CDATA[关于MothonEvent的一些了解以及getAction()与getActionMasked()的区别]]></title>
+    <title><![CDATA[关于MothonEvent里getAction与getActionMasked的区别]]></title>
     <link href="http://www.turegeek.com/2016/01/07/about-motionevent/"/>
     <id>http://www.turegeek.com/2016/01/07/about-motionevent/</id>
     <published>2016-01-06T16:00:00.000Z</published>
-    <updated>2016-01-19T15:32:04.000Z</updated>
-    <content type="html"><![CDATA[<h5 id="u6211_u4EEC_u7ECF_u5E38_u5728dispatchTouchEvent_u3001onInterceptTouchEvent_u3001onTouchEvent_u4E2D_u770B_u5230MotionEvent_u5BF9_u8C61_uFF0C_u901A_u8FC7_u8FD9_u4E2A_u5BF9_u8C61_u6211_u53EF_u4EE5_u53EF_u4EE5_u83B7_u53D6_u89E6_u6478_u4E8B_u4EF6_u7136_u540E_u8FDB_u884C_u76F8_u5E94_u7684_u64CD_u4F5C_uFF0C_u89E6_u6478_u4E8B_u4EF6_u7C7B_u578B_u6BD4_u8F83_u5E38_u7528_u7684_u5C31_u662FACTION_UP_u3001ACTION_DOWN_u3001ACTION_MOVE_u7B49_u3002_u83B7_u53D6_u89E6_u6478_u70B9_u5750_u6807_u6709_u4EE5_u4E0B_u65B9_u6CD5"><a href="#u6211_u4EEC_u7ECF_u5E38_u5728dispatchTouchEvent_u3001onInterceptTouchEvent_u3001onTouchEvent_u4E2D_u770B_u5230MotionEvent_u5BF9_u8C61_uFF0C_u901A_u8FC7_u8FD9_u4E2A_u5BF9_u8C61_u6211_u53EF_u4EE5_u53EF_u4EE5_u83B7_u53D6_u89E6_u6478_u4E8B_u4EF6_u7136_u540E_u8FDB_u884C_u76F8_u5E94_u7684_u64CD_u4F5C_uFF0C_u89E6_u6478_u4E8B_u4EF6_u7C7B_u578B_u6BD4_u8F83_u5E38_u7528_u7684_u5C31_u662FACTION_UP_u3001ACTION_DOWN_u3001ACTION_MOVE_u7B49_u3002_u83B7_u53D6_u89E6_u6478_u70B9_u5750_u6807_u6709_u4EE5_u4E0B_u65B9_u6CD5" class="headerlink" title="我们经常在dispatchTouchEvent、onInterceptTouchEvent、onTouchEvent中看到MotionEvent对象，通过这个对象我可以可以获取触摸事件然后进行相应的操作，触摸事件类型比较常用的就是ACTION_UP、ACTION_DOWN、ACTION_MOVE等。获取触摸点坐标有以下方法"></a>我们经常在dispatchTouchEvent、onInterceptTouchEvent、onTouchEvent中看到MotionEvent对象，通过这个对象我可以可以获取触摸事件然后进行相应的操作，触摸事件类型比较常用的就是ACTION_UP、ACTION_DOWN、ACTION_MOVE等。获取触摸点坐标有以下方法</h5><pre><code>  getX() 获取触摸点X轴坐标
+    <updated>2016-01-21T15:58:55.000Z</updated>
+    <content type="html"><![CDATA[<p>我们经常在dispatchTouchEvent、onInterceptTouchEvent、onTouchEvent中看到MotionEvent对象，通过这个对象我可以可以获取触摸事件然后进行相应的操作，触摸事件类型比较常用的就是ACTION_UP、ACTION_DOWN、ACTION_MOVE等。获取触摸点坐标有以下方法</p>
+<pre><code>getX() 获取触摸点X轴坐标
 
 getY() 获取触摸点Y轴坐标
 
 getX(int pointerIndex)、getY(int pointerIndex) 在多点触控时获取对应手指的坐标
 
 getRawX()、getRawY() 与getX()、getY()的区别是前者相对手机屏幕，后者相对当前控件
-</code></pre><h5 id="u5728_u83B7_u53D6MotionEvent_u7684Action_u4E8B_u4EF6_u7684_u65F6_u5019_uFF0C_u6211_u4EEC_u770B_u5230_u4EE5_u4E0B_u4E24_u4E2A_u65B9_u6CD5_u53EF_u4EE5_u83B7_u53D6_u5F53_u524D_u7684_u4E8B_u4EF6_3A"><a href="#u5728_u83B7_u53D6MotionEvent_u7684Action_u4E8B_u4EF6_u7684_u65F6_u5019_uFF0C_u6211_u4EEC_u770B_u5230_u4EE5_u4E0B_u4E24_u4E2A_u65B9_u6CD5_u53EF_u4EE5_u83B7_u53D6_u5F53_u524D_u7684_u4E8B_u4EF6_3A" class="headerlink" title="在获取MotionEvent的Action事件的时候，我们看到以下两个方法可以获取当前的事件:"></a>在获取MotionEvent的Action事件的时候，我们看到以下两个方法可以获取当前的事件:</h5><h5 id="getAction_28_29_3A"><a href="#getAction_28_29_3A" class="headerlink" title="getAction():"></a>getAction():</h5><p><img src="http://ww4.sinaimg.cn/large/005KJayxjw1ezq82y8dcej30zk07ktaf.jpg" alt=""></p>
-<h5 id="getActionMasked_28_29_3A"><a href="#getActionMasked_28_29_3A" class="headerlink" title="getActionMasked():"></a>getActionMasked():</h5><p><img src="http://ww3.sinaimg.cn/large/005KJayxjw1ezq8541g8ej3104060myn.jpg" alt="">         </p>
-<h5 id="u4E24_u4E2A_u65B9_u6CD5_u7684_u533A_u522B_u5728_u4E8E_uFF0CgetActionMasked_u65B9_u6CD5_u4E2D_u591A_u4E86_u4E00_u4E2A_26amp_3BACTION_MASK_uFF1A"><a href="#u4E24_u4E2A_u65B9_u6CD5_u7684_u533A_u522B_u5728_u4E8E_uFF0CgetActionMasked_u65B9_u6CD5_u4E2D_u591A_u4E86_u4E00_u4E2A_26amp_3BACTION_MASK_uFF1A" class="headerlink" title="两个方法的区别在于，getActionMasked方法中多了一个&amp;ACTION_MASK："></a>两个方法的区别在于，getActionMasked方法中多了一个&amp;ACTION_MASK：</h5><pre><code>public static final int ACTION_MASK = 0xff;
-</code></pre><h5 id="u6211_u4EEC_u628AnativeGetAction_28mNativePtr_29_u6BD4_u4F5CmActionValue_u4E5F_u5C31_u662F_u8BF4mActionValue__26amp_3B_0xff_u8868_u793A_u53EA_u8981mActionValue_u7684_u503C_u57280x00-0xff_u4E4B_u95F4_u7684_u8BDD_uFF0CgetAction_u4E0EgetActionMasked_u8FD4_u56DE_u503C_u662F_u4E00_u6837_u7684_uFF0C_u56E0_u4E3Aff_u662F_u5341_u516D_u8FDB_u5236_u8F6C_u6362_u62102_u8FDB_u5236_u5C31_u662F11111111__u4E0E_u5B83_u76F8_u4E0E_u7684_u6570_u53EA_u8981_u5C0F_u4E8E_u7B49_u4E8E_u5B83_u90FD_u662F_u539F_u503C_uFF0C_26amp_3B_28_u4E0E_29_u53EF_u4EE5_u7528_u4F5C_u4F4D_u8FD0_u7B97_u7B26_uFF0C_u4F8B_u59821101__26amp_3B_1011__3D_1001_uFF0C_u6309_u4F4D_u8FDB_u884C_u6BD4_u8F83_u4E24_u4E2A_u90FD_u4E3A1_u5219_u4E3A1_uFF0C_u5426_u5219_u4E3A0_u3002"><a href="#u6211_u4EEC_u628AnativeGetAction_28mNativePtr_29_u6BD4_u4F5CmActionValue_u4E5F_u5C31_u662F_u8BF4mActionValue__26amp_3B_0xff_u8868_u793A_u53EA_u8981mActionValue_u7684_u503C_u57280x00-0xff_u4E4B_u95F4_u7684_u8BDD_uFF0CgetAction_u4E0EgetActionMasked_u8FD4_u56DE_u503C_u662F_u4E00_u6837_u7684_uFF0C_u56E0_u4E3Aff_u662F_u5341_u516D_u8FDB_u5236_u8F6C_u6362_u62102_u8FDB_u5236_u5C31_u662F11111111__u4E0E_u5B83_u76F8_u4E0E_u7684_u6570_u53EA_u8981_u5C0F_u4E8E_u7B49_u4E8E_u5B83_u90FD_u662F_u539F_u503C_uFF0C_26amp_3B_28_u4E0E_29_u53EF_u4EE5_u7528_u4F5C_u4F4D_u8FD0_u7B97_u7B26_uFF0C_u4F8B_u59821101__26amp_3B_1011__3D_1001_uFF0C_u6309_u4F4D_u8FDB_u884C_u6BD4_u8F83_u4E24_u4E2A_u90FD_u4E3A1_u5219_u4E3A1_uFF0C_u5426_u5219_u4E3A0_u3002" class="headerlink" title="我们把nativeGetAction(mNativePtr)比作mActionValue也就是说mActionValue &amp; 0xff表示只要mActionValue的值在0x00-0xff之间的话，getAction与getActionMasked返回值是一样的，因为ff是十六进制转换成2进制就是11111111 与它相与的数只要小于等于它都是原值，&amp;(与)可以用作位运算符，例如1101 &amp; 1011 = 1001，按位进行比较两个都为1则为1，否则为0。"></a>我们把nativeGetAction(mNativePtr)比作mActionValue也就是说mActionValue &amp; 0xff表示只要mActionValue的值在0x00-0xff之间的话，getAction与getActionMasked返回值是一样的，因为ff是十六进制转换成2进制就是11111111 与它相与的数只要小于等于它都是原值，&amp;(与)可以用作位运算符，例如1101 &amp; 1011 = 1001，按位进行比较两个都为1则为1，否则为0。</h5><h4 id="u90A3_u4EC0_u4E48_u65F6_u5019_u4E24_u4E2A_u65B9_u6CD5_u8FD4_u56DE_u7684_u4E0D_u4E00_u6837_u5462_uFF1F"><a href="#u90A3_u4EC0_u4E48_u65F6_u5019_u4E24_u4E2A_u65B9_u6CD5_u8FD4_u56DE_u7684_u4E0D_u4E00_u6837_u5462_uFF1F" class="headerlink" title="那什么时候两个方法返回的不一样呢？"></a>那什么时候两个方法返回的不一样呢？<br></h4><h5 id="u80AF_u5B9A_u662F_u8FD4_u56DE_u7684_u503C_u5927_u4E8E0xff_u7684_u65F6_u5019_u3002"><a href="#u80AF_u5B9A_u662F_u8FD4_u56DE_u7684_u503C_u5927_u4E8E0xff_u7684_u65F6_u5019_u3002" class="headerlink" title="肯定是返回的值大于0xff的时候。"></a>肯定是返回的值大于0xff的时候。<br></h5><h4 id="u90A3_u53C8_u662F_u4EC0_u4E48_u65F6_u5019_u8FD4_u56DE_u7684_u503C_u5927_u4E8E0xff_u5462_uFF1F"><a href="#u90A3_u53C8_u662F_u4EC0_u4E48_u65F6_u5019_u8FD4_u56DE_u7684_u503C_u5927_u4E8E0xff_u5462_uFF1F" class="headerlink" title="那又是什么时候返回的值大于0xff呢？"></a>那又是什么时候返回的值大于0xff呢？<br></h4><h5 id="u7B54_u6848_u5C31_u662F_u591A_u70B9_u89E6_u63A7_u7684_u65F6_u5019_u3002"><a href="#u7B54_u6848_u5C31_u662F_u591A_u70B9_u89E6_u63A7_u7684_u65F6_u5019_u3002" class="headerlink" title="答案就是多点触控的时候。"></a>答案就是多点触控的时候。<br></h5><h5 id="u56E0_u4E3A_u65E2_u7136_u662F_u591A_u70B9_u89E6_u63A7_uFF0C_u5982_u679C_u6211_u4EEC_u8981_u83B7_u53D6_u67D0_u4E00_u70B9_u7684_u89E6_u63A7_u4FE1_u606F_u600E_u4E48_u83B7_u53D6_uFF0C_u80AF_u5B9A_u9700_u8981_u6709_u4E00_u4E2A_u7D22_u5F15_uFF0Candroid_u5C31_u628A_u7D22_u5F15_u7684_u4FE1_u606F_u653E_u5728action_u9AD8_u516B_u4F4D_u4E2D_u5B58_u50A8_uFF0C_u4E5F_u5C31_u662F_u8BF40x00-0xff_u4EE3_u8868_u7684_u662F_u5F53_u524D_u89E6_u6478_u65F6_u95F4_u7684_u7C7B_u578B_uFF0C_u5B58_u653E_u5728action_u4F4E_u516B_u4F4D_u4E2D-_u4E00_u4E2A_u5B57_u6BB5_u5B58_u653E_u4E24_u79CD_u4FE1_u606F-_u6240_u4EE50xff_3D0x00ff_uFF0C00_u4EE3_u8868_u9AD8_u516B_u4F4D_u5B58_u50A8_u7D22_u5F15_u4FE1_u606F_uFF0Cff_u4EE3_u8868_u4E8B_u4EF6_u7C7B_u578B_uFF0C_u7531_u6B64_u63A8_u8BBAgetAction_28_29_u8FD4_u56DE_u89E6_u6478_u4E8B_u4EF6_u7C7B_u578B_uFF0C_u5982_u679C_u662F_u591A_u70B9_u89E6_u63A7_u5219_u8FD4_u56DEACTION_POINTER_DOWN_u4E0E_u7D22_u5F15_u4FE1_u606F_u7684_u6DF7_u5408_u503C_uFF0C_u800CgetActionMasked_28_29_u7531_u4E8E__26amp_3B_0xff_280x00ff_29_u7684_u64CD_u4F5C_uFF0C_u6E05_u7A7A_u4E86_u7D22_u5F15_u4FE1_u606F_uFF0C_u53EA_u8FD4_u56DEACTION_POINTER_DOWN_u7684_u503C_uFF0C_u5982_u679C_u60F3_u5355_u72EC_u83B7_u53D6_u7D22_u5F15_u4FE1_u606F_u7684_u8BDD_u53EF_u901A_u8FC7getActionIndex_28_29_u65B9_u6CD5_u3002"><a href="#u56E0_u4E3A_u65E2_u7136_u662F_u591A_u70B9_u89E6_u63A7_uFF0C_u5982_u679C_u6211_u4EEC_u8981_u83B7_u53D6_u67D0_u4E00_u70B9_u7684_u89E6_u63A7_u4FE1_u606F_u600E_u4E48_u83B7_u53D6_uFF0C_u80AF_u5B9A_u9700_u8981_u6709_u4E00_u4E2A_u7D22_u5F15_uFF0Candroid_u5C31_u628A_u7D22_u5F15_u7684_u4FE1_u606F_u653E_u5728action_u9AD8_u516B_u4F4D_u4E2D_u5B58_u50A8_uFF0C_u4E5F_u5C31_u662F_u8BF40x00-0xff_u4EE3_u8868_u7684_u662F_u5F53_u524D_u89E6_u6478_u65F6_u95F4_u7684_u7C7B_u578B_uFF0C_u5B58_u653E_u5728action_u4F4E_u516B_u4F4D_u4E2D-_u4E00_u4E2A_u5B57_u6BB5_u5B58_u653E_u4E24_u79CD_u4FE1_u606F-_u6240_u4EE50xff_3D0x00ff_uFF0C00_u4EE3_u8868_u9AD8_u516B_u4F4D_u5B58_u50A8_u7D22_u5F15_u4FE1_u606F_uFF0Cff_u4EE3_u8868_u4E8B_u4EF6_u7C7B_u578B_uFF0C_u7531_u6B64_u63A8_u8BBAgetAction_28_29_u8FD4_u56DE_u89E6_u6478_u4E8B_u4EF6_u7C7B_u578B_uFF0C_u5982_u679C_u662F_u591A_u70B9_u89E6_u63A7_u5219_u8FD4_u56DEACTION_POINTER_DOWN_u4E0E_u7D22_u5F15_u4FE1_u606F_u7684_u6DF7_u5408_u503C_uFF0C_u800CgetActionMasked_28_29_u7531_u4E8E__26amp_3B_0xff_280x00ff_29_u7684_u64CD_u4F5C_uFF0C_u6E05_u7A7A_u4E86_u7D22_u5F15_u4FE1_u606F_uFF0C_u53EA_u8FD4_u56DEACTION_POINTER_DOWN_u7684_u503C_uFF0C_u5982_u679C_u60F3_u5355_u72EC_u83B7_u53D6_u7D22_u5F15_u4FE1_u606F_u7684_u8BDD_u53EF_u901A_u8FC7getActionIndex_28_29_u65B9_u6CD5_u3002" class="headerlink" title="因为既然是多点触控，如果我们要获取某一点的触控信息怎么获取，肯定需要有一个索引，android就把索引的信息放在action高八位中存储，也就是说0x00-0xff代表的是当前触摸时间的类型，存放在action低八位中.一个字段存放两种信息.所以0xff=0x00ff，00代表高八位存储索引信息，ff代表事件类型，由此推论getAction()返回触摸事件类型，如果是多点触控则返回ACTION_POINTER_DOWN与索引信息的混合值，而getActionMasked()由于 &amp; 0xff(0x00ff)的操作，清空了索引信息，只返回ACTION_POINTER_DOWN的值，如果想单独获取索引信息的话可通过getActionIndex()方法。"></a>因为既然是多点触控，如果我们要获取某一点的触控信息怎么获取，肯定需要有一个索引，android就把索引的信息放在action高八位中存储，也就是说0x00-0xff代表的是当前触摸时间的类型，存放在action低八位中.一个字段存放两种信息.所以0xff=0x00ff，00代表高八位存储索引信息，ff代表事件类型，由此推论getAction()返回触摸事件类型，如果是多点触控则返回ACTION_POINTER_DOWN与索引信息的混合值，而getActionMasked()由于 &amp; 0xff(0x00ff)的操作，清空了索引信息，只返回ACTION_POINTER_DOWN的值，如果想单独获取索引信息的话可通过getActionIndex()方法。</h5><pre><code> public static final int ACTION_POINTER_INDEX_MASK  = 0xff00;
+</code></pre><a id="more"></a>
+<p>在获取MotionEvent的Action事件的时候，我们看到以下两个方法可以获取当前的事件:<br>getAction():<br><img src="http://ww4.sinaimg.cn/large/005KJayxjw1ezq82y8dcej30zk07ktaf.jpg" alt=""></p>
+<p>getActionMasked():<br><img src="http://ww3.sinaimg.cn/large/005KJayxjw1ezq8541g8ej3104060myn.jpg" alt=""><br>两个方法的区别在于，getActionMasked方法中多了一个&amp;ACTION_MASK：</p>
+<pre><code>public static final int ACTION_MASK = 0xff;
+</code></pre><p>我们把nativeGetAction(mNativePtr)比作mActionValue也就是说mActionValue &amp; 0xff表示只要mActionValue的值在0x00-0xff之间的话，getAction与getActionMasked返回值是一样的，因为ff是十六进制转换成2进制就是11111111 与它相与的数只要小于等于它都是原值，&amp;(与)可以用作位运算符，例如1101 &amp; 1011 = 1001，按位进行比较两个都为1则为1，否则为0。</p>
+<p>那什么时候两个方法返回的不一样呢？<br><br>肯定是返回的值大于0xff的时候。<br><br>那又是什么时候返回的值大于0xff呢？<br><br>答案就是多点触控的时候。<br></p>
+<p>因为既然是多点触控，如果我们要获取某一点的触控信息怎么获取，肯定需要有一个索引，android就把索引的信息放在action高八位中存储，也就是说0x00-0xff代表的是当前触摸时间的类型，存放在action低八位中.一个字段存放两种信息.所以0xff=0x00ff，00代表高八位存储索引信息，ff代表事件类型，由此推论getAction()返回触摸事件类型，如果是多点触控则返回ACTION_POINTER_DOWN与索引信息的混合值，而getActionMasked()由于 &amp; 0xff(0x00ff)的操作，清空了索引信息，只返回ACTION_POINTER_DOWN的值，如果想单独获取索引信息的话可通过getActionIndex()方法。</p>
+<pre><code> public static final int ACTION_POINTER_INDEX_MASK  = 0xff00;
 
  public static final int ACTION_POINTER_INDEX_SHIFT = 8;
 
@@ -138,24 +44,38 @@ getRawX()、getRawY() 与getX()、getY()的区别是前者相对手机屏幕，�
     return (nativeGetAction(mNativePtr) &amp; ACTION_POINTER_INDEX_MASK)
             &gt;&gt; ACTION_POINTER_INDEX_SHIFT;
 }
-</code></pre><h5 id="u901A_u8FC7_u4E0A_u8FF0_u4EE3_u7801_u53EF_u5F97_u77E5mActionValue__26amp_3B_ACTION_POINTER_INDEX_MASK_280xff00_29_u4F1A_u6E05_u7A7A_u4F4E_u516B_u4F4D_u7684_u503C_u4E5F_u5C31_u662F_u4E8B_u4EF6_u7C7B_u578B_u7684_u503C_uFF0C_u53EA_u7559_u4E0B_u7D22_u5F15_u4FE1_u606F_u7684_u503C_uFF0C_u518D_u901A_u8FC7_26gt_3B_26gt_3B_ACTION_POINTER_INDEX_SHIFT_288_29__u5C06_u503C_u53F3_u79FB_u516B_u4F4D_u8FD4_u56DE_u3002"><a href="#u901A_u8FC7_u4E0A_u8FF0_u4EE3_u7801_u53EF_u5F97_u77E5mActionValue__26amp_3B_ACTION_POINTER_INDEX_MASK_280xff00_29_u4F1A_u6E05_u7A7A_u4F4E_u516B_u4F4D_u7684_u503C_u4E5F_u5C31_u662F_u4E8B_u4EF6_u7C7B_u578B_u7684_u503C_uFF0C_u53EA_u7559_u4E0B_u7D22_u5F15_u4FE1_u606F_u7684_u503C_uFF0C_u518D_u901A_u8FC7_26gt_3B_26gt_3B_ACTION_POINTER_INDEX_SHIFT_288_29__u5C06_u503C_u53F3_u79FB_u516B_u4F4D_u8FD4_u56DE_u3002" class="headerlink" title="通过上述代码可得知mActionValue &amp; ACTION_POINTER_INDEX_MASK(0xff00)会清空低八位的值也就是事件类型的值，只留下索引信息的值，再通过&gt;&gt; ACTION_POINTER_INDEX_SHIFT(8) 将值右移八位返回。"></a>通过上述代码可得知mActionValue &amp; ACTION_POINTER_INDEX_MASK(0xff00)会清空低八位的值也就是事件类型的值，只留下索引信息的值，再通过&gt;&gt; ACTION_POINTER_INDEX_SHIFT(8) 将值右移八位返回。</h5><blockquote>
+</code></pre><p>通过上述代码可得知mActionValue &amp; ACTION_POINTER_INDEX_MASK(0xff00)会清空低八位的值也就是事件类型的值，只留下索引信息的值，再通过&gt;&gt; ACTION_POINTER_INDEX_SHIFT(8) 将值右移八位返回。</p>
+<blockquote>
 <h5 id="u5173_u4E8E_u9AD8_u516B_u4F4D_u4E0E_u4F4E_u516B_u4F4D_u7684_u4E00_u4E9B_u89E3_u91CA_3A"><a href="#u5173_u4E8E_u9AD8_u516B_u4F4D_u4E0E_u4F4E_u516B_u4F4D_u7684_u4E00_u4E9B_u89E3_u91CA_3A" class="headerlink" title="关于高八位与低八位的一些解释:"></a>关于高八位与低八位的一些解释:</h5><h5 id="u4E00_u822C_u6765_u8BF4_u5185_u5B58_u64CD_u4F5C_u90FD_u662F_u9488_u5BF9_u5185_u5B58_uFF0C_u4E5F_u5C31_u662F_u4E00_u4E2A_u5B57_u8282_uFF0C8_u4F4D_u3002_u5982_u679C_u662F16_u4F4D_u7684_u6307_u4EE4_uFF0C_u5C31_u662F_u540C_u65F6_u64CD_u4F5C_u8FDE_u7EED_u76842_u4E2A_u5185_u5B58_u5730_u5740_uFF0C_u5C06_u8FD9_u8FDE_u7EED_u76842_u4E2A_u5185_u5B58_u5730_u5740_u5F53_u6210_u4E00_u4E2A_u5355_u4F4D_uFF0C_u6240_u6709_u5C31_u6709_u9AD88_u4F4D_u548C_u4F4E8_u4F4D_u4E4B_u5206_u3002_u7531_u4E8E_u8BA1_u7B97_u673A_u4EC5_u8BC6_u522B_u4E8C_u8FDB_u5236_uFF0C_u6240_u4EE5_u5BF9_u4E00_u4E2A_u5185_u5B58_u5730_u5740_uFF0C_u4E5F_u5C31_u662F8_u4F4D_u4E8C_u8FDB_u5236_uFF0C_u5982_3A0000_0001_0000_u5C31_u662F_u9AD8_u56DB_u4F4D_uFF0C0001_u5C31_u662F_u4F4E_u56DB_u4F4D_uFF0C_u5F53_u71362_u4E2A_u5185_u5B58_u5730_u5740_uFF0C_u5C31_u662F16_u4F4D_u4E8C_u8FDB_u5236_uFF0C_u4E5F_u5C31_u662F_uFF1A0000_0001_0000_0002_uFF0C0000_0001__u5C31_u662F_u9AD8_u516B_u4F4D_uFF0C0000_0002_u5C31_u662F_u4F4E_u516B_u4F4D"><a href="#u4E00_u822C_u6765_u8BF4_u5185_u5B58_u64CD_u4F5C_u90FD_u662F_u9488_u5BF9_u5185_u5B58_uFF0C_u4E5F_u5C31_u662F_u4E00_u4E2A_u5B57_u8282_uFF0C8_u4F4D_u3002_u5982_u679C_u662F16_u4F4D_u7684_u6307_u4EE4_uFF0C_u5C31_u662F_u540C_u65F6_u64CD_u4F5C_u8FDE_u7EED_u76842_u4E2A_u5185_u5B58_u5730_u5740_uFF0C_u5C06_u8FD9_u8FDE_u7EED_u76842_u4E2A_u5185_u5B58_u5730_u5740_u5F53_u6210_u4E00_u4E2A_u5355_u4F4D_uFF0C_u6240_u6709_u5C31_u6709_u9AD88_u4F4D_u548C_u4F4E8_u4F4D_u4E4B_u5206_u3002_u7531_u4E8E_u8BA1_u7B97_u673A_u4EC5_u8BC6_u522B_u4E8C_u8FDB_u5236_uFF0C_u6240_u4EE5_u5BF9_u4E00_u4E2A_u5185_u5B58_u5730_u5740_uFF0C_u4E5F_u5C31_u662F8_u4F4D_u4E8C_u8FDB_u5236_uFF0C_u5982_3A0000_0001_0000_u5C31_u662F_u9AD8_u56DB_u4F4D_uFF0C0001_u5C31_u662F_u4F4E_u56DB_u4F4D_uFF0C_u5F53_u71362_u4E2A_u5185_u5B58_u5730_u5740_uFF0C_u5C31_u662F16_u4F4D_u4E8C_u8FDB_u5236_uFF0C_u4E5F_u5C31_u662F_uFF1A0000_0001_0000_0002_uFF0C0000_0001__u5C31_u662F_u9AD8_u516B_u4F4D_uFF0C0000_0002_u5C31_u662F_u4F4E_u516B_u4F4D" class="headerlink" title="一般来说内存操作都是针对内存，也就是一个字节，8位。如果是16位的指令，就是同时操作连续的2个内存地址，将这连续的2个内存地址当成一个单位，所有就有高8位和低8位之分。由于计算机仅识别二进制，所以对一个内存地址，也就是8位二进制，如:0000 0001 0000就是高四位，0001就是低四位，当然2个内存地址，就是16位二进制，也就是：0000 0001 0000 0002，0000 0001 就是高八位，0000 0002就是低八位"></a>一般来说内存操作都是针对内存，也就是一个字节，8位。如果是16位的指令，就是同时操作连续的2个内存地址，将这连续的2个内存地址当成一个单位，所有就有高8位和低8位之分。由于计算机仅识别二进制，所以对一个内存地址，也就是8位二进制，如:0000 0001 0000就是高四位，0001就是低四位，当然2个内存地址，就是16位二进制，也就是：0000 0001 0000 0002，0000 0001 就是高八位，0000 0002就是低八位</h5></blockquote>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h5 id="u6211_u4EEC_u7ECF_u5E38_u5728dispatchTouchEvent_u3001onInterceptTouchEvent_u3001onTouchEvent_u4E2D_u770B_u5230MotionEvent_u5BF9_u8C6]]>
+    <![CDATA[<p>我们经常在dispatchTouchEvent、onInterceptTouchEvent、onTouchEvent中看到MotionEvent对象，通过这个对象我可以可以获取触摸事件然后进行相应的操作，触摸事件类型比较常用的就是ACTION_UP、ACTION_DOWN、ACTION_MOVE等。获取触摸点坐标有以下方法</p>
+<pre><code>getX() 获取触摸点X轴坐标
+
+getY() 获取触摸点Y轴坐标
+
+getX(int pointerIndex)、getY(int pointerIndex) 在多点触控时获取对应手指的坐标
+
+getRawX()、getRawY() 与getX()、getY()的区别是前者相对手机屏幕，后者相对当前控件
+</code></pre>]]>
+    
     </summary>
+    
+      <category term="MothonEvent" scheme="http://www.turegeek.com/tags/MothonEvent/"/>
     
       <category term="android" scheme="http://www.turegeek.com/categories/android/"/>
     
   </entry>
   
   <entry>
-    <title><![CDATA[每周十个开源库(二)]]></title>
+    <title><![CDATA[十个开源库分享(二)]]></title>
     <link href="http://www.turegeek.com/2016/01/06/open-source-02/"/>
     <id>http://www.turegeek.com/2016/01/06/open-source-02/</id>
-    <published>2016-01-06T00:00:00.000Z</published>
-    <updated>2016-01-06T07:11:29.000Z</updated>
-    <content type="html"><![CDATA[<h3 id="SwipeableCard"><a href="#SwipeableCard" class="headerlink" title="SwipeableCard"></a><a href="https://github.com/michelelacorte/SwipeableCard" target="_blank" rel="external">SwipeableCard</a></h3><p>swipe card +recyclerView </p>
+    <published>2016-01-05T16:00:00.000Z</published>
+    <updated>2016-01-21T16:21:56.000Z</updated>
+    <content type="html"><![CDATA[<p>可以滑动的recyclerview CardItem、高效的Gif播放器、视觉差viewpager、自定义仪表盘、开源视频项目、GestureViews、图片选择库、Custome CoordinatorLayout、个性动态展示文字、基于materialDesign的开源项目</p>
+<a id="more"></a>
+<h3 id="SwipeableCard"><a href="#SwipeableCard" class="headerlink" title="SwipeableCard"></a><a href="https://github.com/michelelacorte/SwipeableCard" target="_blank" rel="external">SwipeableCard</a></h3><p>swipe card +recyclerView </p>
 <p><img src="https://camo.githubusercontent.com/ba7339848db3b5e64570d9948ff63a52dd06cb7c/687474703a2f2f692e67697068792e636f6d2f336f38646f517876323843565447644d36512e676966" alt=""></p>
 <h3 id="GifView"><a href="#GifView" class="headerlink" title="GifView"></a><a href="https://github.com/Cutta/GifView" target="_blank" rel="external">GifView</a></h3><p>播放gif的高效library,支持暂停开始停止</p>
 <p><img src="https://camo.githubusercontent.com/19b4e43298746358948ac05ce184fa4d99029159/68747470733a2f2f6d656469612e67697068792e636f6d2f6d656469612f3236745073594c356841344945474166752f67697068792e676966" alt=""></p>
@@ -176,42 +96,47 @@ getRawX()、getRawY() 与getX()、getY()的区别是前者相对手机屏幕，�
 <p><img src="http://ww1.sinaimg.cn/large/005KJayxjw1ezps3p100yg30b40jrnpm.gif" alt=""></p>
 ]]></content>
     <summary type="html">
-    <![CDATA[<h3 id="SwipeableCard"><a href="#SwipeableCard" class="headerlink" title="SwipeableCard"></a><a href="https://github.com/michelelacorte/Swip]]>
+    <![CDATA[<p>可以滑动的recyclerview CardItem、高效的Gif播放器、视觉差viewpager、自定义仪表盘、开源视频项目、GestureViews、图片选择库、Custome CoordinatorLayout、个性动态展示文字、基于materialDesign的开源项目</p>]]>
+    
     </summary>
+    
+      <category term="开源库" scheme="http://www.turegeek.com/categories/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
     
   </entry>
   
   <entry>
-    <title><![CDATA[每周十个开源库(一)]]></title>
+    <title><![CDATA[十个开源库分享(一)]]></title>
     <link href="http://www.turegeek.com/2015/12/30/open-source-01/"/>
     <id>http://www.turegeek.com/2015/12/30/open-source-01/</id>
-    <published>2015-12-30T00:00:00.000Z</published>
-    <updated>2016-01-06T08:32:53.000Z</updated>
-    <content type="html"><![CDATA[<ol>
-<li><h4 id="Twitter_u7684like_u52A8_u753B_28for_any_view_29"><a href="#Twitter_u7684like_u52A8_u753B_28for_any_view_29" class="headerlink" title="Twitter的like动画(for any view)"></a><a href="https://github.com/hanks-zyh/SmallBang" target="_blank" rel="external">Twitter的like动画(for any view)</a></h4><p> <img src="http://ww4.sinaimg.cn/large/005KJayxjw1ezhkhn2yr2g308w0f3abj.gif" alt=""></p>
+    <published>2015-12-29T16:00:00.000Z</published>
+    <updated>2016-01-21T16:28:24.000Z</updated>
+    <content type="html"><![CDATA[<p>仿twitter like动画、android 动态加载技术系列、支持手势缩放的TextView、倾斜45°显示文字的lableView、<br>类似于flowlayout的扩展、微博话题功能、富文本编辑器、为listView、gridView…添加阻尼效果、仿Tinder的卡片效果</p>
+<a id="more"></a>
+<ol>
+<li><h3 id="Twitter_u7684like_u52A8_u753B_28for_any_view_29"><a href="#Twitter_u7684like_u52A8_u753B_28for_any_view_29" class="headerlink" title="Twitter的like动画(for any view)"></a><a href="https://github.com/hanks-zyh/SmallBang" target="_blank" rel="external">Twitter的like动画(for any view)</a></h3><p> <img src="http://ww4.sinaimg.cn/large/005KJayxjw1ezhkhn2yr2g308w0f3abj.gif" alt=""></p>
 </li>
-<li><h4 id="u53E6_u5916_u4E00_u79CD_u4EFFtwitter_like_animation"><a href="#u53E6_u5916_u4E00_u79CD_u4EFFtwitter_like_animation" class="headerlink" title="另外一种仿twitter like animation"></a><a href="https://github.com/frogermcs/LikeAnimation" target="_blank" rel="external">另外一种仿twitter like animation</a></h4><p> <img src="http://ww3.sinaimg.cn/large/005KJayxjw1ezhkijear8g305b05bt9p.gif" alt=""></p>
+<li><h3 id="u53E6_u5916_u4E00_u79CD_u4EFFtwitter_like_animation"><a href="#u53E6_u5916_u4E00_u79CD_u4EFFtwitter_like_animation" class="headerlink" title="另外一种仿twitter like animation"></a><a href="https://github.com/frogermcs/LikeAnimation" target="_blank" rel="external">另外一种仿twitter like animation</a></h3><p> <img src="http://ww3.sinaimg.cn/large/005KJayxjw1ezhkijear8g305b05bt9p.gif" alt=""></p>
 </li>
-<li><h4 id="Android-Plugin-Framework"><a href="#Android-Plugin-Framework" class="headerlink" title="Android-Plugin-Framework"></a><a href="https://github.com/limpoxe/Android-Plugin-Framework" target="_blank" rel="external">Android-Plugin-Framework</a></h4><p> 此项目是Android插件开发框架完整源码及示例。用来通过动态加载的方式在宿主程序中运行插件APK。在此附上关于动态加载技术的一些文章供了解</p>
+<li><h3 id="Android-Plugin-Framework"><a href="#Android-Plugin-Framework" class="headerlink" title="Android-Plugin-Framework"></a><a href="https://github.com/limpoxe/Android-Plugin-Framework" target="_blank" rel="external">Android-Plugin-Framework</a></h3><p> 此项目是Android插件开发框架完整源码及示例。用来通过动态加载的方式在宿主程序中运行插件APK。在此附上关于动态加载技术的一些文章供了解</p>
 <p> <a href="http://segmentfault.com/a/1190000004086213" target="_blank" rel="external">Android动态加载技术 系列索引</a></p>
 <p> <a href="http://tech.meituan.com/mt-android-auto-split-dex.html" target="_blank" rel="external">美团Android DEX自动拆包及动态加载简介</a><br> <a href="https://github.com/CtripMobile/DynamicAPK" target="_blank" rel="external">DynamicAPK已经在携程旅行Android App中使用</a><br> <a href="http://www.infoq.com/cn/articles/android-dynamic-loading?utm_campaign=rightbar_v2&amp;utm_source=infoq&amp;utm_medium=articles_link&amp;utm_content=link_text" target="_blank" rel="external">Android动态加载技术三个关键问题详解</a></p>
 </li>
-<li><h4 id="ZoomTextView"><a href="#ZoomTextView" class="headerlink" title="ZoomTextView"></a><a href="https://github.com/nomanr/ZoomTextView" target="_blank" rel="external">ZoomTextView</a></h4><p> 支持手势缩放的自定义 TextView，控件本身和文字都会随着手势同时放大和缩小。<br> <img src="http://ww4.sinaimg.cn/large/005KJayxjw1ezhkjjik80g30dc0a0b29.gif" alt=""></p>
+<li><h3 id="ZoomTextView"><a href="#ZoomTextView" class="headerlink" title="ZoomTextView"></a><a href="https://github.com/nomanr/ZoomTextView" target="_blank" rel="external">ZoomTextView</a></h3><p> 支持手势缩放的自定义 TextView，控件本身和文字都会随着手势同时放大和缩小。<br> <img src="http://ww4.sinaimg.cn/large/005KJayxjw1ezhkjjik80g30dc0a0b29.gif" alt=""></p>
 </li>
-<li><h4 id="FlycoLabelView"><a href="#FlycoLabelView" class="headerlink" title="FlycoLabelView"></a><a href="https://github.com/H07000223/FlycoLabelView" target="_blank" rel="external">FlycoLabelView</a></h4><p> 自定义的标签view</p>
+<li><h3 id="FlycoLabelView"><a href="#FlycoLabelView" class="headerlink" title="FlycoLabelView"></a><a href="https://github.com/H07000223/FlycoLabelView" target="_blank" rel="external">FlycoLabelView</a></h3><p> 自定义的标签view</p>
 <p> <img src="http://ww3.sinaimg.cn/large/005KJayxjw1ezhjmogodfj309m06ugmh.jpg" alt=""></p>
 </li>
-<li><h4 id="Hashtags"><a href="#Hashtags" class="headerlink" title="Hashtags"></a><a href="https://github.com/davidbeloo/Hashtags" target="_blank" rel="external">Hashtags</a></h4><p> 基于一个开源项目flowlayout开发的标签控件,动态标签大小,标签大小自适应,超过一行自动换行,标签可点击,支持各种gravity选项<br> <img src="http://ww1.sinaimg.cn/large/005KJayxjw1ezhptodjl4j30b90k0dgt.jpg" alt=""></p>
+<li><h3 id="Hashtags"><a href="#Hashtags" class="headerlink" title="Hashtags"></a><a href="https://github.com/davidbeloo/Hashtags" target="_blank" rel="external">Hashtags</a></h3><p> 基于一个开源项目flowlayout开发的标签控件,动态标签大小,标签大小自适应,超过一行自动换行,标签可点击,支持各种gravity选项<br> <img src="http://ww1.sinaimg.cn/large/005KJayxjw1ezhptodjl4j30b90k0dgt.jpg" alt=""></p>
 </li>
-<li><h4 id="HashTagHelper"><a href="#HashTagHelper" class="headerlink" title="HashTagHelper"></a><a href="https://github.com/Danylo2006/HashTagHelper" target="_blank" rel="external">HashTagHelper</a></h4><p> 一个高亮显示#开头工具,支持点击事件,类似微博话题</p>
+<li><h3 id="HashTagHelper"><a href="#HashTagHelper" class="headerlink" title="HashTagHelper"></a><a href="https://github.com/Danylo2006/HashTagHelper" target="_blank" rel="external">HashTagHelper</a></h3><p> 一个高亮显示#开头工具,支持点击事件,类似微博话题</p>
 <p> <img src="http://ww4.sinaimg.cn/large/005KJayxjw1ezhpva5s1rg307i0dck2s.gif" alt=""></p>
 </li>
-<li><h4 id="https_3A//github-com/mthli/Knife"><a href="#https_3A//github-com/mthli/Knife" class="headerlink" title="https://github.com/mthli/Knife"></a><a href="https://github.com/mthli/Knife" target="_blank" rel="external">https://github.com/mthli/Knife</a></h4><p>富文本编辑器,支持android4.0+<br><img src="http://ww1.sinaimg.cn/large/005KJayxjw1ezhkl7sp9wg30dc0ca1kx.gif" alt=""></p>
+<li><h3 id="https_3A//github-com/mthli/Knife"><a href="#https_3A//github-com/mthli/Knife" class="headerlink" title="https://github.com/mthli/Knife"></a><a href="https://github.com/mthli/Knife" target="_blank" rel="external">https://github.com/mthli/Knife</a></h3><p>富文本编辑器,支持android4.0+<br><img src="http://ww1.sinaimg.cn/large/005KJayxjw1ezhkl7sp9wg30dc0ca1kx.gif" alt=""></p>
 </li>
-<li><h4 id="overscroll-decor"><a href="#overscroll-decor" class="headerlink" title="overscroll-decor"></a><a href="https://github.com/EverythingMe/overscroll-decor" target="_blank" rel="external">overscroll-decor</a></h4><p> 为recyclerView、listView、GridView、ScrollView、or AnyView增加类似IOS阻尼效果</p>
+<li><h3 id="overscroll-decor"><a href="#overscroll-decor" class="headerlink" title="overscroll-decor"></a><a href="https://github.com/EverythingMe/overscroll-decor" target="_blank" rel="external">overscroll-decor</a></h3><p> 为recyclerView、listView、GridView、ScrollView、or AnyView增加类似IOS阻尼效果</p>
 <p> <img src="http://ww1.sinaimg.cn/large/005KJayxjw1ezhpqdbweag305l09n1kz.gif" alt=""></p>
 </li>
-<li><h4 id="android-card-slide-panel"><a href="#android-card-slide-panel" class="headerlink" title="android-card-slide-panel"></a><a href="https://github.com/xmuSistone/android-card-slide-panel" target="_blank" rel="external">android-card-slide-panel</a></h4><p>仿tinder卡片滑动切换 </p>
+<li><h3 id="android-card-slide-panel"><a href="#android-card-slide-panel" class="headerlink" title="android-card-slide-panel"></a><a href="https://github.com/xmuSistone/android-card-slide-panel" target="_blank" rel="external">android-card-slide-panel</a></h3><p>仿tinder卡片滑动切换 </p>
 <p><img src="http://ww2.sinaimg.cn/large/005KJayxjw1ezhprq4uc6g30c20k0qv5.gif" alt=""></p>
 <p>这里给另外一个类似的开源项目</p>
 <p><a href="https://github.com/aaronbond/Swipe-Deck" target="_blank" rel="external">Swipe-Deck</a></p>
@@ -219,21 +144,24 @@ getRawX()、getRawY() 与getX()、getY()的区别是前者相对手机屏幕，�
 </ol>
 ]]></content>
     <summary type="html">
-    <![CDATA[<ol>
-<li><h4 id="Twitter_u7684like_u52A8_u753B_28for_any_view_29"><a href="#Twitter_u7684like_u52A8_u753B_28for_any_view_29" class="headerli]]>
+    <![CDATA[<p>仿twitter like动画、android 动态加载技术系列、支持手势缩放的TextView、倾斜45°显示文字的lableView、<br>类似于flowlayout的扩展、微博话题功能、富文本编辑器、为listView、gridView…添加阻尼效果、仿Tinder的卡片效果</p>]]>
+    
     </summary>
+    
+      <category term="开源库" scheme="http://www.turegeek.com/categories/%E5%BC%80%E6%BA%90%E5%BA%93/"/>
     
   </entry>
   
   <entry>
-    <title><![CDATA[APP版本号定义与说明基础知识]]></title>
+    <title><![CDATA[App版本号定义与说明基础知识]]></title>
     <link href="http://www.turegeek.com/2015/12/29/version-tips/"/>
     <id>http://www.turegeek.com/2015/12/29/version-tips/</id>
-    <published>2015-12-29T00:00:00.000Z</published>
-    <updated>2015-12-29T11:11:32.000Z</updated>
-    <content type="html"><![CDATA[<p>发现有些同学对APP的版本号有些困惑,因此写篇文章讲下版本号的基本知识</p>
+    <published>2015-12-28T16:00:00.000Z</published>
+    <updated>2016-01-21T16:51:59.000Z</updated>
+    <content type="html"><![CDATA[<p>版本号(version number)是版本的标识号。每一个操作系统（或广义的讲，每一个软件）都有一个版本号,有些童鞋对于版本号的定义规则或者当前版本号代表什么意思,升级开源库或者设置版本号应该规避那些问题可能只有一些模糊的概念,因此大概的描述下关于版本号定义的基础知识.</p>
+<a id="more"></a>
 <h3 id="u7248_u672C_u63A7_u5236_u6BD4_u8F83_u666E_u904D_u7684_u4E09_u79CD_u547D_u540D_u683C_u5F0F"><a href="#u7248_u672C_u63A7_u5236_u6BD4_u8F83_u666E_u904D_u7684_u4E09_u79CD_u547D_u540D_u683C_u5F0F" class="headerlink" title="版本控制比较普遍的三种命名格式"></a>版本控制比较普遍的三种命名格式</h3><ol>
-<li><p>GNU 风格的版本号命名格式 :</p>
+<li><p>GNU 风格的版本号命名格式</p>
 <p> 主版本号 . 次版本号 [. 修正版本号 [. 编译版本号 ]]</p>
 <p> 示例 : 1.2.1, 2.0, 5.0.0 build-13124</p>
 </li>
@@ -253,41 +181,20 @@ getRawX()、getRawY() 与getX()、getY()的区别是前者相对手机屏幕，�
 次版本号：当你做了向下兼容的功能性新增
 
 修订号：当你做了向下兼容的问题修正
-</code></pre><p>可能觉着上述描述有些笼统,接下来详细说下</p>
-<h3 id="u4E3B_u7248_u672C_u53F7_3A"><a href="#u4E3B_u7248_u672C_u53F7_3A" class="headerlink" title="主版本号:"></a>主版本号:</h3><p>主版本代表不向下兼容的API的新增,在APP里表示大版本更新<br>项目开发初期在API不稳定的情况下,一般以0开始,表示该项目公共API不稳定,随时可能会变.<br>正式稳定版、APP第一版以1开始,当项目发生大的变化的时候主版本号++,次版本号以及修订号归零</p>
-<h3 id="u6B21_u7248_u672C_u53F7_3A"><a href="#u6B21_u7248_u672C_u53F7_3A" class="headerlink" title="次版本号:"></a>次版本号:</h3><p>次版本号标示做了兼容旧API的处理,在APP里表示在原有的基础上增加了部分功能时候++,修订号归零</p>
-<h3 id="u4FEE_u8BA2_u53F7_3A"><a href="#u4FEE_u8BA2_u53F7_3A" class="headerlink" title="修订号:"></a>修订号:</h3><p>项目的bug修复以及小范围更改,APP同理</p>
+</code></pre><h4 id="u4E3B_u7248_u672C_u53F7_3A"><a href="#u4E3B_u7248_u672C_u53F7_3A" class="headerlink" title="主版本号:"></a>主版本号:</h4><p>主版本代表不向下兼容的API的新增,在APP里表示大版本更新<br>项目开发初期在API不稳定的情况下,一般以0开始,表示该项目公共API不稳定,随时可能会变.<br>正式稳定版、APP第一版以1开始,当项目发生大的变化的时候主版本号++,次版本号以及修订号归零</p>
+<h4 id="u6B21_u7248_u672C_u53F7_3A"><a href="#u6B21_u7248_u672C_u53F7_3A" class="headerlink" title="次版本号:"></a>次版本号:</h4><p>次版本号标示做了兼容旧API的处理,在APP里表示在原有的基础上增加了部分功能时候++,修订号归零</p>
+<h4 id="u4FEE_u8BA2_u53F7_3A"><a href="#u4FEE_u8BA2_u53F7_3A" class="headerlink" title="修订号:"></a>修订号:</h4><p>项目的bug修复以及小范围更改,APP同理</p>
 <h3 id="u7248_u672C_u53F7_u89C4_u5219_u8BF4_u660E"><a href="#u7248_u672C_u53F7_u89C4_u5219_u8BF4_u660E" class="headerlink" title="版本号规则说明"></a>版本号规则说明</h3><p>在平常开发的时候,我们会引用一些第三方的jar包或者compile一些开源的library,通过上述说明,我们可以根据引用的jar包、类库的版本号,适当的去升级.比如说引用一个第三方的库xxx-2.1,那我们在后期可以放心的使用&gt;=2.1、&lt;3.0之内所有版本更新,因为主版本号不变的情况下,只是修改了次版本号(向下兼容的修改和新增)、修订号(bug的修复),不会出现兼容问题,主版本增加了不兼容旧版本的修改</p>
 <blockquote>
 <p><a href="http://semver.org/" target="_blank" rel="external">语义化版本说明</a></p>
 </blockquote>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>发现有些同学对APP的版本号有些困惑,因此写篇文章讲下版本号的基本知识</p>
-<h3 id="u7248_u672C_u63A7_u5236_u6BD4_u8F83_u666E_u904D_u7684_u4E09_u79CD_u547D_u540D_u683C_u5F0F]]>
+    <![CDATA[<p>版本号(version number)是版本的标识号。每一个操作系统（或广义的讲，每一个软件）都有一个版本号,有些童鞋对于版本号的定义规则或者当前版本号代表什么意思,升级开源库或者设置版本号应该规避那些问题可能只有一些模糊的概念,因此大概的描述下关于版本号定义的基础知识.</p>]]>
+    
     </summary>
     
-  </entry>
-  
-  <entry>
-    <title><![CDATA[Android命名规范的参考笔记]]></title>
-    <link href="http://www.turegeek.com/2015/12/29/name-rule/"/>
-    <id>http://www.turegeek.com/2015/12/29/name-rule/</id>
-    <published>2015-12-29T00:00:00.000Z</published>
-    <updated>2015-12-29T09:42:44.000Z</updated>
-    <content type="html"><![CDATA[<p><img src="http://ww4.sinaimg.cn/large/005KJayxjw1ezgms8wfp6j314i0m2gqp.jpg" alt=""></p>
-<p><img src="http://ww4.sinaimg.cn/large/005KJayxjw1ezgmrcfnvaj314g0jmjwl.jpg" alt=""></p>
-<h4 id="u82F1_u6587_u7F29_u5199_u539F_u5219_uFF1A"><a href="#u82F1_u6587_u7F29_u5199_u539F_u5219_uFF1A" class="headerlink" title="英文缩写原则："></a>英文缩写原则：</h4><ol>
-<li>较短的单词可通过去掉“元音”形成缩写</li>
-<li>较长的单词可取单词的头几个字母形成缩写</li>
-<li>此外还有一些约定成俗的英文单词缩写.</li>
-</ol>
-<p>viewID 缩写+功能<br><img src="http://ww2.sinaimg.cn/large/005KJayxjw1ezgmt43fnpj30ze0ga0wt.jpg" alt=""></p>
-]]></content>
-    <summary type="html">
-    <![CDATA[<p><img src="http://ww4.sinaimg.cn/large/005KJayxjw1ezgms8wfp6j314i0m2gqp.jpg" alt=""></p>
-<p><img src="http://ww4.sinaimg.cn/large/005KJayx]]>
-    </summary>
+      <category term="App规范" scheme="http://www.turegeek.com/categories/App%E8%A7%84%E8%8C%83/"/>
     
   </entry>
   
@@ -296,13 +203,14 @@ getRawX()、getRawY() 与getX()、getY()的区别是前者相对手机屏幕，�
     <link href="http://www.turegeek.com/2015/11/13/dpi-tips/"/>
     <id>http://www.turegeek.com/2015/11/13/dpi-tips/</id>
     <published>2015-11-12T16:00:00.000Z</published>
-    <updated>2016-01-19T14:27:03.000Z</updated>
+    <updated>2016-01-21T16:54:07.000Z</updated>
     <content type="html"><![CDATA[<p>做android开发还有面试的时候经验会遇到屏幕适配问题,Android由于机型太多,所以导致屏幕尺寸还有分辨率多样化.接下来讲解下DP、DPI、SP的概念,有些不对的地方欢迎指正</p>
 <p>引用Andorid官方文档的说明</p>
 <blockquote>
 <p>When adding support for multiple screens, applications do not work directly with resolution; applications should be concerned only with screen size and density, as specified by the generalized size and density groups.</p>
 </blockquote>
 <p>所以关于适配主要根据手机屏幕大小和屏幕密度</p>
+<a id="more"></a>
 <h3 id="u4EC0_u4E48_u662FDPI"><a href="#u4EC0_u4E48_u662FDPI" class="headerlink" title="什么是DPI"></a>什么是DPI</h3><p>DPI(Dots Per Inch)表示屏幕密度,按字面意思理解就是每一英寸有多少个像素点,例如320DPI就表示一个Inch包含320个像素点.Android DPI也可以理解为PPI</p>
 <p>一般我们说手机多少寸,是指手机屏幕对角线的长度,因此可以根据手机屏幕尺寸还有分辨率计算手机的DPI,比如MOTO X(1920*1080)、5.2英寸</p>
 <pre><code>DPI = Math.sqrt(1920*1920+1080*1080)/5.2
@@ -329,8 +237,13 @@ MOTO X = 0.062...
     <![CDATA[<p>做android开发还有面试的时候经验会遇到屏幕适配问题,Android由于机型太多,所以导致屏幕尺寸还有分辨率多样化.接下来讲解下DP、DPI、SP的概念,有些不对的地方欢迎指正</p>
 <p>引用Andorid官方文档的说明</p>
 <blockquote>
-<p>Wh]]>
+<p>When adding support for multiple screens, applications do not work directly with resolution; applications should be concerned only with screen size and density, as specified by the generalized size and density groups.</p>
+</blockquote>
+<p>所以关于适配主要根据手机屏幕大小和屏幕密度</p>]]>
+    
     </summary>
+    
+      <category term="App规范" scheme="http://www.turegeek.com/categories/App%E8%A7%84%E8%8C%83/"/>
     
   </entry>
   
