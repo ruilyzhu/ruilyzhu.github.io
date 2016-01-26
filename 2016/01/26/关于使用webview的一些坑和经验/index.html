@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="WebView," />
 
 
 
@@ -59,31 +59,16 @@
 
 
 
-<meta name="description" content="参考了Hugo中文文档、CoderZH Blog
-
-前言Hugo是一个静态网站生成器,使用起来非常方便简单.个人认为程序员必须要有一个自己的博客,不只是以后找工作有加分,最重要的是对自己的知识点、经验、爬坑的总结,理解是一回事,能写出来让大家理解又是另外一回事.
-安装Hugo本文章是针对mac系统的配置,其他系统仅供参考
-
-Hugo Releases下载对应系统的二进制文件:hugo_0.14_d">
+<meta name="description" content="WebView是基于webkit引擎展现web页面的控件,而且越来越多项目在使用hybrid模式,因此我们在日常开发中不可避免的回合WebView打交道,也会碰到各种各样的问题,有可能是手机系统版本问题,机型兼容问题,耗电问题,安全漏洞问题,资源释放问题,还罗列一些WebView的小功能点,因此特地总结一下,用来提高开发效率.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用Hugo搭建个人博客">
-<meta property="og:url" content="http://www.turegeek.com/2015/11/12/hugo-help/index.html">
+<meta property="og:title" content="关于使用WebView的一些坑和经验">
+<meta property="og:url" content="http://www.turegeek.com/2016/01/26/关于使用webview的一些坑和经验/index.html">
 <meta property="og:site_name" content="Ruily blog">
-<meta property="og:description" content="参考了Hugo中文文档、CoderZH Blog
-
-前言Hugo是一个静态网站生成器,使用起来非常方便简单.个人认为程序员必须要有一个自己的博客,不只是以后找工作有加分,最重要的是对自己的知识点、经验、爬坑的总结,理解是一回事,能写出来让大家理解又是另外一回事.
-安装Hugo本文章是针对mac系统的配置,其他系统仅供参考
-
-Hugo Releases下载对应系统的二进制文件:hugo_0.14_d">
-<meta property="og:updated_time" content="2016-01-19T14:27:53.000Z">
+<meta property="og:description" content="WebView是基于webkit引擎展现web页面的控件,而且越来越多项目在使用hybrid模式,因此我们在日常开发中不可避免的回合WebView打交道,也会碰到各种各样的问题,有可能是手机系统版本问题,机型兼容问题,耗电问题,安全漏洞问题,资源释放问题,还罗列一些WebView的小功能点,因此特地总结一下,用来提高开发效率.">
+<meta property="og:updated_time" content="2016-01-26T08:31:10.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用Hugo搭建个人博客">
-<meta name="twitter:description" content="参考了Hugo中文文档、CoderZH Blog
-
-前言Hugo是一个静态网站生成器,使用起来非常方便简单.个人认为程序员必须要有一个自己的博客,不只是以后找工作有加分,最重要的是对自己的知识点、经验、爬坑的总结,理解是一回事,能写出来让大家理解又是另外一回事.
-安装Hugo本文章是针对mac系统的配置,其他系统仅供参考
-
-Hugo Releases下载对应系统的二进制文件:hugo_0.14_d">
+<meta name="twitter:title" content="关于使用WebView的一些坑和经验">
+<meta name="twitter:description" content="WebView是基于webkit引擎展现web页面的控件,而且越来越多项目在使用hybrid模式,因此我们在日常开发中不可避免的回合WebView打交道,也会碰到各种各样的问题,有可能是手机系统版本问题,机型兼容问题,耗电问题,安全漏洞问题,资源释放问题,还罗列一些WebView的小功能点,因此特地总结一下,用来提高开发效率.">
 
 
 
@@ -101,7 +86,7 @@ Hugo Releases下载对应系统的二进制文件:hugo_0.14_d">
   };
 </script>
 
-  <title> 使用Hugo搭建个人博客 | Ruily blog </title>
+  <title> 关于使用WebView的一些坑和经验 | Ruily blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -251,7 +236,7 @@ Hugo Releases下载对应系统的二进制文件:hugo_0.14_d">
             
             
               
-                使用Hugo搭建个人博客
+                关于使用WebView的一些坑和经验
               
             
           </h1>
@@ -263,19 +248,38 @@ Hugo Releases下载对应系统的二进制文件:hugo_0.14_d">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-11-12T00:00:00+08:00" content="2015-11-12">
-              2015-11-12
+            <time itemprop="dateCreated" datetime="2016-01-26T00:00:00+08:00" content="2016-01-26">
+              2016-01-26
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/11/12/hugo-help/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/12/hugo-help/" itemprop="commentsCount"></span>
+                <a href="/2016/01/26/关于使用webview的一些坑和经验/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/26/关于使用webview的一些坑和经验/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -296,73 +300,54 @@ Hugo Releases下载对应系统的二进制文件:hugo_0.14_d">
       
 
       
-        <blockquote>
-<p><a href="/www.gohugo.org">参考了Hugo中文文档</a>、<a href="http://blog.coderzh.com/2015/08/29/hugo/" target="_blank" rel="external">CoderZH Blog</a></p>
-</blockquote>
-<h3 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h3><p>Hugo是一个静态网站生成器,使用起来非常方便简单.个人认为程序员必须要有一个自己的博客,不只是以后找工作有加分,最重要的是对自己的知识点、经验、爬坑的总结,理解是一回事,能写出来让大家理解又是另外一回事.</p>
-<h3 id="u5B89_u88C5Hugo"><a href="#u5B89_u88C5Hugo" class="headerlink" title="安装Hugo"></a>安装Hugo</h3><p>本文章是针对mac系统的配置,其他系统仅供参考</p>
-<ol>
-<li><a href="https://github.com/spf13/hugo/releases" target="_blank" rel="external">Hugo Releases</a>下载对应系统的二进制文件:<a href="https://github.com/spf13/hugo/releases/download/v0.14/hugo_0.14_darwin_amd64.zip" target="_blank" rel="external">hugo_0.14_darwin_amd64.zip</a><br></li>
-<li>下载完解压将文件重命名为hugo<br></li>
-<li>然后放入/usr/local/bin目录下</li>
+        <p>WebView是基于webkit引擎展现web页面的控件,而且越来越多项目在使用hybrid模式,因此我们在日常开发中不可避免的回合WebView打交道,也会碰到各种各样的问题,有可能是手机系统版本问题,机型兼容问题,耗电问题,安全漏洞问题,资源释放问题,还罗列一些WebView的小功能点,因此特地总结一下,用来提高开发效率.</p>
+<a id="more"></a>
+<h2 id="WebView_u6E05_u7A7A_u5386_u53F2_u8BB0_u5F55"><a href="#WebView_u6E05_u7A7A_u5386_u53F2_u8BB0_u5F55" class="headerlink" title="WebView清空历史记录"></a>WebView清空历史记录</h2><p>WebView有提供clearHistory功能,但是要在onPageFinished()方法里调用才能调用goback方法,这样就略死板,而且加载一个url的时候有可能多次调用,因此查了下资料找到了一种解决办法</p>
+<pre><code>clearView()
+This method was deprecated in API level 18. Use WebView.loadUrl(&quot;about:blank&quot;) to
+reliably reset the view state and release page resources (including any running 
+JavaScript)
+</code></pre><p>WebView.clearView()在api18以后被废弃,可以使用WebView.loadUrl(“about:blank”)代替</p>
+<h2 id="WebView_u7684JS_u4EA4_u4E92_u4E0E_u5B89_u5168_u6027_u95EE_u9898"><a href="#WebView_u7684JS_u4EA4_u4E92_u4E0E_u5B89_u5168_u6027_u95EE_u9898" class="headerlink" title="WebView的JS交互与安全性问题"></a>WebView的JS交互与安全性问题</h2><p>总所周知,4.2以下的系统与本地交互可能会产生安全性问题,<br>具体可以通过<a href="http://drops.wooyun.org/papers/548" target="_blank" rel="external">WebView中接口隐患与手机挂马利用</a>了解.<br>这里推荐一个比较好的的解决方案</p>
+<p><a href="https://github.com/pedant/safe-java-js-webview-bridge" target="_blank" rel="external">safe-java-js-webview-bridge</a></p>
+<h2 id="u5173_u4E8E_u624B_u673A_u9875_u9762_u7684_u9002_u914D"><a href="#u5173_u4E8E_u624B_u673A_u9875_u9762_u7684_u9002_u914D" class="headerlink" title="关于手机页面的适配"></a>关于手机页面的适配</h2><p>同一个Web页面可能在不同的手机上显示的效果不一样,可以在HTML的head标签里添加</p>
+<pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, user-scalable=no&quot;&gt;
+</code></pre><p>通过设置width、height、initial-scale、当前手机屏幕密度等还适配当前的手机,具体参考<a href="http://developer.android.com/intl/zh-cn/guide/webapps/targeting.html" target="_blank" rel="external">Supporting Different Screens in Web Apps</a><br><a href="https://developer.chrome.com/multidevice/webview/pixelperfect" target="_blank" rel="external">Pixel-Perfect UI in the WebView</a></p>
+<h2 id="u5982_u679C_u9875_u9762_u4E3Ahttps_2C_u56FE_u7247_u4E3Ahttp_u5730_u5740_u7684_u65F6_u50195-0+_u7CFB_u7EDF_u65E0_u6CD5_u52A0_u8F7D_u56FE_u7247"><a href="#u5982_u679C_u9875_u9762_u4E3Ahttps_2C_u56FE_u7247_u4E3Ahttp_u5730_u5740_u7684_u65F6_u50195-0+_u7CFB_u7EDF_u65E0_u6CD5_u52A0_u8F7D_u56FE_u7247" class="headerlink" title="如果页面为https,图片为http地址的时候5.0+系统无法加载图片"></a>如果页面为https,图片为http地址的时候5.0+系统无法加载图片</h2><p>5.0以上的系统默认屏蔽混合内容,需要开启setMixedContentMode(true)来支持非https文件的加载</p>
+<h2 id="u52A0_u5FEBhtml_u52A0_u8F7D_u901F_u5EA6"><a href="#u52A0_u5FEBhtml_u52A0_u8F7D_u901F_u5EA6" class="headerlink" title="加快html加载速度"></a>加快html加载速度</h2><p>通过设置setLoadsImagesAutomatically(false)来关闭自动加载图片功能,保证页面加载出来在加载图片,只适用于API19以下不包括19,同时在onPageFinished里通过getLoadsImagesAutomatically()判断是否关闭,如果关闭则打开加载图片功能</p>
+<h2 id="u81EA_u5B9A_u4E49_u52A0_u8F7D_u9519_u8BEF_u9875_u9762"><a href="#u81EA_u5B9A_u4E49_u52A0_u8F7D_u9519_u8BEF_u9875_u9762" class="headerlink" title="自定义加载错误页面"></a>自定义加载错误页面</h2><p>WebView在无网络状态下load网页会提示找不到网页而且还会暴露地址链接,我们可以在onReceivedError里面获取错误,然后可以load本地自定义错误页面</p>
+<pre><code>String errorHtml = &quot;&lt;html&gt;&lt;body&gt;加载出错了!&lt;/body&gt;&lt;/html&gt;&quot;;
+mWebView.stopLoading();
+mWebView.loadData(errorHtml, &quot;text/html&quot;, &quot;UTF-8&quot;);
+</code></pre><h2 id="WebView_u5360_u5185_u5B58_u95EE_u9898"><a href="#WebView_u5360_u5185_u5B58_u95EE_u9898" class="headerlink" title="WebView占内存问题"></a>WebView占内存问题</h2><ol>
+<li>代码动态添加WebView(待验证)</li>
+<li>在执行webView的ondestory之前,需要在当前布局remove WebView,因为可能会<br>碰到WebView.destroy() called while still attached的问题</li>
+<li>在activity的onDestory调用webView.removeAllViews()、webView.onDestory()</li>
 </ol>
-<h3 id="u4F7F_u7528Hugo_u751F_u6210_u81EA_u5DF1_u7684_u7AD9_u70B9"><a href="#u4F7F_u7528Hugo_u751F_u6210_u81EA_u5DF1_u7684_u7AD9_u70B9" class="headerlink" title="使用Hugo生成自己的站点"></a>使用Hugo生成自己的站点</h3><h4 id="u521B_u5EFA_u4E00_u4E2A_u7AD9_u70B9_u76EE_u5F55_u5982/_u2026/_u2026/Documents/blog"><a href="#u521B_u5EFA_u4E00_u4E2A_u7AD9_u70B9_u76EE_u5F55_u5982/_u2026/_u2026/Documents/blog" class="headerlink" title="创建一个站点目录如/…/…/Documents/blog"></a>创建一个站点目录如/…/…/Documents/blog</h4><p> <code>$ hugo new site.../Documents/blog</code></p>
-<h4 id="u7136_u540EHugo_u4F1A_u5728blog_u76EE_u5F55_u4E0B_u521B_u5EFA_u4E00_u4E2A_u7AD9_u70B9_u76EE_u5F55_u7ED3_u6784_3A"><a href="#u7136_u540EHugo_u4F1A_u5728blog_u76EE_u5F55_u4E0B_u521B_u5EFA_u4E00_u4E2A_u7AD9_u70B9_u76EE_u5F55_u7ED3_u6784_3A" class="headerlink" title="然后Hugo会在blog目录下创建一个站点目录结构:"></a>然后Hugo会在blog目录下创建一个站点目录结构:</h4><pre><code>▸ archetypes/
-▸ content/   //存放markdown文章
-▸ layouts/   //存放网站模板文件
-▸ static/    //存放静态图片
-config.toml   //网站配置文件(可以配置baseurl、title、theme等)
-</code></pre><h4 id="cd_u5230blog_u76EE_u5F55_3A"><a href="#cd_u5230blog_u76EE_u5F55_3A" class="headerlink" title="cd到blog目录:"></a>cd到blog目录:</h4><p><code>$ cd ../../Documents/blog</code></p>
-<h4 id="u521B_u5EFA_u4E00_u4E2A_u535A_u6587_28_u6700_u597D_u653E_u5728content/post/_u76EE_u5F55_u4E0B_29_3A"><a href="#u521B_u5EFA_u4E00_u4E2A_u535A_u6587_28_u6700_u597D_u653E_u5728content/post/_u76EE_u5F55_u4E0B_29_3A" class="headerlink" title="创建一个博文(最好放在content/post/目录下):"></a>创建一个博文(最好放在content/post/目录下):</h4><p><code>$ hugo new post/hello_Hugo.md</code></p>
-<p>Hugo默认的是TOML格式的,至于其他格式,请自行了解</p>
-<pre><code>+++
-date = &quot;2015-10-25T08:36:54-07:00&quot;
-draft = true
-title = &quot;hello,Hugo&quot;
 
-+++
-
-正文内容
-</code></pre><p>date格式自行设置,title为文章标题</p>
-<h3 id="u535A_u5BA2_u6A21_u677F"><a href="#u535A_u5BA2_u6A21_u677F" class="headerlink" title="博客模板"></a>博客模板</h3><p>点击<a href="http://www.gohugo.org/theme/" target="_blank" rel="external">模板列表</a>自行挑选喜欢的模板,并复制对应git地址,如AIR主题<br>在上面创建的blog目录下创建themes目录</p>
-<pre><code>cd themes
-git clone https://github.com/syui/hugo-theme-air.git
-</code></pre><p>你可以在themes目录下针对模板的布局还有CSS样式进行自定义</p>
-<h3 id="u5F00_u59CB_u4F60_u7684_u535A_u5BA2_u4E4B_u65C5"><a href="#u5F00_u59CB_u4F60_u7684_u535A_u5BA2_u4E4B_u65C5" class="headerlink" title="开始你的博客之旅"></a>开始你的博客之旅</h3><p>在站点根目录执行命令:</p>
-<pre><code>$ hugo server --theme=hugo-theme-air --buildDrafts --watch
-</code></pre><p>watch参数可以在你修改博客的时候保持实时刷新,执行命令后会有以下提醒:</p>
-<pre><code>Web Server is available at http://127.0.0.1:1313/
-Press Ctrl+C to stop
-</code></pre><p>打开对应的网址,就可以看到对应模板效果的博客</p>
-<h3 id="Github_pages_u90E8_u7F72"><a href="#Github_pages_u90E8_u7F72" class="headerlink" title="Github pages部署"></a>Github pages部署</h3><p>在自己的github里创建个Repository,命名xxxx.github.io(xxxx为你的github用户名)</p>
-<p>在站点根目录执行以下命令,会自动生成关于github路径的静态页面:</p>
-<pre><code>$ hugo --theme=hugo-theme-air --baseUrl=&quot;http://xxxx.github.io/&quot;
-</code></pre><p>Ok,这个时候你打开站点目录的public目录下,可以看到生成的所有静态页面</p>
-<p>最后一步,把生成的静态页面push到github的master分支就可以了,推荐个mac git工具SourceTree,配置好路径,这样以后每次你写完文章直接push就可以了,以下为使用命令初始化、push</p>
-<pre><code>$ cd public
-$ git init
-$ git remote add origin https://github.com/xxxx/xxxx.github.io.git
-$ git add -A
-$ git commit -m &quot;first commit for blog&quot;
-$ git push -u origin master
-</code></pre><h3 id="Mac_Markdown_u5DE5_u5177_u63A8_u8350Mou"><a href="#Mac_Markdown_u5DE5_u5177_u63A8_u8350Mou" class="headerlink" title="Mac Markdown工具推荐Mou"></a>Mac Markdown工具推荐<a href="http://25.io/mou/" target="_blank" rel="external">Mou</a></h3>
       
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/WebView/" rel="tag">#WebView</a>
+          
+        </div>
       
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/01/07/about-motionevent/" rel="next" title="关于MothonEvent里getAction与getActionMasked的区别">
+                <i class="fa fa-chevron-left"></i> 关于MothonEvent里getAction与getActionMasked的区别
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/11/13/dpi-tips/" rel="prev" title="关于dpi、dp与sp的解释与适配">
-                关于dpi、dp与sp的解释与适配 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -388,8 +373,8 @@ $ git push -u origin master
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/11/12/hugo-help/"
-           data-title="使用Hugo搭建个人博客" data-url="http://www.turegeek.com/2015/11/12/hugo-help/">
+      <div class="ds-thread" data-thread-key="2016/01/26/关于使用webview的一些坑和经验/"
+           data-title="关于使用WebView的一些坑和经验" data-url="http://www.turegeek.com/2016/01/26/关于使用webview的一些坑和经验/">
       </div>
     
   </div>
@@ -487,7 +472,7 @@ $ git push -u origin master
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#u524D_u8A00"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5B89_u88C5Hugo"><span class="nav-number">2.</span> <span class="nav-text">安装Hugo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u4F7F_u7528Hugo_u751F_u6210_u81EA_u5DF1_u7684_u7AD9_u70B9"><span class="nav-number">3.</span> <span class="nav-text">使用Hugo生成自己的站点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#u521B_u5EFA_u4E00_u4E2A_u7AD9_u70B9_u76EE_u5F55_u5982/_u2026/_u2026/Documents/blog"><span class="nav-number">3.1.</span> <span class="nav-text">创建一个站点目录如/…/…/Documents/blog</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u7136_u540EHugo_u4F1A_u5728blog_u76EE_u5F55_u4E0B_u521B_u5EFA_u4E00_u4E2A_u7AD9_u70B9_u76EE_u5F55_u7ED3_u6784_3A"><span class="nav-number">3.2.</span> <span class="nav-text">然后Hugo会在blog目录下创建一个站点目录结构:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cd_u5230blog_u76EE_u5F55_3A"><span class="nav-number">3.3.</span> <span class="nav-text">cd到blog目录:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u521B_u5EFA_u4E00_u4E2A_u535A_u6587_28_u6700_u597D_u653E_u5728content/post/_u76EE_u5F55_u4E0B_29_3A"><span class="nav-number">3.4.</span> <span class="nav-text">创建一个博文(最好放在content/post/目录下):</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u535A_u5BA2_u6A21_u677F"><span class="nav-number">4.</span> <span class="nav-text">博客模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u5F00_u59CB_u4F60_u7684_u535A_u5BA2_u4E4B_u65C5"><span class="nav-number">5.</span> <span class="nav-text">开始你的博客之旅</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Github_pages_u90E8_u7F72"><span class="nav-number">6.</span> <span class="nav-text">Github pages部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mac_Markdown_u5DE5_u5177_u63A8_u8350Mou"><span class="nav-number">7.</span> <span class="nav-text">Mac Markdown工具推荐Mou</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#WebView_u6E05_u7A7A_u5386_u53F2_u8BB0_u5F55"><span class="nav-number">1.</span> <span class="nav-text">WebView清空历史记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WebView_u7684JS_u4EA4_u4E92_u4E0E_u5B89_u5168_u6027_u95EE_u9898"><span class="nav-number">2.</span> <span class="nav-text">WebView的JS交互与安全性问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5173_u4E8E_u624B_u673A_u9875_u9762_u7684_u9002_u914D"><span class="nav-number">3.</span> <span class="nav-text">关于手机页面的适配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5982_u679C_u9875_u9762_u4E3Ahttps_2C_u56FE_u7247_u4E3Ahttp_u5730_u5740_u7684_u65F6_u50195-0+_u7CFB_u7EDF_u65E0_u6CD5_u52A0_u8F7D_u56FE_u7247"><span class="nav-number">4.</span> <span class="nav-text">如果页面为https,图片为http地址的时候5.0+系统无法加载图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u52A0_u5FEBhtml_u52A0_u8F7D_u901F_u5EA6"><span class="nav-number">5.</span> <span class="nav-text">加快html加载速度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u81EA_u5B9A_u4E49_u52A0_u8F7D_u9519_u8BEF_u9875_u9762"><span class="nav-number">6.</span> <span class="nav-text">自定义加载错误页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WebView_u5360_u5185_u5B58_u95EE_u9898"><span class="nav-number">7.</span> <span class="nav-text">WebView占内存问题</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">

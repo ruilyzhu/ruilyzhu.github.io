@@ -5,7 +5,7 @@
   <subtitle><![CDATA[reading and Writing]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.turegeek.com//"/>
-  <updated>2016-01-21T15:58:55.000Z</updated>
+  <updated>2016-01-26T08:31:10.000Z</updated>
   <id>http://www.turegeek.com//</id>
   
   <author>
@@ -14,6 +14,48 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[关于使用WebView的一些坑和经验]]></title>
+    <link href="http://www.turegeek.com/2016/01/26/%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8webview%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91%E5%92%8C%E7%BB%8F%E9%AA%8C/"/>
+    <id>http://www.turegeek.com/2016/01/26/关于使用webview的一些坑和经验/</id>
+    <published>2016-01-25T16:00:00.000Z</published>
+    <updated>2016-01-26T08:31:10.000Z</updated>
+    <content type="html"><![CDATA[<p>WebView是基于webkit引擎展现web页面的控件,而且越来越多项目在使用hybrid模式,因此我们在日常开发中不可避免的回合WebView打交道,也会碰到各种各样的问题,有可能是手机系统版本问题,机型兼容问题,耗电问题,安全漏洞问题,资源释放问题,还罗列一些WebView的小功能点,因此特地总结一下,用来提高开发效率.</p>
+<a id="more"></a>
+<h2 id="WebView_u6E05_u7A7A_u5386_u53F2_u8BB0_u5F55"><a href="#WebView_u6E05_u7A7A_u5386_u53F2_u8BB0_u5F55" class="headerlink" title="WebView清空历史记录"></a>WebView清空历史记录</h2><p>WebView有提供clearHistory功能,但是要在onPageFinished()方法里调用才能调用goback方法,这样就略死板,而且加载一个url的时候有可能多次调用,因此查了下资料找到了一种解决办法</p>
+<pre><code>clearView()
+This method was deprecated in API level 18. Use WebView.loadUrl(&quot;about:blank&quot;) to
+reliably reset the view state and release page resources (including any running 
+JavaScript)
+</code></pre><p>WebView.clearView()在api18以后被废弃,可以使用WebView.loadUrl(“about:blank”)代替</p>
+<h2 id="WebView_u7684JS_u4EA4_u4E92_u4E0E_u5B89_u5168_u6027_u95EE_u9898"><a href="#WebView_u7684JS_u4EA4_u4E92_u4E0E_u5B89_u5168_u6027_u95EE_u9898" class="headerlink" title="WebView的JS交互与安全性问题"></a>WebView的JS交互与安全性问题</h2><p>总所周知,4.2以下的系统与本地交互可能会产生安全性问题,<br>具体可以通过<a href="http://drops.wooyun.org/papers/548" target="_blank" rel="external">WebView中接口隐患与手机挂马利用</a>了解.<br>这里推荐一个比较好的的解决方案</p>
+<p><a href="https://github.com/pedant/safe-java-js-webview-bridge" target="_blank" rel="external">safe-java-js-webview-bridge</a></p>
+<h2 id="u5173_u4E8E_u624B_u673A_u9875_u9762_u7684_u9002_u914D"><a href="#u5173_u4E8E_u624B_u673A_u9875_u9762_u7684_u9002_u914D" class="headerlink" title="关于手机页面的适配"></a>关于手机页面的适配</h2><p>同一个Web页面可能在不同的手机上显示的效果不一样,可以在HTML的head标签里添加</p>
+<pre><code>&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0, user-scalable=no&quot;&gt;
+</code></pre><p>通过设置width、height、initial-scale、当前手机屏幕密度等还适配当前的手机,具体参考<a href="http://developer.android.com/intl/zh-cn/guide/webapps/targeting.html" target="_blank" rel="external">Supporting Different Screens in Web Apps</a><br><a href="https://developer.chrome.com/multidevice/webview/pixelperfect" target="_blank" rel="external">Pixel-Perfect UI in the WebView</a></p>
+<h2 id="u5982_u679C_u9875_u9762_u4E3Ahttps_2C_u56FE_u7247_u4E3Ahttp_u5730_u5740_u7684_u65F6_u50195-0+_u7CFB_u7EDF_u65E0_u6CD5_u52A0_u8F7D_u56FE_u7247"><a href="#u5982_u679C_u9875_u9762_u4E3Ahttps_2C_u56FE_u7247_u4E3Ahttp_u5730_u5740_u7684_u65F6_u50195-0+_u7CFB_u7EDF_u65E0_u6CD5_u52A0_u8F7D_u56FE_u7247" class="headerlink" title="如果页面为https,图片为http地址的时候5.0+系统无法加载图片"></a>如果页面为https,图片为http地址的时候5.0+系统无法加载图片</h2><p>5.0以上的系统默认屏蔽混合内容,需要开启setMixedContentMode(true)来支持非https文件的加载</p>
+<h2 id="u52A0_u5FEBhtml_u52A0_u8F7D_u901F_u5EA6"><a href="#u52A0_u5FEBhtml_u52A0_u8F7D_u901F_u5EA6" class="headerlink" title="加快html加载速度"></a>加快html加载速度</h2><p>通过设置setLoadsImagesAutomatically(false)来关闭自动加载图片功能,保证页面加载出来在加载图片,只适用于API19以下不包括19,同时在onPageFinished里通过getLoadsImagesAutomatically()判断是否关闭,如果关闭则打开加载图片功能</p>
+<h2 id="u81EA_u5B9A_u4E49_u52A0_u8F7D_u9519_u8BEF_u9875_u9762"><a href="#u81EA_u5B9A_u4E49_u52A0_u8F7D_u9519_u8BEF_u9875_u9762" class="headerlink" title="自定义加载错误页面"></a>自定义加载错误页面</h2><p>WebView在无网络状态下load网页会提示找不到网页而且还会暴露地址链接,我们可以在onReceivedError里面获取错误,然后可以load本地自定义错误页面</p>
+<pre><code>String errorHtml = &quot;&lt;html&gt;&lt;body&gt;加载出错了!&lt;/body&gt;&lt;/html&gt;&quot;;
+mWebView.stopLoading();
+mWebView.loadData(errorHtml, &quot;text/html&quot;, &quot;UTF-8&quot;);
+</code></pre><h2 id="WebView_u5360_u5185_u5B58_u95EE_u9898"><a href="#WebView_u5360_u5185_u5B58_u95EE_u9898" class="headerlink" title="WebView占内存问题"></a>WebView占内存问题</h2><ol>
+<li>代码动态添加WebView(待验证)</li>
+<li>在执行webView的ondestory之前,需要在当前布局remove WebView,因为可能会<br>碰到WebView.destroy() called while still attached的问题</li>
+<li>在activity的onDestory调用webView.removeAllViews()、webView.onDestory()</li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>WebView是基于webkit引擎展现web页面的控件,而且越来越多项目在使用hybrid模式,因此我们在日常开发中不可避免的回合WebView打交道,也会碰到各种各样的问题,有可能是手机系统版本问题,机型兼容问题,耗电问题,安全漏洞问题,资源释放问题,还罗列一些WebView的小功能点,因此特地总结一下,用来提高开发效率.</p>]]>
+    
+    </summary>
+    
+      <category term="WebView" scheme="http://www.turegeek.com/tags/WebView/"/>
+    
+      <category term="android" scheme="http://www.turegeek.com/categories/android/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[关于MothonEvent里getAction与getActionMasked的区别]]></title>
