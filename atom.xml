@@ -5,7 +5,7 @@
   <subtitle><![CDATA[reading and Writing]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.turegeek.com//"/>
-  <updated>2016-01-26T08:31:10.000Z</updated>
+  <updated>2016-02-29T09:58:29.000Z</updated>
   <id>http://www.turegeek.com//</id>
   
   <author>
@@ -16,11 +16,58 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[关于HTTPS的一些基础知识]]></title>
+    <link href="http://www.turegeek.com/2016/02/26/%E5%85%B3%E4%BA%8Ehttps%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+    <id>http://www.turegeek.com/2016/02/26/关于https的一些基础知识/</id>
+    <published>2016-02-25T16:00:00.000Z</published>
+    <updated>2016-02-29T09:58:29.000Z</updated>
+    <content type="html"><![CDATA[<p>由于通过Http协议传输的数据都是未加密的明文传输,这样会引起第三方伪造客户端与服务端通信、篡改请求数据、获取接口数据内容，由于http传输敏感数据的不安全性,因此在http协议的基础上通过SSL/TLS对传输数据进行加密.</p>
+<a id="more"></a>
+<h4 id="HTTPS_u8BC1_u4E66"><a href="#HTTPS_u8BC1_u4E66" class="headerlink" title="HTTPS证书"></a>HTTPS证书</h4><p>https需要证书去验证服务器的合法性,也有的安全性比较高的应用采用双向证书认证。Https证书分为CA机构颁发的证书以及自签名的证书也就是自己生成的证书,12306网站就是自签名证书</p>
+<h4 id="HTTPS_u4E00_u822C_u4F7F_u7528_u7684_u52A0_u5BC6_u7B97_u6CD5"><a href="#HTTPS_u4E00_u822C_u4F7F_u7528_u7684_u52A0_u5BC6_u7B97_u6CD5" class="headerlink" title="HTTPS一般使用的加密算法"></a>HTTPS一般使用的加密算法</h4><p>非对称加密算法:RSA,DSA/DSS<br>对称加密算法:AES、RC4、3DES<br>HASH算法:MD5、SHA1、SHA256</p>
+<h4 id="HTTPS_u5DE5_u4F5C_u539F_u7406"><a href="#HTTPS_u5DE5_u4F5C_u539F_u7406" class="headerlink" title="HTTPS工作原理"></a>HTTPS工作原理</h4><p>Https在传输数据之前与服务器进行一次握手首先告诉服务器我这边支持SSL的版本、可以使用的加密方法,你服务器把证书发过来我客户端来验验,然后服务器回应奥你这个SSL版本我支持,加密算法我们就用XXX,证书信息也给你,客户端收到回应后验了验证书，恩没问题,奥用这个加密算法,成！随后告诉服务器那咱既然商量好了 我客户端下面发的数据就用我们约定好的算法加密,你到时候解密就成了,具体如下。</p>
+<h5 id="u5BA2_u6237_u7AEF"><a href="#u5BA2_u6237_u7AEF" class="headerlink" title="客户端"></a>客户端</h5><ul>
+<li>生成随机数A</li>
+<li>支持的SSL/TLS版本号</li>
+<li>支持的加密算法</li>
+</ul>
+<h5 id="u670D_u52A1_u5668"><a href="#u670D_u52A1_u5668" class="headerlink" title="服务器"></a>服务器</h5><ul>
+<li>确认SSL/TLS版本</li>
+<li>生成随机数B</li>
+<li>确认使用哪个加密算法与HASH算法</li>
+<li>服务器证书(网站地址、加密公钥、证书颁发的机构信息) </li>
+</ul>
+<h5 id="u5BA2_u6237_u7AEF-1"><a href="#u5BA2_u6237_u7AEF-1" class="headerlink" title="客户端"></a>客户端</h5><ul>
+<li>验证证书,包括证书颁发机构的合法性,发行者证书的公钥能否正确解开服务器证书的数字签名,网站地址是否与当前地址一致等</li>
+<li>生成随机数C,使用证书里的加密公钥加密,生成密码,防止被窃取</li>
+<li>(option)如果在双向认证的情况下,需要客户端生成随机数并进行数据签名并和客户端的证书一起传给服务器</li>
+<li>使用确认好的HASH算法计算握手信息,并使用随机数C进行加密,并把之前所有生成的信息发送给服务器标示<br>客户端握手阶段结束,以后的信息将按约定好的规则加密发送</li>
+</ul>
+<h5 id="u670D_u52A1_u5668-1"><a href="#u670D_u52A1_u5668-1" class="headerlink" title="服务器"></a>服务器</h5><ul>
+<li>(option)如果客户端发送证书,服务器验证合法性</li>
+<li>使用自己的私钥解密出密码,然后使用密码解密客户端计算的握手信息,并验证HASH</li>
+<li>使用密码加密握手信息并响应给客户端告知服务器握手阶段结束,下面开始使用约定好的解密规则通信</li>
+</ul>
+<h5 id="u5BA2_u6237_u7AEF-2"><a href="#u5BA2_u6237_u7AEF-2" class="headerlink" title="客户端"></a>客户端</h5><p>解密并验证HASH值,握手结束,开始使用加密的数据进行http通信</p>
+<h5 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h5><p>在SSL握手的过程中总共产生了三个随机数,使用来保证密钥产生的随机性.最后也是通过这三个随机数生成一个对称密钥用于HTTP通信中对数据的加密解密、验证数据的完整性等.</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>由于通过Http协议传输的数据都是未加密的明文传输,这样会引起第三方伪造客户端与服务端通信、篡改请求数据、获取接口数据内容，由于http传输敏感数据的不安全性,因此在http协议的基础上通过SSL/TLS对传输数据进行加密.</p>]]>
+    
+    </summary>
+    
+      <category term="HTTPS" scheme="http://www.turegeek.com/tags/HTTPS/"/>
+    
+      <category term="android" scheme="http://www.turegeek.com/categories/android/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[关于使用WebView的一些坑和经验]]></title>
     <link href="http://www.turegeek.com/2016/01/26/%E5%85%B3%E4%BA%8E%E4%BD%BF%E7%94%A8webview%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91%E5%92%8C%E7%BB%8F%E9%AA%8C/"/>
     <id>http://www.turegeek.com/2016/01/26/关于使用webview的一些坑和经验/</id>
     <published>2016-01-25T16:00:00.000Z</published>
-    <updated>2016-01-26T08:31:10.000Z</updated>
+    <updated>2016-01-26T08:31:33.000Z</updated>
     <content type="html"><![CDATA[<p>WebView是基于webkit引擎展现web页面的控件,而且越来越多项目在使用hybrid模式,因此我们在日常开发中不可避免的回合WebView打交道,也会碰到各种各样的问题,有可能是手机系统版本问题,机型兼容问题,耗电问题,安全漏洞问题,资源释放问题,还罗列一些WebView的小功能点,因此特地总结一下,用来提高开发效率.</p>
 <a id="more"></a>
 <h2 id="WebView_u6E05_u7A7A_u5386_u53F2_u8BB0_u5F55"><a href="#WebView_u6E05_u7A7A_u5386_u53F2_u8BB0_u5F55" class="headerlink" title="WebView清空历史记录"></a>WebView清空历史记录</h2><p>WebView有提供clearHistory功能,但是要在onPageFinished()方法里调用才能调用goback方法,这样就略死板,而且加载一个url的时候有可能多次调用,因此查了下资料找到了一种解决办法</p>

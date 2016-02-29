@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="HTTPS," />
 
 
 
@@ -59,25 +59,16 @@
 
 
 
-<meta name="description" content="仿twitter like动画、android 动态加载技术系列、支持手势缩放的TextView、倾斜45°显示文字的lableView、类似于flowlayout的扩展、微博话题功能、富文本编辑器、为listView、gridView…添加阻尼效果、仿Tinder的卡片效果">
+<meta name="description" content="由于通过Http协议传输的数据都是未加密的明文传输,这样会引起第三方伪造客户端与服务端通信、篡改请求数据、获取接口数据内容，由于http传输敏感数据的不安全性,因此在http协议的基础上通过SSL/TLS对传输数据进行加密.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="十个开源库分享(一)">
-<meta property="og:url" content="http://www.turegeek.com/2015/12/30/open-source-01/index.html">
+<meta property="og:title" content="关于HTTPS的一些基础知识">
+<meta property="og:url" content="http://www.turegeek.com/2016/02/26/关于https的一些基础知识/index.html">
 <meta property="og:site_name" content="Ruily blog">
-<meta property="og:description" content="仿twitter like动画、android 动态加载技术系列、支持手势缩放的TextView、倾斜45°显示文字的lableView、类似于flowlayout的扩展、微博话题功能、富文本编辑器、为listView、gridView…添加阻尼效果、仿Tinder的卡片效果">
-<meta property="og:image" content="http://ww4.sinaimg.cn/large/005KJayxjw1ezhkhn2yr2g308w0f3abj.gif">
-<meta property="og:image" content="http://ww3.sinaimg.cn/large/005KJayxjw1ezhkijear8g305b05bt9p.gif">
-<meta property="og:image" content="http://ww4.sinaimg.cn/large/005KJayxjw1ezhkjjik80g30dc0a0b29.gif">
-<meta property="og:image" content="http://ww3.sinaimg.cn/large/005KJayxjw1ezhjmogodfj309m06ugmh.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005KJayxjw1ezhptodjl4j30b90k0dgt.jpg">
-<meta property="og:image" content="http://ww4.sinaimg.cn/large/005KJayxjw1ezhpva5s1rg307i0dck2s.gif">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005KJayxjw1ezhkl7sp9wg30dc0ca1kx.gif">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/005KJayxjw1ezhpqdbweag305l09n1kz.gif">
-<meta property="og:image" content="http://ww2.sinaimg.cn/large/005KJayxjw1ezhprq4uc6g30c20k0qv5.gif">
-<meta property="og:updated_time" content="2016-01-21T16:28:25.000Z">
+<meta property="og:description" content="由于通过Http协议传输的数据都是未加密的明文传输,这样会引起第三方伪造客户端与服务端通信、篡改请求数据、获取接口数据内容，由于http传输敏感数据的不安全性,因此在http协议的基础上通过SSL/TLS对传输数据进行加密.">
+<meta property="og:updated_time" content="2016-02-29T09:58:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="十个开源库分享(一)">
-<meta name="twitter:description" content="仿twitter like动画、android 动态加载技术系列、支持手势缩放的TextView、倾斜45°显示文字的lableView、类似于flowlayout的扩展、微博话题功能、富文本编辑器、为listView、gridView…添加阻尼效果、仿Tinder的卡片效果">
+<meta name="twitter:title" content="关于HTTPS的一些基础知识">
+<meta name="twitter:description" content="由于通过Http协议传输的数据都是未加密的明文传输,这样会引起第三方伪造客户端与服务端通信、篡改请求数据、获取接口数据内容，由于http传输敏感数据的不安全性,因此在http协议的基础上通过SSL/TLS对传输数据进行加密.">
 
 
 
@@ -95,7 +86,7 @@
   };
 </script>
 
-  <title> 十个开源库分享(一) | Ruily blog </title>
+  <title> 关于HTTPS的一些基础知识 | Ruily blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -245,7 +236,7 @@
             
             
               
-                十个开源库分享(一)
+                关于HTTPS的一些基础知识
               
             
           </h1>
@@ -257,8 +248,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-30T00:00:00+08:00" content="2015-12-30">
-              2015-12-30
+            <time itemprop="dateCreated" datetime="2016-02-26T00:00:00+08:00" content="2016-02-26">
+              2016-02-26
             </time>
           </span>
 
@@ -271,8 +262,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/开源库/" itemprop="url" rel="index">
-                    <span itemprop="name">开源库</span>
+                  <a href="/categories/android/" itemprop="url" rel="index">
+                    <span itemprop="name">android</span>
                   </a>
                 </span>
 
@@ -287,8 +278,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/30/open-source-01/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/30/open-source-01/" itemprop="commentsCount"></span>
+                <a href="/2016/02/26/关于https的一些基础知识/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/26/关于https的一些基础知识/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -309,60 +300,59 @@
       
 
       
-        <p>仿twitter like动画、android 动态加载技术系列、支持手势缩放的TextView、倾斜45°显示文字的lableView、<br>类似于flowlayout的扩展、微博话题功能、富文本编辑器、为listView、gridView…添加阻尼效果、仿Tinder的卡片效果</p>
+        <p>由于通过Http协议传输的数据都是未加密的明文传输,这样会引起第三方伪造客户端与服务端通信、篡改请求数据、获取接口数据内容，由于http传输敏感数据的不安全性,因此在http协议的基础上通过SSL/TLS对传输数据进行加密.</p>
 <a id="more"></a>
-<ol>
-<li><h3 id="Twitter_u7684like_u52A8_u753B_28for_any_view_29"><a href="#Twitter_u7684like_u52A8_u753B_28for_any_view_29" class="headerlink" title="Twitter的like动画(for any view)"></a><a href="https://github.com/hanks-zyh/SmallBang" target="_blank" rel="external">Twitter的like动画(for any view)</a></h3><p> <img src="http://ww4.sinaimg.cn/large/005KJayxjw1ezhkhn2yr2g308w0f3abj.gif" alt=""></p>
-</li>
-<li><h3 id="u53E6_u5916_u4E00_u79CD_u4EFFtwitter_like_animation"><a href="#u53E6_u5916_u4E00_u79CD_u4EFFtwitter_like_animation" class="headerlink" title="另外一种仿twitter like animation"></a><a href="https://github.com/frogermcs/LikeAnimation" target="_blank" rel="external">另外一种仿twitter like animation</a></h3><p> <img src="http://ww3.sinaimg.cn/large/005KJayxjw1ezhkijear8g305b05bt9p.gif" alt=""></p>
-</li>
-<li><h3 id="Android-Plugin-Framework"><a href="#Android-Plugin-Framework" class="headerlink" title="Android-Plugin-Framework"></a><a href="https://github.com/limpoxe/Android-Plugin-Framework" target="_blank" rel="external">Android-Plugin-Framework</a></h3><p> 此项目是Android插件开发框架完整源码及示例。用来通过动态加载的方式在宿主程序中运行插件APK。在此附上关于动态加载技术的一些文章供了解</p>
-<p> <a href="http://segmentfault.com/a/1190000004086213" target="_blank" rel="external">Android动态加载技术 系列索引</a></p>
-<p> <a href="http://tech.meituan.com/mt-android-auto-split-dex.html" target="_blank" rel="external">美团Android DEX自动拆包及动态加载简介</a><br> <a href="https://github.com/CtripMobile/DynamicAPK" target="_blank" rel="external">DynamicAPK已经在携程旅行Android App中使用</a><br> <a href="http://www.infoq.com/cn/articles/android-dynamic-loading?utm_campaign=rightbar_v2&amp;utm_source=infoq&amp;utm_medium=articles_link&amp;utm_content=link_text" target="_blank" rel="external">Android动态加载技术三个关键问题详解</a></p>
-</li>
-<li><h3 id="ZoomTextView"><a href="#ZoomTextView" class="headerlink" title="ZoomTextView"></a><a href="https://github.com/nomanr/ZoomTextView" target="_blank" rel="external">ZoomTextView</a></h3><p> 支持手势缩放的自定义 TextView，控件本身和文字都会随着手势同时放大和缩小。<br> <img src="http://ww4.sinaimg.cn/large/005KJayxjw1ezhkjjik80g30dc0a0b29.gif" alt=""></p>
-</li>
-<li><h3 id="FlycoLabelView"><a href="#FlycoLabelView" class="headerlink" title="FlycoLabelView"></a><a href="https://github.com/H07000223/FlycoLabelView" target="_blank" rel="external">FlycoLabelView</a></h3><p> 自定义的标签view</p>
-<p> <img src="http://ww3.sinaimg.cn/large/005KJayxjw1ezhjmogodfj309m06ugmh.jpg" alt=""></p>
-</li>
-<li><h3 id="Hashtags"><a href="#Hashtags" class="headerlink" title="Hashtags"></a><a href="https://github.com/davidbeloo/Hashtags" target="_blank" rel="external">Hashtags</a></h3><p> 基于一个开源项目flowlayout开发的标签控件,动态标签大小,标签大小自适应,超过一行自动换行,标签可点击,支持各种gravity选项<br> <img src="http://ww1.sinaimg.cn/large/005KJayxjw1ezhptodjl4j30b90k0dgt.jpg" alt=""></p>
-</li>
-<li><h3 id="HashTagHelper"><a href="#HashTagHelper" class="headerlink" title="HashTagHelper"></a><a href="https://github.com/Danylo2006/HashTagHelper" target="_blank" rel="external">HashTagHelper</a></h3><p> 一个高亮显示#开头工具,支持点击事件,类似微博话题</p>
-<p> <img src="http://ww4.sinaimg.cn/large/005KJayxjw1ezhpva5s1rg307i0dck2s.gif" alt=""></p>
-</li>
-<li><h3 id="https_3A//github-com/mthli/Knife"><a href="#https_3A//github-com/mthli/Knife" class="headerlink" title="https://github.com/mthli/Knife"></a><a href="https://github.com/mthli/Knife" target="_blank" rel="external">https://github.com/mthli/Knife</a></h3><p>富文本编辑器,支持android4.0+<br><img src="http://ww1.sinaimg.cn/large/005KJayxjw1ezhkl7sp9wg30dc0ca1kx.gif" alt=""></p>
-</li>
-<li><h3 id="overscroll-decor"><a href="#overscroll-decor" class="headerlink" title="overscroll-decor"></a><a href="https://github.com/EverythingMe/overscroll-decor" target="_blank" rel="external">overscroll-decor</a></h3><p> 为recyclerView、listView、GridView、ScrollView、or AnyView增加类似IOS阻尼效果</p>
-<p> <img src="http://ww1.sinaimg.cn/large/005KJayxjw1ezhpqdbweag305l09n1kz.gif" alt=""></p>
-</li>
-<li><h3 id="android-card-slide-panel"><a href="#android-card-slide-panel" class="headerlink" title="android-card-slide-panel"></a><a href="https://github.com/xmuSistone/android-card-slide-panel" target="_blank" rel="external">android-card-slide-panel</a></h3><p>仿tinder卡片滑动切换 </p>
-<p><img src="http://ww2.sinaimg.cn/large/005KJayxjw1ezhprq4uc6g30c20k0qv5.gif" alt=""></p>
-<p>这里给另外一个类似的开源项目</p>
-<p><a href="https://github.com/aaronbond/Swipe-Deck" target="_blank" rel="external">Swipe-Deck</a></p>
-</li>
-</ol>
+<h4 id="HTTPS_u8BC1_u4E66"><a href="#HTTPS_u8BC1_u4E66" class="headerlink" title="HTTPS证书"></a>HTTPS证书</h4><p>https需要证书去验证服务器的合法性,也有的安全性比较高的应用采用双向证书认证。Https证书分为CA机构颁发的证书以及自签名的证书也就是自己生成的证书,12306网站就是自签名证书</p>
+<h4 id="HTTPS_u4E00_u822C_u4F7F_u7528_u7684_u52A0_u5BC6_u7B97_u6CD5"><a href="#HTTPS_u4E00_u822C_u4F7F_u7528_u7684_u52A0_u5BC6_u7B97_u6CD5" class="headerlink" title="HTTPS一般使用的加密算法"></a>HTTPS一般使用的加密算法</h4><p>非对称加密算法:RSA,DSA/DSS<br>对称加密算法:AES、RC4、3DES<br>HASH算法:MD5、SHA1、SHA256</p>
+<h4 id="HTTPS_u5DE5_u4F5C_u539F_u7406"><a href="#HTTPS_u5DE5_u4F5C_u539F_u7406" class="headerlink" title="HTTPS工作原理"></a>HTTPS工作原理</h4><p>Https在传输数据之前与服务器进行一次握手首先告诉服务器我这边支持SSL的版本、可以使用的加密方法,你服务器把证书发过来我客户端来验验,然后服务器回应奥你这个SSL版本我支持,加密算法我们就用XXX,证书信息也给你,客户端收到回应后验了验证书，恩没问题,奥用这个加密算法,成！随后告诉服务器那咱既然商量好了 我客户端下面发的数据就用我们约定好的算法加密,你到时候解密就成了,具体如下。</p>
+<h5 id="u5BA2_u6237_u7AEF"><a href="#u5BA2_u6237_u7AEF" class="headerlink" title="客户端"></a>客户端</h5><ul>
+<li>生成随机数A</li>
+<li>支持的SSL/TLS版本号</li>
+<li>支持的加密算法</li>
+</ul>
+<h5 id="u670D_u52A1_u5668"><a href="#u670D_u52A1_u5668" class="headerlink" title="服务器"></a>服务器</h5><ul>
+<li>确认SSL/TLS版本</li>
+<li>生成随机数B</li>
+<li>确认使用哪个加密算法与HASH算法</li>
+<li>服务器证书(网站地址、加密公钥、证书颁发的机构信息) </li>
+</ul>
+<h5 id="u5BA2_u6237_u7AEF-1"><a href="#u5BA2_u6237_u7AEF-1" class="headerlink" title="客户端"></a>客户端</h5><ul>
+<li>验证证书,包括证书颁发机构的合法性,发行者证书的公钥能否正确解开服务器证书的数字签名,网站地址是否与当前地址一致等</li>
+<li>生成随机数C,使用证书里的加密公钥加密,生成密码,防止被窃取</li>
+<li>(option)如果在双向认证的情况下,需要客户端生成随机数并进行数据签名并和客户端的证书一起传给服务器</li>
+<li>使用确认好的HASH算法计算握手信息,并使用随机数C进行加密,并把之前所有生成的信息发送给服务器标示<br>客户端握手阶段结束,以后的信息将按约定好的规则加密发送</li>
+</ul>
+<h5 id="u670D_u52A1_u5668-1"><a href="#u670D_u52A1_u5668-1" class="headerlink" title="服务器"></a>服务器</h5><ul>
+<li>(option)如果客户端发送证书,服务器验证合法性</li>
+<li>使用自己的私钥解密出密码,然后使用密码解密客户端计算的握手信息,并验证HASH</li>
+<li>使用密码加密握手信息并响应给客户端告知服务器握手阶段结束,下面开始使用约定好的解密规则通信</li>
+</ul>
+<h5 id="u5BA2_u6237_u7AEF-2"><a href="#u5BA2_u6237_u7AEF-2" class="headerlink" title="客户端"></a>客户端</h5><p>解密并验证HASH值,握手结束,开始使用加密的数据进行http通信</p>
+<h5 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h5><p>在SSL握手的过程中总共产生了三个随机数,使用来保证密钥产生的随机性.最后也是通过这三个随机数生成一个对称密钥用于HTTP通信中对数据的加密解密、验证数据的完整性等.</p>
 
       
     </div>
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/HTTPS/" rel="tag">#HTTPS</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/29/version-tips/" rel="next" title="App版本号定义与说明基础知识">
-                <i class="fa fa-chevron-left"></i> App版本号定义与说明基础知识
+              <a href="/2016/01/26/关于使用webview的一些坑和经验/" rel="next" title="关于使用WebView的一些坑和经验">
+                <i class="fa fa-chevron-left"></i> 关于使用WebView的一些坑和经验
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/01/06/open-source-02/" rel="prev" title="十个开源库分享(二)">
-                十个开源库分享(二) <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -388,8 +378,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/12/30/open-source-01/"
-           data-title="十个开源库分享(一)" data-url="http://www.turegeek.com/2015/12/30/open-source-01/">
+      <div class="ds-thread" data-thread-key="2016/02/26/关于https的一些基础知识/"
+           data-title="关于HTTPS的一些基础知识" data-url="http://www.turegeek.com/2016/02/26/关于https的一些基础知识/">
       </div>
     
   </div>
@@ -487,7 +477,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Twitter_u7684like_u52A8_u753B_28for_any_view_29"><span class="nav-number">1.</span> <span class="nav-text">Twitter的like动画(for any view)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u53E6_u5916_u4E00_u79CD_u4EFFtwitter_like_animation"><span class="nav-number">2.</span> <span class="nav-text">另外一种仿twitter like animation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android-Plugin-Framework"><span class="nav-number">3.</span> <span class="nav-text">Android-Plugin-Framework</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZoomTextView"><span class="nav-number">4.</span> <span class="nav-text">ZoomTextView</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FlycoLabelView"><span class="nav-number">5.</span> <span class="nav-text">FlycoLabelView</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hashtags"><span class="nav-number">6.</span> <span class="nav-text">Hashtags</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HashTagHelper"><span class="nav-number">7.</span> <span class="nav-text">HashTagHelper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#https_3A//github-com/mthli/Knife"><span class="nav-number">8.</span> <span class="nav-text">https://github.com/mthli/Knife</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#overscroll-decor"><span class="nav-number">9.</span> <span class="nav-text">overscroll-decor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#android-card-slide-panel"><span class="nav-number">10.</span> <span class="nav-text">android-card-slide-panel</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTPS_u8BC1_u4E66"><span class="nav-number">1.</span> <span class="nav-text">HTTPS证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTPS_u4E00_u822C_u4F7F_u7528_u7684_u52A0_u5BC6_u7B97_u6CD5"><span class="nav-number">2.</span> <span class="nav-text">HTTPS一般使用的加密算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTPS_u5DE5_u4F5C_u539F_u7406"><span class="nav-number">3.</span> <span class="nav-text">HTTPS工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#u5BA2_u6237_u7AEF"><span class="nav-number">3.1.</span> <span class="nav-text">客户端</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u670D_u52A1_u5668"><span class="nav-number">3.2.</span> <span class="nav-text">服务器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u5BA2_u6237_u7AEF-1"><span class="nav-number">3.3.</span> <span class="nav-text">客户端</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u670D_u52A1_u5668-1"><span class="nav-number">3.4.</span> <span class="nav-text">服务器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u5BA2_u6237_u7AEF-2"><span class="nav-number">3.5.</span> <span class="nav-text">客户端</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Tips"><span class="nav-number">3.6.</span> <span class="nav-text">Tips</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
