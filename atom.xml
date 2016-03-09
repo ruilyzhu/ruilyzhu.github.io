@@ -5,7 +5,7 @@
   <subtitle><![CDATA[reading and Writing]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.turegeek.com//"/>
-  <updated>2016-02-29T09:58:40.000Z</updated>
+  <updated>2016-03-09T08:51:05.000Z</updated>
   <id>http://www.turegeek.com//</id>
   
   <author>
@@ -14,6 +14,92 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[android内存优化工具篇之MAT]]></title>
+    <link href="http://www.turegeek.com/2016/03/09/android%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96%E5%B7%A5%E5%85%B7%E7%AF%87%E4%B9%8BMAT/"/>
+    <id>http://www.turegeek.com/2016/03/09/android内存优化工具篇之MAT/</id>
+    <published>2016-03-08T16:00:00.000Z</published>
+    <updated>2016-03-09T08:51:05.000Z</updated>
+    <content type="html"><![CDATA[<p>众所周知android应用是基于JAVA语言开发的,JAVA有自己的垃圾回收机制,因此我们不用再释放内存、资源回收方面花费太多的精力,但是JAVA的GC机制是自动进行的,因此在APP开发当中难免会遇到内存泄露,而android分配给每个应用的内存大小是有限制的因此大量的内存泄露积少成多会造成内存溢出(out of memory).所以我们应当重视内存优化问题.接下来我将通过Studio创建一个简单的单例模式内存泄露的例子,使用MAT(Eclipse MemoryAnalyzer)来进行分析.</p>
+<a id="more"></a>
+<h4 id="MAT_u4E0B_u8F7D"><a href="#MAT_u4E0B_u8F7D" class="headerlink" title="MAT下载"></a>MAT下载</h4><p>MAT有对应的eclipse插件,但是大部分开发是在studio下进行的,因此附上MAT应用的下载地址<br><a href="http://www.eclipse.org/mat/" target="_blank" rel="external">MAT的下载地址</a></p>
+<h4 id="u521B_u5EFA_u5185_u5BB9_u6CC4_u9732_u5B9E_u4F8B"><a href="#u521B_u5EFA_u5185_u5BB9_u6CC4_u9732_u5B9E_u4F8B" class="headerlink" title="创建内容泄露实例"></a>创建内容泄露实例</h4><h6 id="u521B_u5EFA_u4E3BActivity"><a href="#u521B_u5EFA_u4E3BActivity" class="headerlink" title="创建主Activity"></a>创建主Activity</h6><pre><code>public class MainMATActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_mat_main);
+        findViewById(R.id.btn_go).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainMATActivity.this, LeakMemoryActivity.class);
+                startActivity(intent);
+        }
+});        
+</code></pre><h6 id="u521B_u5EFA_u5355_u4F8B_u6A21_u5F0F_u7684LeakManager_2C_u5728_u6784_u9020_u51FD_u6570_u91CC_u5F15_u7528Activity_u7684Context"><a href="#u521B_u5EFA_u5355_u4F8B_u6A21_u5F0F_u7684LeakManager_2C_u5728_u6784_u9020_u51FD_u6570_u91CC_u5F15_u7528Activity_u7684Context" class="headerlink" title="创建单例模式的LeakManager,在构造函数里引用Activity的Context"></a>创建单例模式的LeakManager,在构造函数里引用Activity的Context</h6><pre><code>public class LeakManager {
+    private static final String TAG=LeakManager.class.getSimpleName();
+    public Context context;
+    private static LeakManager leakEntity=null;
+
+    public static LeakManager getInstance(Context context) {
+        if (leakEntity == null) {
+            leakEntity = new LeakManager(context);
+        }
+        return leakEntity;
+    }
+
+    private LeakManager(Context context) {
+        this.context = context;
+    }
+    public void doTask(){
+        Log.e(TAG,&quot;哈哈,吃的别想让我吐出来!&quot;);
+    }
+}
+</code></pre><h6 id="u521B_u5EFA_u5185_u5B58_u6CC4_u9732Activity"><a href="#u521B_u5EFA_u5185_u5B58_u6CC4_u9732Activity" class="headerlink" title="创建内存泄露Activity"></a>创建内存泄露Activity</h6><pre><code>public class LeakMemoryActivity extends Activity {
+    private static final String TAG = LeakMemoryActivity.class.getSimpleName();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        TextView textView = new TextView(this);
+        textView.setGravity(Gravity.CENTER);
+        textView.setText(&quot;Leark Memory Activity&quot;);
+        setContentView(textView);
+        LeakManager.getInstance(this).doTask();
+
+    }
+}
+</code></pre><h6 id="u5728_u7B2C_u4E09_u6B65_u4E2D_u6211_u4EEC_u521B_u5EFA_u4E86LeakMemoryActivity_u5E76_u5B8C_u6210LeakManager_u5355_u4F8B_u6A21_u5F0F_u4E0B_u7684_u521D_u59CB_u5316_2C_u4E5F_u5C31_u662F_u8BF4LeakManger_u5DF2_u7ECF_u4FDD_u6301_u4E86LeakMemory_u7684Context_u5F15_u7528-_u63A5_u4E0B_u6765_u542F_u52A8APP"><a href="#u5728_u7B2C_u4E09_u6B65_u4E2D_u6211_u4EEC_u521B_u5EFA_u4E86LeakMemoryActivity_u5E76_u5B8C_u6210LeakManager_u5355_u4F8B_u6A21_u5F0F_u4E0B_u7684_u521D_u59CB_u5316_2C_u4E5F_u5C31_u662F_u8BF4LeakManger_u5DF2_u7ECF_u4FDD_u6301_u4E86LeakMemory_u7684Context_u5F15_u7528-_u63A5_u4E0B_u6765_u542F_u52A8APP" class="headerlink" title="在第三步中我们创建了LeakMemoryActivity并完成LeakManager单例模式下的初始化,也就是说LeakManger已经保持了LeakMemory的Context引用.接下来启动APP."></a>在第三步中我们创建了LeakMemoryActivity并完成LeakManager单例模式下的初始化,也就是说LeakManger已经保持了LeakMemory的Context引用.接下来启动APP.</h6><p><img src="http://ww1.sinaimg.cn/large/005KJayxjw1f1qnemqi2rj30ae0gdglj.jpg" alt=""></p>
+<h4 id="u751F_u6210hprof_u5206_u6790_u6587_u4EF6"><a href="#u751F_u6210hprof_u5206_u6790_u6587_u4EF6" class="headerlink" title="生成hprof分析文件"></a>生成hprof分析文件</h4><h6 id="u6253_u5F00Android_Device_Monitor_u3001_u9009_u4E2D_u9700_u8981_u76D1_u542C_u7684_u5E94_u7528_u7A0B_u5E8F_u3001_u70B9_u51FBupdate_heap"><a href="#u6253_u5F00Android_Device_Monitor_u3001_u9009_u4E2D_u9700_u8981_u76D1_u542C_u7684_u5E94_u7528_u7A0B_u5E8F_u3001_u70B9_u51FBupdate_heap" class="headerlink" title="打开Android Device Monitor、选中需要监听的应用程序、点击update heap"></a>打开Android Device Monitor、选中需要监听的应用程序、点击update heap</h6><p><img src="http://ww2.sinaimg.cn/large/005KJayxjw1f1qmu8wi1mj308g04sjro.jpg" alt=""><br><img src="http://ww3.sinaimg.cn/large/005KJayxjw1f1qmxkpcgyj309609z3yy.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/005KJayxjw1f1qn0snmp0j309404iq37.jpg" alt=""></p>
+<h6 id="u8FD9_u65F6_u5019_u53F3_u8FB9_u663E_u793A_u4E00_u4E2AHeap_u754C_u9762_u5982_u4E0B_2C_u5982_u679C_u6CA1_u6709_u70B9_u51FBWindow-_26gt_3BShow_View-_26gt_3BAndroid-_26gt_3BHeap_uFF0C_u7136_u540E_u70B9_u51FBCause_GC_u5373_u53EF_u51FA_u53D1_u5783_u573E_u56DE_u6536_u3002HeapSize_u8868_u793AAPP_u5806_u5185_u5B58_u5927_u5C0F_uFF0CAllocated_u8868_u793A_u5DF2_u7ECF_u5206_u914D_u7684_u5185_u5B58_u5927_u5C0F"><a href="#u8FD9_u65F6_u5019_u53F3_u8FB9_u663E_u793A_u4E00_u4E2AHeap_u754C_u9762_u5982_u4E0B_2C_u5982_u679C_u6CA1_u6709_u70B9_u51FBWindow-_26gt_3BShow_View-_26gt_3BAndroid-_26gt_3BHeap_uFF0C_u7136_u540E_u70B9_u51FBCause_GC_u5373_u53EF_u51FA_u53D1_u5783_u573E_u56DE_u6536_u3002HeapSize_u8868_u793AAPP_u5806_u5185_u5B58_u5927_u5C0F_uFF0CAllocated_u8868_u793A_u5DF2_u7ECF_u5206_u914D_u7684_u5185_u5B58_u5927_u5C0F" class="headerlink" title="这时候右边显示一个Heap界面如下,如果没有点击Window-&gt;Show View-&gt;Android-&gt;Heap，然后点击Cause GC即可出发垃圾回收。HeapSize表示APP堆内存大小，Allocated表示已经分配的内存大小"></a>这时候右边显示一个Heap界面如下,如果没有点击Window-&gt;Show View-&gt;Android-&gt;Heap，然后点击Cause GC即可出发垃圾回收。HeapSize表示APP堆内存大小，Allocated表示已经分配的内存大小</h6><p><img src="http://ww1.sinaimg.cn/large/005KJayxjw1f1qn8c2qilj30js0e8q65.jpg" alt=""></p>
+<h6 id="u70B9_u51FBMainMATActivity_u6309_u94AE_u8DF3_u8F6C_u5230LeakMemoryActivity_2C_u7136_u540E_u8FD4_u56DE_u7136_u540E_u5728_u8DF3_u8F6C_u3001_u8FD4_u56DE_2C_u968F_u540E_u70B9_u51FBDump_HPROF_file_u751F_u6210hprof_u6587_u4EF6_2C_u5982_u679C_u9879_u76EE_u8F83_u5927_u53EF_u80FD_u4F1A_u6162_u4E00_u4E9B_2C_u7136_u540E_u4FDD_u5B58_u5230_u6307_u5B9A_u4F4D_u7F6E"><a href="#u70B9_u51FBMainMATActivity_u6309_u94AE_u8DF3_u8F6C_u5230LeakMemoryActivity_2C_u7136_u540E_u8FD4_u56DE_u7136_u540E_u5728_u8DF3_u8F6C_u3001_u8FD4_u56DE_2C_u968F_u540E_u70B9_u51FBDump_HPROF_file_u751F_u6210hprof_u6587_u4EF6_2C_u5982_u679C_u9879_u76EE_u8F83_u5927_u53EF_u80FD_u4F1A_u6162_u4E00_u4E9B_2C_u7136_u540E_u4FDD_u5B58_u5230_u6307_u5B9A_u4F4D_u7F6E" class="headerlink" title="点击MainMATActivity按钮跳转到LeakMemoryActivity,然后返回然后在跳转、返回,随后点击Dump HPROF file生成hprof文件,如果项目较大可能会慢一些,然后保存到指定位置"></a>点击MainMATActivity按钮跳转到LeakMemoryActivity,然后返回然后在跳转、返回,随后点击Dump HPROF file生成hprof文件,如果项目较大可能会慢一些,然后保存到指定位置</h6><p><img src="http://ww4.sinaimg.cn/large/005KJayxjw1f1qnhyp7mgj303r036mx5.jpg" alt=""></p>
+<h6 id="u8FD9_u4E2A_u65F6_u5019_u751F_u6210_u7684_u4E00_u822C_u662F_u5305_u540D-hprof_u6587_u4EF6_2C_u8FD9_u4E2A_u6587_u4EF6_u76EE_u524D_u8FD8_u4E0D_u80FD_u88ABMAT_u6253_u5F00_2C_u9700_u8981SDK_u7684_u547D_u4EE4_u8F6C_u6362_u4E00_u4E0B"><a href="#u8FD9_u4E2A_u65F6_u5019_u751F_u6210_u7684_u4E00_u822C_u662F_u5305_u540D-hprof_u6587_u4EF6_2C_u8FD9_u4E2A_u6587_u4EF6_u76EE_u524D_u8FD8_u4E0D_u80FD_u88ABMAT_u6253_u5F00_2C_u9700_u8981SDK_u7684_u547D_u4EE4_u8F6C_u6362_u4E00_u4E0B" class="headerlink" title="这个时候生成的一般是包名.hprof文件,这个文件目前还不能被MAT打开,需要SDK的命令转换一下"></a>这个时候生成的一般是包名.hprof文件,这个文件目前还不能被MAT打开,需要SDK的命令转换一下</h6><pre><code>hprof-conv /Users/.../com.ymy.app.hprof(源文件路径) /Desktop/hprof/out.hprof(转换后的路径)
+</code></pre><h4 id="u4F7F_u7528MAT_u5206_u6790_u5185_u5B58_u4F7F_u7528_u60C5_u51B5"><a href="#u4F7F_u7528MAT_u5206_u6790_u5185_u5B58_u4F7F_u7528_u60C5_u51B5" class="headerlink" title="使用MAT分析内存使用情况"></a>使用MAT分析内存使用情况</h4><h6 id="u6253_u5F00MAT"><a href="#u6253_u5F00MAT" class="headerlink" title="打开MAT"></a>打开MAT</h6><p><img src="http://ww4.sinaimg.cn/large/005KJayxjw1f1qnohrfd0j30qu0extc7.jpg" alt=""></p>
+<h6 id="u9009_u62E9cancle_uFF0C_u70B9_u51FB_Open_a_Heap_Dump_uFF0C_u6253_u5F00_u521A_u624D_u8F6C_u6362_u540E_u7684out-hprof_u6587_u4EF6"><a href="#u9009_u62E9cancle_uFF0C_u70B9_u51FB_Open_a_Heap_Dump_uFF0C_u6253_u5F00_u521A_u624D_u8F6C_u6362_u540E_u7684out-hprof_u6587_u4EF6" class="headerlink" title="选择cancle，点击 Open a Heap Dump，打开刚才转换后的out.hprof文件"></a>选择cancle，点击 Open a Heap Dump，打开刚才转换后的out.hprof文件</h6><p><img src="http://ww4.sinaimg.cn/large/005KJayxjw1f1qnp6557xj30h605hdg7.jpg" alt=""></p>
+<h6 id="u4E4B_u540E_u5C55_u793A_u7684_u9875_u9762"><a href="#u4E4B_u540E_u5C55_u793A_u7684_u9875_u9762" class="headerlink" title="之后展示的页面"></a>之后展示的页面</h6><p><img src="http://ww4.sinaimg.cn/large/005KJayxjw1f1qnrf4b7fj30l70h4gnt.jpg" alt=""></p>
+<h6 id="u70B9_u51FB_u4E0A_u56FE_u5DE6_u4E0B_u89D2_u7684Histogram"><a href="#u70B9_u51FB_u4E0A_u56FE_u5DE6_u4E0B_u89D2_u7684Histogram" class="headerlink" title="点击上图左下角的Histogram"></a>点击上图左下角的Histogram</h6><p><img src="http://ww2.sinaimg.cn/large/005KJayxjw1f1qnt9igwbj30kz0g5793.jpg" alt=""></p>
+<h6 id="u4E0A_u9762_u663E_u793A_u4E86_u5185_u5B58_u4E2D_u6BCF_u4E2A_u5BF9_u8C61_u7684_u540D_u79F0_u3001_u6570_u91CF_u3001_u5927_u5C0F_u7B49_2C_u662F_u4E0D_u662F_u5F00_u7740_u6709_u70B9_u61F5_2C_u522B_u6015_2C_u5728_u5B83_u7684_u7B2C_u4E00_u884C_u652F_u6301_u6B63_u5219_u8FD8_u6709_u6A21_u7CCA_u641C_u7D22_2C_u6211_u5728_u8FD9_u91CC_u8F93_u5165_u5305_u540D_u7684_u5173_u952E_u5B57_u2018ymy_u2019_2C_u7136_u540E_u56DE_u8F66"><a href="#u4E0A_u9762_u663E_u793A_u4E86_u5185_u5B58_u4E2D_u6BCF_u4E2A_u5BF9_u8C61_u7684_u540D_u79F0_u3001_u6570_u91CF_u3001_u5927_u5C0F_u7B49_2C_u662F_u4E0D_u662F_u5F00_u7740_u6709_u70B9_u61F5_2C_u522B_u6015_2C_u5728_u5B83_u7684_u7B2C_u4E00_u884C_u652F_u6301_u6B63_u5219_u8FD8_u6709_u6A21_u7CCA_u641C_u7D22_2C_u6211_u5728_u8FD9_u91CC_u8F93_u5165_u5305_u540D_u7684_u5173_u952E_u5B57_u2018ymy_u2019_2C_u7136_u540E_u56DE_u8F66" class="headerlink" title="上面显示了内存中每个对象的名称、数量、大小等,是不是开着有点懵,别怕,在它的第一行支持正则还有模糊搜索,我在这里输入包名的关键字‘ymy’,然后回车"></a>上面显示了内存中每个对象的名称、数量、大小等,是不是开着有点懵,别怕,在它的第一行支持正则还有模糊搜索,我在这里输入包名的关键字‘ymy’,然后回车</h6><p><img src="http://ww3.sinaimg.cn/large/005KJayxjw1f1qnwljficj30l707smyl.jpg" alt=""></p>
+<h6 id="u8FD9_u91CC_u6211_u4EEC_u5C31_u719F_u6089_u4E86_u5427_u54C8_2C_u4E5F_u8BB8_u6709_u4EBA_u4F1A_u597D_u5947MainMATActivity_241_u4EC0_u4E48_u610F_u601D_2C_u6211_u4EEC_u4E0D_u662F_u5728MainMATActivity_u91CC_u6709_u4E2AsetOnClickListener_u4E8B_u4EF6_u7528_u4E8E_u8DF3_u8F6C_u5230LeakMemoryActivity_u4E48_2COnClickListener_u662F_u4E00_u4E2A_u5185_u90E8_u7C7B_2C_241_u4EE3_u8868MainMATActivity_u7684_u7B2C_u4E00_u4E2A_u5185_u90E8_u7C7B_2C_u6211_u4EEC_u4E3B_u8981_u662F_u5206_u6790LeakMemoryActivity_u5185_u5B58_u6CC4_u9732_u95EE_u9898_2C_u56E0_u6B64_u53F3_u952E_u9009_u4E2D_u5B83_2C_u9009_u62E9listObjects_2C_u8FD9_u91CC_u6709_u4E24_u4E2A_u9009_u9879with_outgoing_references_u4EE3_u8868_u5F53_u524D_u5BF9_u8C61_u5F15_u7528_u7684_u5916_u90E8_u5BF9_u8C61_uFF0Cwith_incoming_references_u8868_u793A_u5F15_u7528_u4E86_u5F53_u524D_u5BF9_u8C61_u7684_u5916_u90E8_u5BF9_u8C61_u3002"><a href="#u8FD9_u91CC_u6211_u4EEC_u5C31_u719F_u6089_u4E86_u5427_u54C8_2C_u4E5F_u8BB8_u6709_u4EBA_u4F1A_u597D_u5947MainMATActivity_241_u4EC0_u4E48_u610F_u601D_2C_u6211_u4EEC_u4E0D_u662F_u5728MainMATActivity_u91CC_u6709_u4E2AsetOnClickListener_u4E8B_u4EF6_u7528_u4E8E_u8DF3_u8F6C_u5230LeakMemoryActivity_u4E48_2COnClickListener_u662F_u4E00_u4E2A_u5185_u90E8_u7C7B_2C_241_u4EE3_u8868MainMATActivity_u7684_u7B2C_u4E00_u4E2A_u5185_u90E8_u7C7B_2C_u6211_u4EEC_u4E3B_u8981_u662F_u5206_u6790LeakMemoryActivity_u5185_u5B58_u6CC4_u9732_u95EE_u9898_2C_u56E0_u6B64_u53F3_u952E_u9009_u4E2D_u5B83_2C_u9009_u62E9listObjects_2C_u8FD9_u91CC_u6709_u4E24_u4E2A_u9009_u9879with_outgoing_references_u4EE3_u8868_u5F53_u524D_u5BF9_u8C61_u5F15_u7528_u7684_u5916_u90E8_u5BF9_u8C61_uFF0Cwith_incoming_references_u8868_u793A_u5F15_u7528_u4E86_u5F53_u524D_u5BF9_u8C61_u7684_u5916_u90E8_u5BF9_u8C61_u3002" class="headerlink" title="这里我们就熟悉了吧哈,也许有人会好奇MainMATActivity$1什么意思,我们不是在MainMATActivity里有个setOnClickListener事件用于跳转到LeakMemoryActivity么,OnClickListener是一个内部类,$1代表MainMATActivity的第一个内部类,我们主要是分析LeakMemoryActivity内存泄露问题,因此右键选中它,选择listObjects,这里有两个选项with outgoing references代表当前对象引用的外部对象，with incoming references表示引用了当前对象的外部对象。"></a>这里我们就熟悉了吧哈,也许有人会好奇MainMATActivity$1什么意思,我们不是在MainMATActivity里有个setOnClickListener事件用于跳转到LeakMemoryActivity么,OnClickListener是一个内部类,$1代表MainMATActivity的第一个内部类,我们主要是分析LeakMemoryActivity内存泄露问题,因此右键选中它,选择listObjects,这里有两个选项with outgoing references代表当前对象引用的外部对象，with incoming references表示引用了当前对象的外部对象。</h6><p><img src="http://ww2.sinaimg.cn/large/005KJayxjw1f1qoqctmlhj30ko083jtc.jpg" alt=""></p>
+<h6 id="u6839_u636E_u4E0A_u9762_u7684_u4EE3_u7801_u6211_u4EEC_u77E5_u9053LeakManager_u4FDD_u6301_u4E86LeakMemoryActivity_context_u7684_u5F15_u7528_2C_u5BFC_u81F4_u65E0_u6CD5_u88AB_u6B63_u5E38_u56DE_u6536_2C_u56E0_u6B64_u6211_u4EEC_u9009_u62E9listobjects_u2013_26gt_3Bwith_incoming_refrence_u9A8C_u8BC1_u4E00_u4E0B"><a href="#u6839_u636E_u4E0A_u9762_u7684_u4EE3_u7801_u6211_u4EEC_u77E5_u9053LeakManager_u4FDD_u6301_u4E86LeakMemoryActivity_context_u7684_u5F15_u7528_2C_u5BFC_u81F4_u65E0_u6CD5_u88AB_u6B63_u5E38_u56DE_u6536_2C_u56E0_u6B64_u6211_u4EEC_u9009_u62E9listobjects_u2013_26gt_3Bwith_incoming_refrence_u9A8C_u8BC1_u4E00_u4E0B" class="headerlink" title="根据上面的代码我们知道LeakManager保持了LeakMemoryActivity context的引用,导致无法被正常回收,因此我们选择listobjects–&gt;with incoming refrence验证一下"></a>根据上面的代码我们知道LeakManager保持了LeakMemoryActivity context的引用,导致无法被正常回收,因此我们选择listobjects–&gt;with incoming refrence验证一下</h6><p><img src="http://ww1.sinaimg.cn/large/005KJayxjw1f1qoy2ez5kj30gk05yacb.jpg" alt=""></p>
+<h6 id="u901A_u8FC7_u8FD9_u4E2A_u6211_u4EEC_u53EF_u4EE5_u770B_u5230LeakMemoryActivity_u7684context_u88ABLeakManger_u7684_u5355_u4F8B_u5BF9_u8C61leakEntity_u5F15_u7528"><a href="#u901A_u8FC7_u8FD9_u4E2A_u6211_u4EEC_u53EF_u4EE5_u770B_u5230LeakMemoryActivity_u7684context_u88ABLeakManger_u7684_u5355_u4F8B_u5BF9_u8C61leakEntity_u5F15_u7528" class="headerlink" title="通过这个我们可以看到LeakMemoryActivity的context被LeakManger的单例对象leakEntity引用"></a>通过这个我们可以看到LeakMemoryActivity的context被LeakManger的单例对象leakEntity引用</h6><h4 id="TIPS"><a href="#TIPS" class="headerlink" title="TIPS"></a>TIPS</h4><h6 id="u6211_u4EEC_u4E5F_u53EF_u4EE5_u901A_u8FC7QQL_u6267_u884C_u67E5_u8BE2_u5F53_u524D_u8FD8_u5728_u5185_u5B58_u4E2D_u7684activity"><a href="#u6211_u4EEC_u4E5F_u53EF_u4EE5_u901A_u8FC7QQL_u6267_u884C_u67E5_u8BE2_u5F53_u524D_u8FD8_u5728_u5185_u5B58_u4E2D_u7684activity" class="headerlink" title="我们也可以通过QQL执行查询当前还在内存中的activity"></a>我们也可以通过QQL执行查询当前还在内存中的activity</h6><ol>
+<li><img src="http://ww2.sinaimg.cn/large/005KJayxjw1f1qp2n00kxj30ai032mxh.jpg" alt=""></li>
+<li><img src="http://ww3.sinaimg.cn/large/005KJayxjw1f1qp3zzjn6j30ig0dh0we.jpg" alt=""></li>
+<li><img src="http://ww1.sinaimg.cn/large/005KJayxjw1f1qp72hrfmj30kv0a677h.jpg" alt=""></li>
+<li><img src="http://ww4.sinaimg.cn/large/005KJayxjw1f1qp7rak93j30kk05bjsp.jpg" alt=""></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>众所周知android应用是基于JAVA语言开发的,JAVA有自己的垃圾回收机制,因此我们不用再释放内存、资源回收方面花费太多的精力,但是JAVA的GC机制是自动进行的,因此在APP开发当中难免会遇到内存泄露,而android分配给每个应用的内存大小是有限制的因此大量的内存泄露积少成多会造成内存溢出(out of memory).所以我们应当重视内存优化问题.接下来我将通过Studio创建一个简单的单例模式内存泄露的例子,使用MAT(Eclipse MemoryAnalyzer)来进行分析.</p>]]>
+    
+    </summary>
+    
+      <category term="内存优化" scheme="http://www.turegeek.com/tags/%E5%86%85%E5%AD%98%E4%BC%98%E5%8C%96/"/>
+    
+      <category term="android" scheme="http://www.turegeek.com/categories/android/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[关于HTTPS的一些基础知识]]></title>
