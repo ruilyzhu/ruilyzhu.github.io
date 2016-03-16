@@ -5,7 +5,7 @@
   <subtitle><![CDATA[reading and Writing]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.turegeek.com//"/>
-  <updated>2016-03-09T10:36:54.000Z</updated>
+  <updated>2016-03-16T09:58:06.000Z</updated>
   <id>http://www.turegeek.com//</id>
   
   <author>
@@ -14,6 +14,53 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[RESTful之API版本控制]]></title>
+    <link href="http://www.turegeek.com/2016/03/16/RESTful%E4%B9%8BAPI%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/"/>
+    <id>http://www.turegeek.com/2016/03/16/RESTful之API版本控制/</id>
+    <published>2016-03-15T16:00:00.000Z</published>
+    <updated>2016-03-16T09:58:06.000Z</updated>
+    <content type="html"><![CDATA[<p>在日常移动端开发中,随着业务需求的不断变化，我们的接口返回的数据就会有各种变动，但由于native语言开发的应用无法动态更新api，在修改接口返回数据改变接口逻辑的同时还要确保旧版本的兼容，因此就用到了接下来要说的API版本控制。</p>
+<a id="more"></a>
+<h4 id="RESTful_u67B6_u6784"><a href="#RESTful_u67B6_u6784" class="headerlink" title="RESTful架构"></a><strong>RESTful架构</strong></h4><p>RESTful全称Representational State Transfer，其架构特性为</p>
+<ol>
+<li>每个url代表某种资源</li>
+<li>资源通过特定的形式展现例如json</li>
+<li>使用http协议的get、post、delete、put等操作服务器资源</li>
+</ol>
+<p>想要具体了解参考<a href="http://www.ruanyifeng.com/blog/2011/09/restful.html" target="_blank" rel="external">理解RESTful架构</a></p>
+<hr>
+<h4 id="u7248_u672C_u63A7_u5236_u65B9_u5F0F"><a href="#u7248_u672C_u63A7_u5236_u65B9_u5F0F" class="headerlink" title="版本控制方式"></a><strong>版本控制方式</strong></h4><ol>
+<li><p><strong>强制使用统一API版本</strong></p>
+<p> 整个项目使用一个API版本,不考虑兼容性,缺点</p>
+</li>
+<li><p><strong>URI中显式添加版本号</strong></p>
+<p> 把版本号嵌入到API中，例如developer.github.com/v3/media/，<br> 访问操作对应版本号下的资源。这种显示的表示版本号的好处是可以很直观的<br> 展示当前api版本号。缺点是违背RESTful架构的原则，理论上一个URI对应服<br> 务器一个特定的资源，添加版本号则会混淆版本和资源的概念，而且会让整个<br> 架构变得混乱，增加日后维护的成本。 还有一种是把版本号作为参数请求api<br> 获取操作对应版本号的资源，例如www.demo.com/list?version=2。</p>
+</li>
+<li><p><strong>添加头信息控制版本</strong></p>
+<p> 在API请求header中添加Accept字段。<br> Accept的作用是客户端指出响应可以接受的媒体类型<br> 如Accept:application/json; version=v2<br> 具体格式也可以参考下面。</p>
+ <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept: application/vnd<span class="class">.xxxx</span>[.version]<span class="class">.param</span>[+json]</span><br></pre></td></tr></table></figure>
+<p>例如Accept: application/vnd.demo.app-v2+json<br><strong>优点：</strong>遵循了REST的原则<br><strong>缺点：</strong>不够直观</p>
+</li>
+</ol>
+<h4 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a><strong>总结</strong></h4><p>通过上述简单的分析,每种版本控制都有不同的优缺点,我们可以选择合适自己的版本控制方式,个人认为小版本的更新可通过把版本号作为参数的方式或者通过accept字段标示版本号的方式判断,大的版本更新则通过URL上添加版本号控制</p>
+<blockquote>
+<p><a href="https://blog.pivotal.io/labs/labs/api-versioning" target="_blank" rel="external">API Versioning</a></p>
+<p><a href="https://developer.github.com/v3/media/" target="_blank" rel="external">Media Types</a></p>
+<p><a href="http://www.django-rest-framework.org/api-guide/versioning/" target="_blank" rel="external">Versioning with REST framework</a></p>
+</blockquote>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>在日常移动端开发中,随着业务需求的不断变化，我们的接口返回的数据就会有各种变动，但由于native语言开发的应用无法动态更新api，在修改接口返回数据改变接口逻辑的同时还要确保旧版本的兼容，因此就用到了接下来要说的API版本控制。</p>]]>
+    
+    </summary>
+    
+      <category term="API版本控制" scheme="http://www.turegeek.com/tags/API%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/"/>
+    
+      <category term="android" scheme="http://www.turegeek.com/categories/android/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[android内存优化工具篇之MAT]]></title>
