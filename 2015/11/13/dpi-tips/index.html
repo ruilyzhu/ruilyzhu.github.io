@@ -72,7 +72,7 @@ When adding support for multiple screens， applications do not work directly wi
 
 When adding support for multiple screens， applications do not work directly with resolution">
 <meta property="og:image" content="http://img1.tbcdn.cn/L1/461/1/7d691bde9a6f414a5f93082b0312c1589289494d">
-<meta property="og:updated_time" content="2016-03-17T10:37:01.000Z">
+<meta property="og:updated_time" content="2016-03-17T11:17:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于dpi、dp与sp的解释与适配">
 <meta name="twitter:description" content="做android开发还有面试的时候经验会遇到屏幕适配问题，Android由于机型太多，所以导致屏幕尺寸还有分辨率多样化.接下来讲解下DP、DPI、SP的概念，有些不对的地方欢迎指正
@@ -332,14 +332,13 @@ MOTO X = 0.062...
 </code></pre><p>通过上述我们可以得出一个结论dp可以保证所有设备大小的统一</p>
 <h4 id="u5047_u5982_u9879_u76EE_u91CC_u53EA_u63D0_u4F9B_u4E00_u5957_u5207_u56FE"><a href="#u5047_u5982_u9879_u76EE_u91CC_u53EA_u63D0_u4F9B_u4E00_u5957_u5207_u56FE" class="headerlink" title="假如项目里只提供一套切图"></a>假如项目里只提供一套切图</h4><p>在高DPI下图会被放大，低DPI下图会被缩小。</p>
 <h3 id="u4EC0_u4E48_u662FSP"><a href="#u4EC0_u4E48_u662FSP" class="headerlink" title="什么是SP"></a>什么是SP</h3><p>用于设置字体大小，因为手机可以设置大中小字体调整字体大小，所以特地设置的单位</p>
-<h3 id="TIPS_u4E4B_u5173_u4E8Elauncher_u56FE_u6807"><a href="#TIPS_u4E4B_u5173_u4E8Elauncher_u56FE_u6807" class="headerlink" title="TIPS之关于launcher图标"></a>TIPS之关于launcher图标</h3><p>我们现在在studio新建项目的时候会发现在res底下多出一个mipmap的目录里面存放了APP的launcher图标，有人会疑惑有drawable不就行了为什么多了个这个文件夹，通过查官方文档大概了解了下，大概意思是部分设备会将launcher图标放大百分之25，这样会造成图标显示效果不够好，把图标放在mipmap目录下就会避免在不同的DPI下被删掉，这样android系统就可以在mipmap文件夹底下选择最优的Launcher icon显示在homescreen上</p>
-<pre><code>Some devices scale-up the launcher icon by as much as 25%. For example, if your highest density launcher icon image is already extra-extra-high-density, the scaling process will make it appear less crisp. So you should provide a higher density launcher icon in the mipmap-xxxhdpi directory, which the system uses instead of scaling up a smaller version of the icon.
-
-Different home screen launcher apps on different devices show app launcher icons at various resolutions. When app resource optimization techniques remove resources for unused screen densities, launcher icons can wind up looking fuzzy because the launcher app has to upscale a lower-resolution icon for display. To avoid these display issues, apps should use the mipmap/ resource folders for launcher icons. The Android system preserves these resources regardless of density stripping, and ensures that launcher apps can pick icons with the best resolution for display.
-
-
-Make sure launcher apps show a high-resolution icon for your app by moving all densities of your launcher icons to density-specific res/mipmap/ folders (for example res/mipmap-mdpi/ and res/mipmap-xxxhdpi/). The mipmap/ folders replace the drawable/ folders for launcher icons. For xxhpdi launcher icons, be sure to add the higher resolution xxxhdpi versions of the icons to enhance the visual experience of the icons on higher resolution devices.
-</code></pre><h3 id="u4E0D_u540C_u5C4F_u5E55_u5BC6_u5EA6_u7684_u53C2_u7167_u56FE"><a href="#u4E0D_u540C_u5C4F_u5E55_u5BC6_u5EA6_u7684_u53C2_u7167_u56FE" class="headerlink" title="不同屏幕密度的参照图"></a>不同屏幕密度的参照图</h3><p><img src="http://img1.tbcdn.cn/L1/461/1/7d691bde9a6f414a5f93082b0312c1589289494d" alt="参考了简书的某篇文章附链接"></p>
+<h3 id="TIPS_u4E4B_u5173_u4E8Elauncher_u56FE_u6807"><a href="#TIPS_u4E4B_u5173_u4E8Elauncher_u56FE_u6807" class="headerlink" title="TIPS之关于launcher图标"></a>TIPS之关于launcher图标</h3><p>我们现在在studio新建项目的时候会发现在res底下多出一个mipmap的目录里面存放了APP的launcher图标，有人会疑惑有drawable不就行了为什么多了个这个文件夹，通过查官方文档大概了解了下，大概意思是部分设备会将launcher图标放大百分之25，这样会造成图标显示效果不够好，把图标放在mipmap目录下就会避免在不同的DPI下被删掉，这样android系统就可以在mipmap文件夹底下选择最优的Launcher icon显示在homescreen上。</p>
+<blockquote>
+<p>Some devices scale-up the launcher icon by as much as 25%. For example, if your highest density launcher icon image is already extra-extra-high-density, the scaling process will make it appear less crisp. So you should provide a higher density launcher icon in the mipmap-xxxhdpi directory, which the system uses instead of scaling up a smaller version of the icon.</p>
+<p>Different home screen launcher apps on different devices show app launcher icons at various resolutions. When app resource optimization techniques remove resources for unused screen densities, launcher icons can wind up looking fuzzy because the launcher app has to upscale a lower-resolution icon for display. To avoid these display issues, apps should use the mipmap/ resource folders for launcher icons. The Android system preserves these resources regardless of density stripping, and ensures that launcher apps can pick icons with the best resolution for display.</p>
+<p>Make sure launcher apps show a high-resolution icon for your app by moving all densities of your launcher icons to density-specific res/mipmap/ folders (for example res/mipmap-mdpi/ and res/mipmap-xxxhdpi/). The mipmap/ folders replace the drawable/ folders for launcher icons. For xxhpdi launcher icons, be sure to add the higher resolution xxxhdpi versions of the icons to enhance the visual experience of the icons on higher resolution devices.</p>
+</blockquote>
+<h3 id="u4E0D_u540C_u5C4F_u5E55_u5BC6_u5EA6_u7684_u53C2_u7167_u56FE"><a href="#u4E0D_u540C_u5C4F_u5E55_u5BC6_u5EA6_u7684_u53C2_u7167_u56FE" class="headerlink" title="不同屏幕密度的参照图"></a>不同屏幕密度的参照图</h3><p><img src="http://img1.tbcdn.cn/L1/461/1/7d691bde9a6f414a5f93082b0312c1589289494d" alt="参考了简书的某篇文章附链接"></p>
 <blockquote>
 <p><a href="http://www.jianshu.com/p/913943d25829" target="_blank" rel="external">http://www.jianshu.com/p/913943d25829</a></p>
 </blockquote>
