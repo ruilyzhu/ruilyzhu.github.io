@@ -41,7 +41,7 @@
 <link href="/css/main.css?v=0.5.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="HTTPS," />
+  <meta name="keywords" content="API版本控制," />
 
 
 
@@ -59,16 +59,16 @@
 
 
 
-<meta name="description" content="由于通过Http协议传输的数据都是未加密的明文传输，这样会引起第三方伪造客户端与服务端通信、篡改请求数据、获取接口数据内容，由于http传输敏感数据的不安全性，因此在http协议的基础上通过SSL/TLS对传输数据进行加密。">
+<meta name="description" content="在日常移动端开发中,随着业务需求的不断变化，我们的接口返回的数据就会有各种变动，但由于native语言开发的应用无法动态更新api，在修改接口返回数据改变接口逻辑的同时还要确保旧版本的兼容，因此就用到了接下来要说的API版本控制。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于HTTPS的一些基础知识">
-<meta property="og:url" content="http://www.turegeek.com/2016/04/27/关于https的一些基础知识/index.html">
+<meta property="og:title" content="RESTful之API版本控制">
+<meta property="og:url" content="http://www.turegeek.com/2016/03/16/api_version/index.html">
 <meta property="og:site_name" content="Ruily blog">
-<meta property="og:description" content="由于通过Http协议传输的数据都是未加密的明文传输，这样会引起第三方伪造客户端与服务端通信、篡改请求数据、获取接口数据内容，由于http传输敏感数据的不安全性，因此在http协议的基础上通过SSL/TLS对传输数据进行加密。">
-<meta property="og:updated_time" content="2016-04-27T11:08:27.000Z">
+<meta property="og:description" content="在日常移动端开发中,随着业务需求的不断变化，我们的接口返回的数据就会有各种变动，但由于native语言开发的应用无法动态更新api，在修改接口返回数据改变接口逻辑的同时还要确保旧版本的兼容，因此就用到了接下来要说的API版本控制。">
+<meta property="og:updated_time" content="2016-03-16T09:58:06.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于HTTPS的一些基础知识">
-<meta name="twitter:description" content="由于通过Http协议传输的数据都是未加密的明文传输，这样会引起第三方伪造客户端与服务端通信、篡改请求数据、获取接口数据内容，由于http传输敏感数据的不安全性，因此在http协议的基础上通过SSL/TLS对传输数据进行加密。">
+<meta name="twitter:title" content="RESTful之API版本控制">
+<meta name="twitter:description" content="在日常移动端开发中,随着业务需求的不断变化，我们的接口返回的数据就会有各种变动，但由于native语言开发的应用无法动态更新api，在修改接口返回数据改变接口逻辑的同时还要确保旧版本的兼容，因此就用到了接下来要说的API版本控制。">
 
 
 
@@ -86,7 +86,7 @@
   };
 </script>
 
-  <title> 关于HTTPS的一些基础知识 | Ruily blog </title>
+  <title> RESTful之API版本控制 | Ruily blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -236,7 +236,7 @@
             
             
               
-                关于HTTPS的一些基础知识
+                RESTful之API版本控制
               
             
           </h1>
@@ -248,8 +248,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-27T00:00:00+08:00" content="2016-04-27">
-              2016-04-27
+            <time itemprop="dateCreated" datetime="2016-03-16T00:00:00+08:00" content="2016-03-16">
+              2016-03-16
             </time>
           </span>
 
@@ -278,8 +278,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/04/27/关于https的一些基础知识/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/27/关于https的一些基础知识/" itemprop="commentsCount"></span>
+                <a href="/2016/03/16/api_version/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/16/api_version/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -300,49 +300,35 @@
       
 
       
-        <p>由于通过Http协议传输的数据都是未加密的明文传输，这样会引起第三方伪造客户端与服务端通信、篡改请求数据、获取接口数据内容，由于http传输敏感数据的不安全性，因此在http协议的基础上通过SSL/TLS对传输数据进行加密。</p>
+        <p>在日常移动端开发中,随着业务需求的不断变化，我们的接口返回的数据就会有各种变动，但由于native语言开发的应用无法动态更新api，在修改接口返回数据改变接口逻辑的同时还要确保旧版本的兼容，因此就用到了接下来要说的API版本控制。</p>
 <a id="more"></a>
-<h4 id="u5173_u4E8E_u52A0_u5BC6_u548C_u7B7E_u540D_u7684_u4E00_u4E9B_u57FA_u7840_u77E5_u8BC6"><a href="#u5173_u4E8E_u52A0_u5BC6_u548C_u7B7E_u540D_u7684_u4E00_u4E9B_u57FA_u7840_u77E5_u8BC6" class="headerlink" title="关于加密和签名的一些基础知识"></a>关于加密和签名的一些基础知识</h4><h5 id="u5BC6_u94A5"><a href="#u5BC6_u94A5" class="headerlink" title="密钥"></a>密钥</h5><p>通常是一组数字或者字符串</p>
-<h5 id="u975E_u5BF9_u79F0_u52A0_u5BC6_u7B97_u6CD5"><a href="#u975E_u5BF9_u79F0_u52A0_u5BC6_u7B97_u6CD5" class="headerlink" title="非对称加密算法"></a>非对称加密算法</h5><p>指的是加密和解密采用不同的密钥的算法如RSA，DSA/DSS。RSA算法包括公钥和私钥，公钥加密的内容只能<br>由私钥解密，私钥加密的内容只能由公钥解密。公钥是公开的，私钥是私有的。</p>
-<h5 id="u5BF9_u79F0_u52A0_u5BC6_u7B97_u6CD5"><a href="#u5BF9_u79F0_u52A0_u5BC6_u7B97_u6CD5" class="headerlink" title="对称加密算法"></a>对称加密算法</h5><p>指的是加密解密采用相同的密钥如AES、RC4、3DES，加解密速度比非对称快。</p>
-<h5 id="HASH_u7B97_u6CD5"><a href="#HASH_u7B97_u6CD5" class="headerlink" title="HASH算法"></a>HASH算法</h5><p>针对通信内容的hash值的算法如MD5、SHA1、SHA256，用于确保内容的完整性</p>
-<h5 id="u7B7E_u540D"><a href="#u7B7E_u540D" class="headerlink" title="签名"></a>签名</h5><p>通过Hash算法计算消息的Hash值并使用签名算法加密和消息一起发出去，接收端收到消息后在通过相同的hash算法计算hash值然后解密传过来的Hash值如果和计算的Hash值一致则说明消息没有被修改过。</p>
-<h4 id="u6570_u5B57_u8BC1_u4E66"><a href="#u6570_u5B57_u8BC1_u4E66" class="headerlink" title="数字证书"></a>数字证书</h4><p>https需要证书去验证服务器的合法性，也有的安全性比较高的应用采用双向证书认证。Https证书分为CA机构颁发的证书以及自签名的证书也就是自己生成的证书，12306网站就是自签名证书。<br>证书内容大概包括一下几个主要的内容:</p>
-<ul>
-<li>Issuer证书的颁发机构如CA</li>
-<li>公钥，一般用于对消息加密</li>
-<li>Valid from/to 有效期</li>
-<li>Subject 证书持有人</li>
-<li>Signature algorithm 签名使用的算法</li>
-<li>指纹以及指纹算法(hash算法) 被证书机构的私钥通过上面的签名算法加密过的值</li>
-</ul>
-<h4 id="u8BC1_u4E66_u7684_u9A8C_u8BC1_u8FC7_u7A0B"><a href="#u8BC1_u4E66_u7684_u9A8C_u8BC1_u8FC7_u7A0B" class="headerlink" title="证书的验证过程"></a>证书的验证过程</h4><p>操作系统里一般已经安装了权威证书颁发机构的数字证书，这个证书里面有这个机构的公钥，而它自己持有私钥，当客户端获取到服务端的数字证书的时候为了验证完整性合法性，读取服务端证书的颁发机构名如CA，找到操作系统里对应颁发机构CA的数字证书的公钥，服务端证书里面的指纹以及指纹算法就是CA使用它自己的数字证书私钥使用签名算法加密的，私钥加密的数据可以使用公钥解密，因此通过CA证书的公钥解密得到指纹以及指纹算法，指纹算法是一种hash算法，指纹是证书颁发机构CA通过指纹算法计算的hash值，客户端通过指纹算法计算数字证书的hash值与CA计算的hash对比如果一样则证书完整。</p>
-<h4 id="HTTPS_u5DE5_u4F5C_u539F_u7406"><a href="#HTTPS_u5DE5_u4F5C_u539F_u7406" class="headerlink" title="HTTPS工作原理"></a>HTTPS工作原理</h4><p>Https在传输数据之前与服务器进行一次握手首先告诉服务器我这边支持SSL的版本、可以使用的加密方法，你服务器把证书发过来我客户端来验验，然后服务器回应奥你这个SSL版本我支持，加密算法我们就用XXX，证书信息也给你，客户端收到回应后验了验证书，恩没问题，奥用这个加密算法，成！随后告诉服务器那咱既然商量好了 我客户端下面发的数据就用我们约定好的算法加密，你到时候解密就成了，具体如下。</p>
-<h5 id="u5BA2_u6237_u7AEF"><a href="#u5BA2_u6237_u7AEF" class="headerlink" title="客户端"></a>客户端</h5><ul>
-<li>生成随机数A</li>
-<li>支持的SSL/TLS版本号</li>
-<li>支持的加密算法(对称、非对称)、Hash算法</li>
-</ul>
-<h5 id="u670D_u52A1_u5668"><a href="#u670D_u52A1_u5668" class="headerlink" title="服务器"></a>服务器</h5><ul>
-<li>确认SSL/TLS版本</li>
-<li>生成随机数B</li>
-<li>确认加密算法、Hash算法</li>
-<li>服务器证书</li>
-</ul>
-<h5 id="u5BA2_u6237_u7AEF-1"><a href="#u5BA2_u6237_u7AEF-1" class="headerlink" title="客户端"></a>客户端</h5><ul>
-<li>验证证书</li>
-<li>获取随机数B，生成随机数C，使用证书里的公钥加密C，使用约定好的HASH算法计算握手信息并加密</li>
-<li>客户端握手阶段结束，以后的信息将按约定好的规则加密发送</li>
-</ul>
-<h5 id="u670D_u52A1_u5668-1"><a href="#u670D_u52A1_u5668-1" class="headerlink" title="服务器"></a>服务器</h5><ul>
-<li>使用自己的私钥解密出密码C，解密客户端发送的握手信息验证Hash值，这个时候服务端客户端共同拥有这三个随机数，这三个随机数就是正式通信使用的密钥，因为服务端和客户端使用同一密钥加解密，所以使用的算法是对称算法优点是速度快。</li>
-<li>使用密码加密握手信息并响应给客户端告知服务器握手阶段结束，下面开始使用约定好的解密规则通信</li>
-</ul>
-<h5 id="u5BA2_u6237_u7AEF-2"><a href="#u5BA2_u6237_u7AEF-2" class="headerlink" title="客户端"></a>客户端</h5><p>解密并验证HASH值，握手结束，开始使用加密的数据进行http通信</p>
-<h5 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h5><ul>
-<li>在SSL握手的过程中总共产生了三个随机数，使用来保证密钥产生的随机性。最后也是通过这三个随机数生成一个对称密钥用于HTTP通信中对数据的加密解密、验证数据的完整性等。</li>
-<li>Https中使用非对称算法加密正式通信之前随机数等数据，使用对称算法加密正式通信内容</li>
-</ul>
+<h4 id="RESTful_u67B6_u6784"><a href="#RESTful_u67B6_u6784" class="headerlink" title="RESTful架构"></a><strong>RESTful架构</strong></h4><p>RESTful全称Representational State Transfer，其架构特性为</p>
+<ol>
+<li>每个url代表某种资源</li>
+<li>资源通过特定的形式展现例如json</li>
+<li>使用http协议的get、post、delete、put等操作服务器资源</li>
+</ol>
+<p>想要具体了解参考<a href="http://www.ruanyifeng.com/blog/2011/09/restful.html" target="_blank" rel="external">理解RESTful架构</a></p>
+<hr>
+<h4 id="u7248_u672C_u63A7_u5236_u65B9_u5F0F"><a href="#u7248_u672C_u63A7_u5236_u65B9_u5F0F" class="headerlink" title="版本控制方式"></a><strong>版本控制方式</strong></h4><ol>
+<li><p><strong>强制使用统一API版本</strong></p>
+<p> 整个项目使用一个API版本,不考虑兼容性,缺点</p>
+</li>
+<li><p><strong>URI中显式添加版本号</strong></p>
+<p> 把版本号嵌入到API中，例如developer.github.com/v3/media/，<br> 访问操作对应版本号下的资源。这种显示的表示版本号的好处是可以很直观的<br> 展示当前api版本号。缺点是违背RESTful架构的原则，理论上一个URI对应服<br> 务器一个特定的资源，添加版本号则会混淆版本和资源的概念，而且会让整个<br> 架构变得混乱，增加日后维护的成本。 还有一种是把版本号作为参数请求api<br> 获取操作对应版本号的资源，例如www.demo.com/list?version=2。</p>
+</li>
+<li><p><strong>添加头信息控制版本</strong></p>
+<p> 在API请求header中添加Accept字段。<br> Accept的作用是客户端指出响应可以接受的媒体类型<br> 如Accept:application/json; version=v2<br> 具体格式也可以参考下面。</p>
+ <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Accept: application/vnd<span class="class">.xxxx</span>[.version]<span class="class">.param</span>[+json]</span><br></pre></td></tr></table></figure>
+<p>例如Accept: application/vnd.demo.app-v2+json<br><strong>优点：</strong>遵循了REST的原则<br><strong>缺点：</strong>不够直观</p>
+</li>
+</ol>
+<h4 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a><strong>总结</strong></h4><p>通过上述简单的分析,每种版本控制都有不同的优缺点,我们可以选择合适自己的版本控制方式,个人认为小版本的更新可通过把版本号作为参数的方式或者通过accept字段标示版本号的方式判断,大的版本更新则通过URL上添加版本号控制</p>
+<blockquote>
+<p><a href="https://blog.pivotal.io/labs/labs/api-versioning" target="_blank" rel="external">API Versioning</a></p>
+<p><a href="https://developer.github.com/v3/media/" target="_blank" rel="external">Media Types</a></p>
+<p><a href="http://www.django-rest-framework.org/api-guide/versioning/" target="_blank" rel="external">Versioning with REST framework</a></p>
+</blockquote>
 
       
     </div>
@@ -351,7 +337,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/HTTPS/" rel="tag">#HTTPS</a>
+            <a href="/tags/API版本控制/" rel="tag">#API版本控制</a>
           
         </div>
       
@@ -360,13 +346,17 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/16/RESTful之API版本控制/" rel="next" title="RESTful之API版本控制">
-                <i class="fa fa-chevron-left"></i> RESTful之API版本控制
+              <a href="/2016/03/09/mat/" rel="next" title="android内存优化工具篇之MAT">
+                <i class="fa fa-chevron-left"></i> android内存优化工具篇之MAT
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/27/about_https/" rel="prev" title="关于HTTPS的一些基础知识">
+                关于HTTPS的一些基础知识 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -392,8 +382,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2016/04/27/关于https的一些基础知识/"
-           data-title="关于HTTPS的一些基础知识" data-url="http://www.turegeek.com/2016/04/27/关于https的一些基础知识/">
+      <div class="ds-thread" data-thread-key="2016/03/16/api_version/"
+           data-title="RESTful之API版本控制" data-url="http://www.turegeek.com/2016/03/16/api_version/">
       </div>
     
   </div>
@@ -491,7 +481,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#u5173_u4E8E_u52A0_u5BC6_u548C_u7B7E_u540D_u7684_u4E00_u4E9B_u57FA_u7840_u77E5_u8BC6"><span class="nav-number">1.</span> <span class="nav-text">关于加密和签名的一些基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#u5BC6_u94A5"><span class="nav-number">1.1.</span> <span class="nav-text">密钥</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u975E_u5BF9_u79F0_u52A0_u5BC6_u7B97_u6CD5"><span class="nav-number">1.2.</span> <span class="nav-text">非对称加密算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u5BF9_u79F0_u52A0_u5BC6_u7B97_u6CD5"><span class="nav-number">1.3.</span> <span class="nav-text">对称加密算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#HASH_u7B97_u6CD5"><span class="nav-number">1.4.</span> <span class="nav-text">HASH算法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u7B7E_u540D"><span class="nav-number">1.5.</span> <span class="nav-text">签名</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u6570_u5B57_u8BC1_u4E66"><span class="nav-number">2.</span> <span class="nav-text">数字证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u8BC1_u4E66_u7684_u9A8C_u8BC1_u8FC7_u7A0B"><span class="nav-number">3.</span> <span class="nav-text">证书的验证过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTPS_u5DE5_u4F5C_u539F_u7406"><span class="nav-number">4.</span> <span class="nav-text">HTTPS工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#u5BA2_u6237_u7AEF"><span class="nav-number">4.1.</span> <span class="nav-text">客户端</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u670D_u52A1_u5668"><span class="nav-number">4.2.</span> <span class="nav-text">服务器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u5BA2_u6237_u7AEF-1"><span class="nav-number">4.3.</span> <span class="nav-text">客户端</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u670D_u52A1_u5668-1"><span class="nav-number">4.4.</span> <span class="nav-text">服务器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#u5BA2_u6237_u7AEF-2"><span class="nav-number">4.5.</span> <span class="nav-text">客户端</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Tips"><span class="nav-number">4.6.</span> <span class="nav-text">Tips</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#RESTful_u67B6_u6784"><span class="nav-number">1.</span> <span class="nav-text">RESTful架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u7248_u672C_u63A7_u5236_u65B9_u5F0F"><span class="nav-number">2.</span> <span class="nav-text">版本控制方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u603B_u7ED3"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
