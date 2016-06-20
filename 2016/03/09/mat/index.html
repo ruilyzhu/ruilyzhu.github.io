@@ -84,7 +84,7 @@
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/005KJayxjw1f1qp3zzjn6j30ig0dh0we.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/005KJayxjw1f1qp72hrfmj30kv0a677h.jpg">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/005KJayxjw1f1qp7rak93j30kk05bjsp.jpg">
-<meta property="og:updated_time" content="2016-03-09T10:36:54.000Z">
+<meta property="og:updated_time" content="2016-06-17T07:55:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="android内存优化工具篇之MAT">
 <meta name="twitter:description" content="众所周知android应用是基于JAVA语言开发的,JAVA有自己的垃圾回收机制,因此我们不用再释放内存、资源回收方面花费太多的精力,但是JAVA的GC(Garbage Collection)机制是自动进行的,因此在APP开发当中难免会遇到内存泄露,而android分配给每个应用的内存大小是有限制的因此大量的内存泄露积少成多会造成内存溢出(out of memory).所以我们应当重视内存优化问题">
@@ -321,8 +321,8 @@
       
         <p>众所周知android应用是基于JAVA语言开发的,JAVA有自己的垃圾回收机制,因此我们不用再释放内存、资源回收方面花费太多的精力,但是JAVA的GC(Garbage Collection)机制是自动进行的,因此在APP开发当中难免会遇到内存泄露,而android分配给每个应用的内存大小是有限制的因此大量的内存泄露积少成多会造成内存溢出(out of memory).所以我们应当重视内存优化问题.接下来我将通过Studio创建一个简单的单例模式内存泄露的例子,使用MAT(Eclipse MemoryAnalyzer)来进行分析.</p>
 <a id="more"></a>
-<h5 id="u6808"><a href="#u6808" class="headerlink" title="栈"></a>栈</h5><p>存放基本数据类型以及对象的引用地址(指向堆里具体的对象),不负责存储对象</p>
-<h5 id="u5806"><a href="#u5806" class="headerlink" title="堆"></a>堆</h5><p>为对象开辟内存空间，保存对象，GC负责管理这里的内存回收</p>
+<h5 id="u6808"><a href="#u6808" class="headerlink" title="栈"></a>栈</h5><p>存放基本数据类型以及对象的引用地址(指向堆里具体的对象),存储局部变量和方法调用,不负责存储对象,每一个<br>线程都对应一个栈内存,栈内存只对其所属线程可见，如果没有可用的栈内存会抛出StackOverFlowError异常.</p>
+<h5 id="u5806"><a href="#u5806" class="headerlink" title="堆"></a>堆</h5><p>为对象开辟内存空间，保存对象，GC负责管理这里的内存回收，对所属进程全部可见，没有可用的堆内容则会抛出OutOfMemoryError</p>
 <h5 id="u4EC0_u4E48_u662F_u5185_u5B58_u6CC4_u9732"><a href="#u4EC0_u4E48_u662F_u5185_u5B58_u6CC4_u9732" class="headerlink" title="什么是内存泄露"></a>什么是内存泄露</h5><p>内存泄露表示当前对象被大于其本身生命周期的其他对象持有引用,而GC只会去回收堆内存中没有被引用的的对象,这样导致内存中持有这些实例不能被回收,然后慢慢积累越来越多造成卡顿甚至内存溢出</p>
 <h4 id="MAT_u4E0B_u8F7D"><a href="#MAT_u4E0B_u8F7D" class="headerlink" title="MAT下载"></a>MAT下载</h4><p>MAT有对应的eclipse插件,但是大部分开发是在studio下进行的,因此附上MAT应用的下载地址<br><a href="http://www.eclipse.org/mat/" target="_blank" rel="external">MAT的下载地址</a></p>
 <h4 id="u521B_u5EFA_u5185_u5BB9_u6CC4_u9732_u5B9E_u4F8B"><a href="#u521B_u5EFA_u5185_u5BB9_u6CC4_u9732_u5B9E_u4F8B" class="headerlink" title="创建内容泄露实例"></a>创建内容泄露实例</h4><h6 id="u521B_u5EFA_u4E3BActivity"><a href="#u521B_u5EFA_u4E3BActivity" class="headerlink" title="创建主Activity"></a>创建主Activity</h6><pre><code>public class MainMATActivity extends AppCompatActivity {
@@ -494,7 +494,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -508,7 +508,7 @@
 
           <div class="site-state-item site-state-tags">
             <a href="/tags">
-              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-count">6</span>
               <span class="site-state-item-name">标签</span>
               </a>
           </div>

@@ -62,7 +62,7 @@
 <meta name="description" content="Ruily&apos;s blog | Android | JAVA">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Ruily blog">
-<meta property="og:url" content="http://www.turegeek.com/archives/2016/03/index.html">
+<meta property="og:url" content="http://www.turegeek.com/page/2/index.html">
 <meta property="og:site_name" content="Ruily blog">
 <meta property="og:description" content="Ruily&apos;s blog | Android | JAVA">
 <meta name="twitter:card" content="summary">
@@ -85,7 +85,7 @@
   };
 </script>
 
-  <title> 归档 | Ruily blog </title>
+  <title> Ruily blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -104,7 +104,9 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  page-archive  ">
+  <div class="container one-collumn sidebar-position-left 
+   page-home 
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -213,96 +215,150 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <section id="posts" class="posts-collapse">
-    <span class="archive-move-on"></span>
-
-    <span class="archive-page-counter">
-      
-      
-      
-        
-      
-      LOL! 目前共计 11 篇日志。 keep going on。
-    </span>
+  <section id="posts" class="posts-expand">
 
     
 
-      
-      
+    
+    
+
+    
       
 
-      
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
         
-        <div class="collection-title">
-          <h2 class="archive-year motion-element" id="archive-year-2016">2016</h2>
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/11/12/hugo-help/" itemprop="url">
+                  使用Hugo搭建个人博客
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-11-12T00:00:00+08:00" content="2015-11-12">
+              2015-11-12
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/11/12/hugo-help/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/12/hugo-help/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
         </div>
-      
-      
-
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
-        
-            <a class="post-title-link" href="/2016/03/16/api_version/" itemprop="url">
-              
-                <span itemprop="name">RESTful之API版本控制</span>
-              
-            </a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-03-16T00:00:00+08:00"
-              content="2016-03-16" >
-          03-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
+      </header>
     
 
-      
-      
-      
+
+    <div class="post-body" itemprop="articleBody">
 
       
       
 
       
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h1 class="post-title">
         
-            <a class="post-title-link" href="/2016/03/09/mat/" itemprop="url">
-              
-                <span itemprop="name">android内存优化工具篇之MAT</span>
-              
-            </a>
+          
+            <blockquote>
+<p><a href="/www.gohugo.org">参考了Hugo中文文档</a>、<a href="http://blog.coderzh.com/2015/08/29/hugo/" target="_blank" rel="external">CoderZH Blog</a></p>
+</blockquote>
+<h3 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h3><p>Hugo是一个静态网站生成器,使用起来非常方便简单.个人认为程序员必须要有一个自己的博客,不只是以后找工作有加分,最重要的是对自己的知识点、经验、爬坑的总结,理解是一回事,能写出来让大家理解又是另外一回事.</p>
+<h3 id="u5B89_u88C5Hugo"><a href="#u5B89_u88C5Hugo" class="headerlink" title="安装Hugo"></a>安装Hugo</h3><p>本文章是针对mac系统的配置,其他系统仅供参考</p>
+<ol>
+<li><a href="https://github.com/spf13/hugo/releases" target="_blank" rel="external">Hugo Releases</a>下载对应系统的二进制文件:<a href="https://github.com/spf13/hugo/releases/download/v0.14/hugo_0.14_darwin_amd64.zip" target="_blank" rel="external">hugo_0.14_darwin_amd64.zip</a><br></li>
+<li>下载完解压将文件重命名为hugo<br></li>
+<li>然后放入/usr/local/bin目录下</li>
+</ol>
+<h3 id="u4F7F_u7528Hugo_u751F_u6210_u81EA_u5DF1_u7684_u7AD9_u70B9"><a href="#u4F7F_u7528Hugo_u751F_u6210_u81EA_u5DF1_u7684_u7AD9_u70B9" class="headerlink" title="使用Hugo生成自己的站点"></a>使用Hugo生成自己的站点</h3><h4 id="u521B_u5EFA_u4E00_u4E2A_u7AD9_u70B9_u76EE_u5F55_u5982/_u2026/_u2026/Documents/blog"><a href="#u521B_u5EFA_u4E00_u4E2A_u7AD9_u70B9_u76EE_u5F55_u5982/_u2026/_u2026/Documents/blog" class="headerlink" title="创建一个站点目录如/…/…/Documents/blog"></a>创建一个站点目录如/…/…/Documents/blog</h4><p> <code>$ hugo new site.../Documents/blog</code></p>
+<h4 id="u7136_u540EHugo_u4F1A_u5728blog_u76EE_u5F55_u4E0B_u521B_u5EFA_u4E00_u4E2A_u7AD9_u70B9_u76EE_u5F55_u7ED3_u6784_3A"><a href="#u7136_u540EHugo_u4F1A_u5728blog_u76EE_u5F55_u4E0B_u521B_u5EFA_u4E00_u4E2A_u7AD9_u70B9_u76EE_u5F55_u7ED3_u6784_3A" class="headerlink" title="然后Hugo会在blog目录下创建一个站点目录结构:"></a>然后Hugo会在blog目录下创建一个站点目录结构:</h4><pre><code>▸ archetypes/
+▸ content/   //存放markdown文章
+▸ layouts/   //存放网站模板文件
+▸ static/    //存放静态图片
+config.toml   //网站配置文件(可以配置baseurl、title、theme等)
+</code></pre><h4 id="cd_u5230blog_u76EE_u5F55_3A"><a href="#cd_u5230blog_u76EE_u5F55_3A" class="headerlink" title="cd到blog目录:"></a>cd到blog目录:</h4><p><code>$ cd ../../Documents/blog</code></p>
+<h4 id="u521B_u5EFA_u4E00_u4E2A_u535A_u6587_28_u6700_u597D_u653E_u5728content/post/_u76EE_u5F55_u4E0B_29_3A"><a href="#u521B_u5EFA_u4E00_u4E2A_u535A_u6587_28_u6700_u597D_u653E_u5728content/post/_u76EE_u5F55_u4E0B_29_3A" class="headerlink" title="创建一个博文(最好放在content/post/目录下):"></a>创建一个博文(最好放在content/post/目录下):</h4><p><code>$ hugo new post/hello_Hugo.md</code></p>
+<p>Hugo默认的是TOML格式的,至于其他格式,请自行了解</p>
+<pre><code>+++
+date = &quot;2015-10-25T08:36:54-07:00&quot;
+draft = true
+title = &quot;hello,Hugo&quot;
+
++++
+
+正文内容
+</code></pre><p>date格式自行设置,title为文章标题</p>
+<h3 id="u535A_u5BA2_u6A21_u677F"><a href="#u535A_u5BA2_u6A21_u677F" class="headerlink" title="博客模板"></a>博客模板</h3><p>点击<a href="http://www.gohugo.org/theme/" target="_blank" rel="external">模板列表</a>自行挑选喜欢的模板,并复制对应git地址,如AIR主题<br>在上面创建的blog目录下创建themes目录</p>
+<pre><code>cd themes
+git clone https://github.com/syui/hugo-theme-air.git
+</code></pre><p>你可以在themes目录下针对模板的布局还有CSS样式进行自定义</p>
+<h3 id="u5F00_u59CB_u4F60_u7684_u535A_u5BA2_u4E4B_u65C5"><a href="#u5F00_u59CB_u4F60_u7684_u535A_u5BA2_u4E4B_u65C5" class="headerlink" title="开始你的博客之旅"></a>开始你的博客之旅</h3><p>在站点根目录执行命令:</p>
+<pre><code>$ hugo server --theme=hugo-theme-air --buildDrafts --watch
+</code></pre><p>watch参数可以在你修改博客的时候保持实时刷新,执行命令后会有以下提醒:</p>
+<pre><code>Web Server is available at http://127.0.0.1:1313/
+Press Ctrl+C to stop
+</code></pre><p>打开对应的网址,就可以看到对应模板效果的博客</p>
+<h3 id="Github_pages_u90E8_u7F72"><a href="#Github_pages_u90E8_u7F72" class="headerlink" title="Github pages部署"></a>Github pages部署</h3><p>在自己的github里创建个Repository,命名xxxx.github.io(xxxx为你的github用户名)</p>
+<p>在站点根目录执行以下命令,会自动生成关于github路径的静态页面:</p>
+<pre><code>$ hugo --theme=hugo-theme-air --baseUrl=&quot;http://xxxx.github.io/&quot;
+</code></pre><p>Ok,这个时候你打开站点目录的public目录下,可以看到生成的所有静态页面</p>
+<p>最后一步,把生成的静态页面push到github的master分支就可以了,推荐个mac git工具SourceTree,配置好路径,这样以后每次你写完文章直接push就可以了,以下为使用命令初始化、push</p>
+<pre><code>$ cd public
+$ git init
+$ git remote add origin https://github.com/xxxx/xxxx.github.io.git
+$ git add -A
+$ git commit -m &quot;first commit for blog&quot;
+$ git push -u origin master
+</code></pre><h3 id="Mac_Markdown_u5DE5_u5177_u63A8_u8350Mou"><a href="#Mac_Markdown_u5DE5_u5177_u63A8_u8350Mou" class="headerlink" title="Mac Markdown工具推荐Mou"></a>Mac Markdown工具推荐<a href="http://25.io/mou/" target="_blank" rel="external">Mou</a></h3>
+          
         
-      </h1>
+      
+    </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-03-09T00:00:00+08:00"
-              content="2016-03-09" >
-          03-09
-        </time>
-      </div>
+    <footer class="post-footer">
+      
 
-    </header>
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </article>
-
 
 
     
@@ -310,6 +366,9 @@
   </section>
 
   
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
 
 
 
@@ -457,12 +516,6 @@
   
 
   
-  
-    <script type="text/javascript" id="motion.page.archive">
-      $('.archive-year').velocity('transition.slideLeftIn');
-    </script>
-  
-
 
   
 

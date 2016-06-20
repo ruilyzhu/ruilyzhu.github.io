@@ -5,7 +5,7 @@
   <subtitle><![CDATA[reading and Writing]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.turegeek.com//"/>
-  <updated>2016-04-27T11:08:27.000Z</updated>
+  <updated>2016-06-20T10:17:09.000Z</updated>
   <id>http://www.turegeek.com//</id>
   
   <author>
@@ -14,6 +14,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[Android Studio常用快捷键说明]]></title>
+    <link href="http://www.turegeek.com/2016/06/20/as_key_tips/"/>
+    <id>http://www.turegeek.com/2016/06/20/as_key_tips/</id>
+    <published>2016-06-19T16:00:00.000Z</published>
+    <updated>2016-06-20T10:17:09.000Z</updated>
+    <content type="html"><![CDATA[<p>总结了比较常用的快捷键，由于操作系统、设置的不一样可能导致默认的快捷键不一样,因此就不在下面说明<br>，只是列举了快捷键关键字以及说明，大家可以去Studio的keymap里自行搜索设置</p>
+<a id="more"></a>
+<h5 id="Navigate_Class_u2026-_28Quickly_navigate_a_class_by_name_29"><a href="#Navigate_Class_u2026-_28Quickly_navigate_a_class_by_name_29" class="headerlink" title="Navigate Class….(Quickly navigate a class by name)"></a>Navigate Class….(Quickly navigate a class by name)</h5><p>根据类名快速查找，非常好用</p>
+<h5 id="File_Structure"><a href="#File_Structure" class="headerlink" title="File Structure"></a>File Structure</h5><p>快速浏览文件结构，列举当前类的方法和属性</p>
+<h5 id="Search_Everywhere"><a href="#Search_Everywhere" class="headerlink" title="Search Everywhere"></a>Search Everywhere</h5><p>查找任何文件</p>
+<h5 id="Delete_Line"><a href="#Delete_Line" class="headerlink" title="Delete Line"></a>Delete Line</h5><p>删除整行</p>
+<h5 id="Hide_All_Tool_Windows"><a href="#Hide_All_Tool_Windows" class="headerlink" title="Hide All Tool Windows"></a>Hide All Tool Windows</h5><p>关闭非代码区的所有窗口,专注于敲代码</p>
+<h5 id="Find_Usages"><a href="#Find_Usages" class="headerlink" title="Find Usages"></a>Find Usages</h5><p>查找引用当前变量和方法的地方</p>
+<h5 id="Quick_Definition"><a href="#Quick_Definition" class="headerlink" title="Quick Definition"></a>Quick Definition</h5><p>可以快速预览类或者方法的实现</p>
+<h5 id="Bookmarks"><a href="#Bookmarks" class="headerlink" title="Bookmarks"></a>Bookmarks</h5><p>可以快速打开已经添加到书签的文件</p>
+<h5 id="Find_Action"><a href="#Find_Action" class="headerlink" title="Find Action"></a>Find Action</h5><p>可以根据输入的关键词匹配各种动作,如debug、run、clean、跳转到plugins、设置等</p>
+<h5 id="Move_Lines_Up/Down"><a href="#Move_Lines_Up/Down" class="headerlink" title="Move Lines Up/Down"></a>Move Lines Up/Down</h5><p>移动整行代码</p>
+<h5 id="Parameter_Info"><a href="#Parameter_Info" class="headerlink" title="Parameter Info"></a>Parameter Info</h5><p>快速查看方法的参数</p>
+<h5 id="Recent_Files"><a href="#Recent_Files" class="headerlink" title="Recent Files"></a>Recent Files</h5><p>最近打开文件列表</p>
+<h5 id="Line_28Navigator_to_a_line_29"><a href="#Line_28Navigator_to_a_line_29" class="headerlink" title="Line(Navigator to a line)"></a>Line(Navigator to a line)</h5><p>快速跳转到指定行数</p>
+<h5 id="Run"><a href="#Run" class="headerlink" title="Run"></a>Run</h5><p>运行app</p>
+<h5 id="Related_Symbol"><a href="#Related_Symbol" class="headerlink" title="Related Symbol"></a>Related Symbol</h5><p>跳转到当前Activity、Fragment的xml文件,如果当前类里有多个布局文件,则列举出来供选择</p>
+<h5 id="Rename"><a href="#Rename" class="headerlink" title="Rename"></a>Rename</h5><p>重命名</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>总结了比较常用的快捷键，由于操作系统、设置的不一样可能导致默认的快捷键不一样,因此就不在下面说明<br>，只是列举了快捷键关键字以及说明，大家可以去Studio的keymap里自行搜索设置</p>]]>
+    
+    </summary>
+    
+      <category term="Android Studio" scheme="http://www.turegeek.com/tags/Android-Studio/"/>
+    
+      <category term="android" scheme="http://www.turegeek.com/categories/android/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[关于HTTPS的一些基础知识]]></title>
@@ -128,11 +164,11 @@
     <link href="http://www.turegeek.com/2016/03/09/mat/"/>
     <id>http://www.turegeek.com/2016/03/09/mat/</id>
     <published>2016-03-08T16:00:00.000Z</published>
-    <updated>2016-03-09T10:36:54.000Z</updated>
+    <updated>2016-06-17T07:55:48.000Z</updated>
     <content type="html"><![CDATA[<p>众所周知android应用是基于JAVA语言开发的,JAVA有自己的垃圾回收机制,因此我们不用再释放内存、资源回收方面花费太多的精力,但是JAVA的GC(Garbage Collection)机制是自动进行的,因此在APP开发当中难免会遇到内存泄露,而android分配给每个应用的内存大小是有限制的因此大量的内存泄露积少成多会造成内存溢出(out of memory).所以我们应当重视内存优化问题.接下来我将通过Studio创建一个简单的单例模式内存泄露的例子,使用MAT(Eclipse MemoryAnalyzer)来进行分析.</p>
 <a id="more"></a>
-<h5 id="u6808"><a href="#u6808" class="headerlink" title="栈"></a>栈</h5><p>存放基本数据类型以及对象的引用地址(指向堆里具体的对象),不负责存储对象</p>
-<h5 id="u5806"><a href="#u5806" class="headerlink" title="堆"></a>堆</h5><p>为对象开辟内存空间，保存对象，GC负责管理这里的内存回收</p>
+<h5 id="u6808"><a href="#u6808" class="headerlink" title="栈"></a>栈</h5><p>存放基本数据类型以及对象的引用地址(指向堆里具体的对象),存储局部变量和方法调用,不负责存储对象,每一个<br>线程都对应一个栈内存,栈内存只对其所属线程可见，如果没有可用的栈内存会抛出StackOverFlowError异常.</p>
+<h5 id="u5806"><a href="#u5806" class="headerlink" title="堆"></a>堆</h5><p>为对象开辟内存空间，保存对象，GC负责管理这里的内存回收，对所属进程全部可见，没有可用的堆内容则会抛出OutOfMemoryError</p>
 <h5 id="u4EC0_u4E48_u662F_u5185_u5B58_u6CC4_u9732"><a href="#u4EC0_u4E48_u662F_u5185_u5B58_u6CC4_u9732" class="headerlink" title="什么是内存泄露"></a>什么是内存泄露</h5><p>内存泄露表示当前对象被大于其本身生命周期的其他对象持有引用,而GC只会去回收堆内存中没有被引用的的对象,这样导致内存中持有这些实例不能被回收,然后慢慢积累越来越多造成卡顿甚至内存溢出</p>
 <h4 id="MAT_u4E0B_u8F7D"><a href="#MAT_u4E0B_u8F7D" class="headerlink" title="MAT下载"></a>MAT下载</h4><p>MAT有对应的eclipse插件,但是大部分开发是在studio下进行的,因此附上MAT应用的下载地址<br><a href="http://www.eclipse.org/mat/" target="_blank" rel="external">MAT的下载地址</a></p>
 <h4 id="u521B_u5EFA_u5185_u5BB9_u6CC4_u9732_u5B9E_u4F8B"><a href="#u521B_u5EFA_u5185_u5BB9_u6CC4_u9732_u5B9E_u4F8B" class="headerlink" title="创建内容泄露实例"></a>创建内容泄露实例</h4><h6 id="u521B_u5EFA_u4E3BActivity"><a href="#u521B_u5EFA_u4E3BActivity" class="headerlink" title="创建主Activity"></a>创建主Activity</h6><pre><code>public class MainMATActivity extends AppCompatActivity {
