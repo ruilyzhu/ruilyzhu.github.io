@@ -5,7 +5,7 @@
   <subtitle><![CDATA[reading and Writing]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.turegeek.com//"/>
-  <updated>2016-06-20T10:17:09.000Z</updated>
+  <updated>2016-06-28T07:36:20.000Z</updated>
   <id>http://www.turegeek.com//</id>
   
   <author>
@@ -14,6 +14,186 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[关于多线程的一些理解与总结]]></title>
+    <link href="http://www.turegeek.com/2016/06/28/multi_thread/"/>
+    <id>http://www.turegeek.com/2016/06/28/multi_thread/</id>
+    <published>2016-06-27T16:00:00.000Z</published>
+    <updated>2016-06-28T07:36:20.000Z</updated>
+    <content type="html"><![CDATA[<h4 id="u540C_u6B65_u9501synchronized"><a href="#u540C_u6B65_u9501synchronized" class="headerlink" title="同步锁synchronized"></a>同步锁synchronized</h4><p>当前两个线程同时访问一个数据对象的时候，会对数据造成破坏，举个简单的例子，商品库有2000个商品，在同一时间，A线程取1500，B线程取1000，这样就会造成麻烦。因此我们需要同步锁去确保我们在多线程下访问修改同一个资源的时候，每次只能有一个线程保持访问。</p>
+<a id="more"></a>
+<p>Java每一个对象都有一个内置锁，一个对象有且只有一个锁。用法就是使用synchronized修饰方法或者代码块，被synchronized修饰的方法或者代码块在运行的时候会获取当前实例的对象，如果一个线程获得该对象的锁，在这个线程释放锁之前，其他线程则无法获得对象的锁。也就意味着如果一个线程访问A方法，得到了当前对象的锁，其他线程在该线程释放锁之前无法访问当前对象被synchronized修饰的所有代码块和方法。释放锁是指持有锁的线程退出了synchronized同步的方法或者代码块的访问。</p>
+<pre><code>public class SynchronizedDemo{
+
+    public synchronized void A(){
+        //....
+    }
+    public synchronized void B(){
+        //....
+    }
+
+    public void C(){
+        synchronized(this){
+            //....
+        }
+    }
+
+}
+</code></pre><p>如果是针对静态方法的同步的话需要这样使用</p>
+<pre><code>public synchronized static void method1(){
+    //....
+}
+public static void method2(){
+    synchronized(SynchronizedDemo.class){
+        //....
+    }
+}
+</code></pre><p>注意静态方法的锁和非静态方法的锁的对象是不一样的，非静态方法的锁是指当前类的实例，而静态方法的调用不需要类的实例，因此它的锁是指当前类。因此静态方法与非静态方法之间不存在竞争关系。同时类中非synchronized修饰的方法可以任意被多线程访问，不受锁的限制。同步影响并发性，因此尽可能同步的范围。</p>
+<h4 id="u540C_u6B65_u9501Lock"><a href="#u540C_u6B65_u9501Lock" class="headerlink" title="同步锁Lock"></a>同步锁Lock</h4><p>Lock是另外一种同步锁，使用起来自由性大一些</p>
+<pre><code>public class LockDemo{
+    Lock lock=new ReentrantLock();
+
+    public void methodA(){
+        if(lock.tryLock()){
+            try{
+                System.out.println(&quot;得到锁&quot;);
+            }catch(Exception e){
+                e.printStackTrace();
+            }finally{
+                System.out.println(&quot;释放锁&quot;);
+                lock.unlock();
+            }
+         }else{
+             System.out.println(&quot;没有得到锁&quot;);
+         }    
+
+    }
+
+
+}
+</code></pre><p>Lock是一个接口定义了以下的方法</p>
+<ul>
+<li><p>void lock();</p>
+<p>获取锁</p>
+</li>
+<li><p>void lockInterruptibly() throws InterruptedException;</p>
+<p>获取锁，使用此方法获取的锁的时候如果处于等待锁的状态，可以调用Thread.interrupt()方法中断等待状态</p>
+</li>
+</ul>
+<ul>
+<li><p>boolean tryLock();</p>
+<p>获取锁，并返回是否成功</p>
+</li>
+<li><p>boolean tryLock(long time, TimeUnit unit) throws InterruptedException;</p>
+<p>作用和上面一样不过可以设置等待锁的时间</p>
+</li>
+<li><p>void unlock();</p>
+<p>释放锁</p>
+</li>
+</ul>
+<h5 id="Lock_u4E0Esynchronized_u7684_u533A_u522B"><a href="#Lock_u4E0Esynchronized_u7684_u533A_u522B" class="headerlink" title="Lock与synchronized的区别"></a>Lock与synchronized的区别</h5><ul>
+<li>Lock可以获取是否得到锁的结果</li>
+<li>Lock等待锁的期间是可以中断的</li>
+<li>Lock需要手动释放锁不能自动释放</li>
+<li>ReentrantReadWriteLock中有两个方法readLock()、writeLock()，readLock()可以让多个线程同时进行读的操作,如果有线程持有读的锁，另外一个线程申请写的锁则需等待读的锁释放才可以。</li>
+</ul>
+<h4 id="u6B7B_u9501"><a href="#u6B7B_u9501" class="headerlink" title="死锁"></a>死锁</h4><p>同步锁带来数据安全的同时如果处理不当也会造成死锁的问题，死锁简单来说就是当前A线程持有O1资源的锁，接着获取O2的锁，而B线程持有O2资源的锁去访问O1的锁，A访问O2资源获取O2的锁的时候会阻塞因为B持有O2的锁，B访问O1资源获取O1地锁的时候也会阻塞因为A持有O1的锁，这样A和B都不会让步，就会造成死锁。更通俗的来讲就是小明有小花的微信号码，但是他喜欢小兰，小孙有小兰的微信，但是他喜欢小花。小明说给我小兰的微信，小孙说给我小花的微信，小明说你先给我小兰的微信，小孙说你先给我小花的微信…..你特码先给…你特码先给… </p>
+<p>代码示例</p>
+<pre><code>public class DeadLockDemo{
+    static class DeadLock implements Runnable{
+        public DeadLock(int num){
+            this.num=num;
+        }
+        int num;
+        static Object o1=new Object();
+        static Object o2=new Object();
+
+        @Override
+        public void run(){
+            System.out.println(&quot;this is thread &quot;+num);
+            if(num==1){
+                synchronized(o1){
+                    try{
+                        Thread.sleep(500);
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                    synchronized(o2){
+                        System.out.println(&quot;Thread &quot;+num+&quot;o2 lock?&quot;);
+                    }
+                }
+            }
+            if(num==2){
+                synchronized(o2){
+                    try{
+                        Thread.sleep(500);
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    }
+                    synchronized(o1){
+                        System.out.println(&quot;Thread &quot;+num+&quot;o2 lock?&quot;);
+                    }
+                }
+            }
+        }
+    }
+    public static void main(String[] args) {
+        DeadLock threadA=new DeadLock(1);
+        DeadLock threadB=new DeadLock(2);
+        new Thread(threadA).start();
+        new Thread(threadB).start();
+    }
+
+
+}
+</code></pre><h5 id="u6B7B_u9501_u4EA7_u751F_u7684_u5FC5_u8981_u6761_u4EF6"><a href="#u6B7B_u9501_u4EA7_u751F_u7684_u5FC5_u8981_u6761_u4EF6" class="headerlink" title="死锁产生的必要条件"></a>死锁产生的必要条件</h5><ol>
+<li><p>互斥性</p>
+<p>同一个方法或者代码块有且只能有一个线程访问</p>
+</li>
+<li><p>不可抢占 </p>
+<p> 当一个线程持有锁的时候，除非执行完毕释放锁，否则其他线程只能等待，不可抢占</p>
+</li>
+<li><p>请求与保持 </p>
+<p>一个线程在保持一个锁的时候同时请求另外一个锁</p>
+</li>
+<li><p>循环等待     </p>
+<p>A等待B释放锁，B等待C释放锁，C等待A释放锁</p>
+</li>
+</ol>
+<h4 id="wait_28_29_u4E0Esleep_28_29"><a href="#wait_28_29_u4E0Esleep_28_29" class="headerlink" title="wait()与sleep()"></a>wait()与sleep()</h4><p>wait()是Object的方法，sleep()是Thread中的方法，wait()调用会挂起线程并且释放当前线程持有的同步锁，由其他线程争夺，可以同过notify()唤醒，而sleep不会释放当前线程持有的锁除非方法执行完毕。调用notify()的时候如果当前有多个线程挂起，则会随机唤醒某一个线程</p>
+<h4 id="join_28_29"><a href="#join_28_29" class="headerlink" title="join()"></a>join()</h4><p>当一个Thead调用join方法，则start这个Thread的线程如主线程需要等待Thread执行完run方法才可以执行join()后面的</p>
+<h4 id="interrupt_28_29"><a href="#interrupt_28_29" class="headerlink" title="interrupt()"></a>interrupt()</h4><p>interrupt()方法不会中止一个正在运行的线程，它的作用是标记当前线程的状态是中断状态为true具体怎么操作需要线程根据Thread.isInterrupted()方法去判断去处理。</p>
+<pre><code>public static void main(String[] args){
+    Thread t=new Thread(){
+        @Override
+        public void run(){
+            while(!isInterrupted()){
+                System.out.println(&quot;运行中&quot;);
+            }
+        }
+
+    }
+    t.start();
+    try{
+        Thead.sleep(500);
+    }catch(InterruptedException e){
+        e.printStackTrace();
+    }
+    t.interrupt();
+}
+</code></pre><p>还可以通过Thread.interrupted()获取当前中断状态，但是在返回状态的同时也会把状态清空为默认状态</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<h4 id="u540C_u6B65_u9501synchronized"><a href="#u540C_u6B65_u9501synchronized" class="headerlink" title="同步锁synchronized"></a>同步锁synchronized</h4><p>当前两个线程同时访问一个数据对象的时候，会对数据造成破坏，举个简单的例子，商品库有2000个商品，在同一时间，A线程取1500，B线程取1000，这样就会造成麻烦。因此我们需要同步锁去确保我们在多线程下访问修改同一个资源的时候，每次只能有一个线程保持访问。</p>]]>
+    
+    </summary>
+    
+      <category term="多线程" scheme="http://www.turegeek.com/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/"/>
+    
+      <category term="android" scheme="http://www.turegeek.com/categories/android/"/>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[Android Studio常用快捷键说明]]></title>
