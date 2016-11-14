@@ -5,7 +5,7 @@
   <subtitle><![CDATA[reading and Writing]]></subtitle>
   <link href="/atom.xml" rel="self"/>
   <link href="http://www.turegeek.com//"/>
-  <updated>2016-06-28T07:36:20.000Z</updated>
+  <updated>2016-06-28T07:36:41.000Z</updated>
   <id>http://www.turegeek.com//</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://www.turegeek.com/2016/06/28/multi_thread/"/>
     <id>http://www.turegeek.com/2016/06/28/multi_thread/</id>
     <published>2016-06-27T16:00:00.000Z</published>
-    <updated>2016-06-28T07:36:20.000Z</updated>
+    <updated>2016-06-28T07:36:41.000Z</updated>
     <content type="html"><![CDATA[<h4 id="u540C_u6B65_u9501synchronized"><a href="#u540C_u6B65_u9501synchronized" class="headerlink" title="同步锁synchronized"></a>同步锁synchronized</h4><p>当前两个线程同时访问一个数据对象的时候，会对数据造成破坏，举个简单的例子，商品库有2000个商品，在同一时间，A线程取1500，B线程取1000，这样就会造成麻烦。因此我们需要同步锁去确保我们在多线程下访问修改同一个资源的时候，每次只能有一个线程保持访问。</p>
 <a id="more"></a>
 <p>Java每一个对象都有一个内置锁，一个对象有且只有一个锁。用法就是使用synchronized修饰方法或者代码块，被synchronized修饰的方法或者代码块在运行的时候会获取当前实例的对象，如果一个线程获得该对象的锁，在这个线程释放锁之前，其他线程则无法获得对象的锁。也就意味着如果一个线程访问A方法，得到了当前对象的锁，其他线程在该线程释放锁之前无法访问当前对象被synchronized修饰的所有代码块和方法。释放锁是指持有锁的线程退出了synchronized同步的方法或者代码块的访问。</p>
